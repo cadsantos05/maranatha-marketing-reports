@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Competitor Analysis — Maranatha Stone and Floors</title>
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --maranatha: #c8923a;
+      --maranatha-light: #fdf3e7;
+      --gmq: #1565c0;
+      --gmq-light: #e3f2fd;
+      --granite: #2e7d32;
+      --granite-light: #e8f5e9;
+      --red: #c62828;
+      --red-light: #ffebee;
+      --yellow: #f57f17;
+      --yellow-light: #fff8e1;
+      --gray: #f5f5f5;
+      --border: #e0e0e0;
+      --text: #1a1a1a;
+      --muted: #666;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #efefef;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--primary);
+      color: white;
+      padding: 40px 48px 32px;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .brand-agency { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--maranatha); font-weight: 600; }
+    .brand-client { font-size: 24px; font-weight: 700; }
+    .report-meta .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #aaa; }
+    .report-meta .value { font-size: 14px; color: white; font-weight: 500; }
+    .header-title { margin-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; }
+    .header-title h1 { font-size: 30px; font-weight: 700; }
+    .header-title p { margin-top: 6px; color: #bbb; font-size: 14px; max-width: 640px; }
+
+    .disclaimer {
+      background: var(--yellow-light);
+      border-left: 4px solid var(--yellow);
+      padding: 12px 16px;
+      font-size: 12px;
+      color: #5d4037;
+      margin: 16px 0 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* LAYOUT */
+    .container { max-width: 1140px; margin: 0 auto; padding: 32px 24px 64px; }
+    section { margin-bottom: 44px; }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 18px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--maranatha);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* COMPANY HEADER CARDS */
+    .company-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .company-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .company-card-header {
+      padding: 18px 20px;
+      color: white;
+      font-weight: 700;
+    }
+    .company-card-header.maranatha { background: var(--maranatha); }
+    .company-card-header.gmq       { background: var(--gmq); }
+    .company-card-header.granite   { background: var(--granite); }
+    .company-card-header .co-name { font-size: 16px; }
+    .company-card-header .co-url  { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+    .company-card-header .co-tag  {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+    .company-card-body { padding: 16px 20px; }
+    .company-meta-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .company-meta-row:last-child { border-bottom: none; }
+    .meta-label { color: var(--muted); font-size: 12px; }
+    .meta-value { font-weight: 600; text-align: right; }
+
+    /* SCORE BAR */
+    .score-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .score-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .score-card-title { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 14px; font-weight: 600; }
+    .score-row { margin-bottom: 12px; }
+    .score-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+    .score-label .name { font-weight: 600; }
+    .score-label .val  { color: var(--muted); }
+    .bar-wrap { background: var(--border); border-radius: 100px; height: 8px; overflow: hidden; }
+    .bar { height: 100%; border-radius: 100px; }
+    .bar.maranatha { background: var(--maranatha); }
+    .bar.gmq       { background: var(--gmq); }
+    .bar.granite   { background: var(--granite); }
+
+    /* THREE-COL TABLE */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      font-size: 13px;
+    }
+    .compare-table th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: white;
+      font-weight: 700;
+    }
+    .compare-table th.col-feature { background: var(--primary); width: 22%; }
+    .compare-table th.col-maranatha { background: var(--maranatha); width: 26%; }
+    .compare-table th.col-gmq      { background: var(--gmq); width: 26%; }
+    .compare-table th.col-granite  { background: var(--granite); width: 26%; }
+    .compare-table td {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:hover td { background: #fafafa; }
+    .compare-table td.feature-col { font-weight: 600; color: var(--primary); font-size: 12px; }
+
+    /* PILL ICONS */
+    .pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600; }
+    .pill-green  { background: #e8f5e9; color: #2e7d32; }
+    .pill-red    { background: #ffebee; color: #c62828; }
+    .pill-yellow { background: #fff8e1; color: #f57f17; }
+    .pill-blue   { background: #e3f2fd; color: #1565c0; }
+    .pill-gray   { background: #f5f5f5; color: #666; }
+
+    /* OPPORTUNITY CARDS */
+    .opp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .opp-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-left: 4px solid transparent;
+    }
+    .opp-card.high   { border-left-color: var(--red); }
+    .opp-card.medium { border-left-color: var(--yellow); }
+    .opp-card.info   { border-left-color: var(--gmq); }
+    .opp-title { font-weight: 700; font-size: 14px; margin-bottom: 6px; color: var(--primary); }
+    .opp-body  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .opp-tag   { margin-bottom: 10px; }
+
+    /* KEYWORD TABLE */
+    .kw-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .kw-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .kw-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid;
+    }
+    .kw-card-title.maranatha { color: var(--maranatha); border-color: var(--maranatha); }
+    .kw-card-title.gmq       { color: var(--gmq);       border-color: var(--gmq); }
+    .kw-card-title.granite   { color: var(--granite);   border-color: var(--granite); }
+    .kw-item {
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .kw-item:last-child { border-bottom: none; }
+    .kw-name { color: var(--text); }
+    .kw-status { font-size: 11px; font-weight: 600; }
+
+    /* SWOT */
+    .swot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .swot-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .swot-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .swot-label.s { background: #e8f5e9; color: #2e7d32; }
+    .swot-label.w { background: #ffebee; color: #c62828; }
+    .swot-label.o { background: #e3f2fd; color: #1565c0; }
+    .swot-label.t { background: #fff8e1; color: #f57f17; }
+    .swot-list { list-style: none; }
+    .swot-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      display: flex;
+      gap: 8px;
+    }
+    .swot-list li:last-child { border-bottom: none; }
+    .swot-icon { flex-shrink: 0; }
+
+    /* DATA NOTE */
+    .data-note {
+      font-size: 11px;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+
+    @media (max-width: 800px) {
+      .company-grid, .score-section, .kw-grid { grid-template-columns: 1fr; }
+      .swot-grid { grid-template-columns: 1fr; }
+      .header { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="brand-agency">Agencia Melbee</div>
+      <div class="brand-client">Competitor Analysis</div>
+    </div>
+    <div class="report-meta" style="text-align:right;">
+      <div class="label">Client</div>
+      <div class="value">Maranatha Stone and Floors</div>
+      <div class="label" style="margin-top:8px;">Report Date</div>
+      <div class="value">March 2026</div>
+    </div>
+  </div>
+  <div class="header-title">
+    <h1>SEO Competitor Comparison</h1>
+    <p>Direct comparison of maranatha.pro against primary Birmingham countertop competitors — gmqtops.com and graniteempirebirmingham.com. Based on live site crawls and observable SEO signals.</p>
+    <div class="disclaimer">
+      ⚠️ <strong>Data note:</strong> Traffic estimates and domain authority figures are based on observable on-site signals (page count, blog volume, content structure, schema). Verified metrics require tools such as Ahrefs, SEMrush, or Moz. Keyword rankings are inferred from page targeting, not live SERP data.
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- COMPANY OVERVIEW -->
+  <section>
+    <div class="section-title">🏢 Company Overview</div>
+    <div class="company-grid">
+
+      <div class="company-card">
+        <div class="company-card-header maranatha">
+          <div class="co-name">Maranatha Stone and Floors</div>
+          <div class="co-url">maranatha.pro</div>
+          <div class="co-tag">Our Client</div>
+        </div>
+        <div class="company-card-body">
+          <div class="company-meta-row">
+            <span class="meta-label">Location</span>
+            <span class="meta-value">Pelham, AL (Birmingham metro)</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Phone</span>
+            <span class="meta-value">205.663.0400</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Markets</span>
+            <span class="meta-value">Birmingham, Huntsville</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Blog Posts</span>
+            <span class="meta-value">27</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Total Pages</span>
+            <span class="meta-value">~59</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">E-commerce</span>
+            <span class="meta-value">No</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Financing</span>
+            <span class="meta-value">No</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Pricing shown</span>
+            <span class="meta-value">No</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Virtual Showroom</span>
+            <span class="meta-value">✅ 3D Matterport tours</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="company-card">
+        <div class="company-card-header gmq">
+          <div class="co-name">GMQ Tops</div>
+          <div class="co-url">gmqtops.com</div>
+          <div class="co-tag">Competitor — Multi-city</div>
+        </div>
+        <div class="company-card-body">
+          <div class="company-meta-row">
+            <span class="meta-label">Locations</span>
+            <span class="meta-value">Birmingham, Montgomery, Mobile</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Phone</span>
+            <span class="meta-value">(334) 269-7445</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Markets</span>
+            <span class="meta-value">Statewide Alabama</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Blog Posts</span>
+            <span class="meta-value" style="color:var(--red);">583</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Total Pages</span>
+            <span class="meta-value">80+ (sitemap indexed)</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">E-commerce</span>
+            <span class="meta-value">✅ WooCommerce store</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Financing</span>
+            <span class="meta-value">✅ Per city</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Pricing shown</span>
+            <span class="meta-value">✅ Product prices listed</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Virtual Showroom</span>
+            <span class="meta-value">No</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="company-card">
+        <div class="company-card-header" style="background:#7b3f00;">
+          <div class="co-name">Alabama Granite (We Rock Granite)</div>
+          <div class="co-url">alabama-granite.com</div>
+          <div class="co-tag">Competitor — Price Leader</div>
+        </div>
+        <div class="company-card-body">
+          <div class="company-meta-row">
+            <span class="meta-label">Location</span>
+            <span class="meta-value">Birmingham, AL</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Phone</span>
+            <span class="meta-value">(205) 791-7900</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Markets</span>
+            <span class="meta-value">Birmingham &amp; surrounding</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Blog Posts</span>
+            <span class="meta-value">Not detected</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">E-commerce</span>
+            <span class="meta-value">No</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Financing</span>
+            <span class="meta-value">Not detected</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Pricing shown</span>
+            <span class="meta-value">✅ From $29.99/SF</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Turnaround</span>
+            <span class="meta-value">Not listed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="company-card">
+        <div class="company-card-header granite">
+          <div class="co-name">Granite Empire of Birmingham</div>
+          <div class="co-url">graniteempirebirmingham.com</div>
+          <div class="co-tag">Competitor — Local Focus</div>
+        </div>
+        <div class="company-card-body">
+          <div class="company-meta-row">
+            <span class="meta-label">Location</span>
+            <span class="meta-value">1800 Green Springs Hwy, Birmingham</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Phone</span>
+            <span class="meta-value">+1-659-250-4778</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Markets</span>
+            <span class="meta-value">Birmingham &amp; surrounding</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Blog Posts</span>
+            <span class="meta-value">None detected</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Total Pages</span>
+            <span class="meta-value">~10–15 estimated</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">E-commerce</span>
+            <span class="meta-value">No</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Financing</span>
+            <span class="meta-value">Not detected</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Pricing shown</span>
+            <span class="meta-value">✅ $35–$150 per SF</span>
+          </div>
+          <div class="company-meta-row">
+            <span class="meta-label">Turnaround</span>
+            <span class="meta-value">✅ 5–7 business days</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ESTIMATED METRICS -->
+  <section>
+    <div class="section-title">📈 Estimated SEO Metrics</div>
+    <p class="data-note" style="margin-bottom:16px;">⚠️ Estimates based on observable signals: blog volume, page count, schema presence, site structure, and on-page optimization. Verify with Ahrefs or SEMrush for exact figures.</p>
+
+    <div class="score-section">
+
+      <div class="score-card">
+        <div class="score-card-title">Estimated Monthly Organic Traffic</div>
+        <div class="score-row">
+          <div class="score-label"><span class="name" style="color:var(--maranatha);">Maranatha</span><span class="val">Low–Medium</span></div>
+          <div class="bar-wrap"><div class="bar maranatha" style="width:20%"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-label"><span class="name" style="color:var(--gmq);">GMQ Tops</span><span class="val">High</span></div>
+          <div class="bar-wrap"><div class="bar gmq" style="width:85%"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-label"><span class="name" style="color:var(--granite);">Granite Empire</span><span class="val">Medium</span></div>
+          <div class="bar-wrap"><div class="bar granite" style="width:40%"></div></div>
+        </div>
+        <p class="data-note">GMQ's 583-post blog likely drives significant long-tail traffic. Granite Empire benefits from strong local schema and service pages.</p>
+      </div>
+
+      <div class="score-card">
+        <div class="score-card-title">Estimated Domain Authority</div>
+        <div class="score-row">
+          <div class="score-label"><span class="name" style="color:var(--maranatha);">Maranatha</span><span class="val">Est. 15–25</span></div>
+          <div class="bar-wrap"><div class="bar maranatha" style="width:20%"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-label"><span class="name" style="color:var(--gmq);">GMQ Tops</span><span class="val">Est. 30–45</span></div>
+          <div class="bar-wrap"><div class="bar gmq" style="width:55%"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-label"><span class="name" style="color:var(--granite);">Granite Empire</span><span class="val">Est. 20–30</span></div>
+          <div class="bar-wrap"><div class="bar granite" style="width:35%"></div></div>
+        </div>
+        <p class="data-note">Verify with Moz or Ahrefs. GMQ's age, content volume, and multi-city presence likely earns more backlinks.</p>
+      </div>
+
+      <div class="score-card">
+        <div class="score-card-title">Content Volume</div>
+        <div class="score-row">
+          <div class="score-label"><span class="name" style="color:var(--maranatha);">Maranatha</span><span class="val">27 posts</span></div>
+          <div class="bar-wrap"><div class="bar maranatha" style="width:5%"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-label"><span class="name" style="color:var(--gmq);">GMQ Tops</span><span class="val">583 posts</span></div>
+          <div class="bar-wrap"><div class="bar gmq" style="width:100%"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-label"><span class="name" style="color:var(--granite);">Granite Empire</span><span class="val">0 posts</span></div>
+          <div class="bar-wrap"><div class="bar granite" style="width:0%"></div></div>
+        </div>
+        <p class="data-note">GMQ's massive blog library is their biggest SEO asset. Granite Empire relies entirely on service pages.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ON-PAGE SEO COMPARISON -->
+  <section>
+    <div class="section-title">🔍 On-Page SEO Comparison</div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th class="col-feature">Element</th>
+          <th class="col-maranatha">Maranatha Stone &amp; Floors</th>
+          <th class="col-gmq">GMQ Tops</th>
+          <th class="col-granite">Granite Empire Birmingham</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feature-col">Homepage Title</td>
+          <td>Countertops in Birmingham, AL | Custom Granite &amp; Quartz<br><span class="pill pill-yellow">⚠ Missing brand name</span></td>
+          <td>GMQ TOPS - Granite countertops - Home<br><span class="pill pill-red">❌ Weak — no location</span></td>
+          <td>Countertops in Birmingham, AL | Granite Empire of Birmingham<br><span class="pill pill-green">✅ Well optimized</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Homepage Meta Description</td>
+          <td><span class="pill pill-yellow">⚠ Present but short</span></td>
+          <td><span class="pill pill-red">❌ Not detected</span></td>
+          <td><span class="pill pill-green">✅ Present with CTA</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Homepage H1</td>
+          <td>"Custom Countertops &amp; Flooring in Birmingham, AL."<br><span class="pill pill-green">✅ Best on any site</span></td>
+          <td>Not clearly defined<br><span class="pill pill-red">❌ Missing or weak</span></td>
+          <td>"Countertops in Birmingham, AL | Granite Empire of Birmingham"<br><span class="pill pill-yellow">⚠ Repeats title tag</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">LocalBusiness Schema</td>
+          <td><span class="pill pill-red">❌ Not present</span></td>
+          <td><span class="pill pill-yellow">⚠ Partial (Yoast)</span></td>
+          <td><span class="pill pill-green">✅ Comprehensive — Org, LocalBusiness, Place, Article</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Granite Page</td>
+          <td>Combined with marble + quartzite<br><span class="pill pill-yellow">⚠ No dedicated page</span></td>
+          <td>Dedicated granite page by city<br><span class="pill pill-green">✅ Per location</span></td>
+          <td>Dedicated page: "Granite Countertops in Birmingham, AL"<br><span class="pill pill-green">✅ Optimized</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Quartz Page</td>
+          <td>Brand-only pages (Silestone, HanStone, Cambria) — no parent quartz page<br><span class="pill pill-red">❌ No broad keyword page</span></td>
+          <td>Quartz countertops page by city<br><span class="pill pill-green">✅ Targeted</span></td>
+          <td>Dedicated: "Quartz Countertops in Birmingham, AL"<br><span class="pill pill-green">✅ Optimized</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Location Pages</td>
+          <td>Birmingham only (homepage)<br><span class="pill pill-red">❌ No Huntsville page</span></td>
+          <td>/birmingham/ /montgomery/ /mobile/ + financing per city<br><span class="pill pill-green">✅ Full multi-city</span></td>
+          <td>Birmingham only<br><span class="pill pill-gray">— Single market</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Pricing Transparency</td>
+          <td>Not shown<br><span class="pill pill-red">❌ No pricing</span></td>
+          <td>Product prices listed in WooCommerce<br><span class="pill pill-green">✅ Visible</span></td>
+          <td>$35–$150 per SF shown prominently<br><span class="pill pill-green">✅ Clear range</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Blog / Content</td>
+          <td>27 posts, inconsistent meta descriptions<br><span class="pill pill-yellow">⚠ Active but gaps</span></td>
+          <td>583 posts — massive content library<br><span class="pill pill-green">✅ Dominant</span></td>
+          <td>No blog detected<br><span class="pill pill-red">❌ No content</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Google Map Embed</td>
+          <td><span class="pill pill-red">❌ Not on contact page</span></td>
+          <td><span class="pill pill-yellow">⚠ Unknown</span></td>
+          <td><span class="pill pill-green">✅ Present</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Turnaround / Speed CTA</td>
+          <td>Not mentioned<br><span class="pill pill-red">❌ Missing</span></td>
+          <td>Not prominently featured<br><span class="pill pill-yellow">⚠ Unclear</span></td>
+          <td>"5–7 business days" — homepage hero<br><span class="pill pill-green">✅ Strong differentiator</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Financing Option</td>
+          <td><span class="pill pill-red">❌ Not offered / not shown</span></td>
+          <td><span class="pill pill-green">✅ Per city pages</span></td>
+          <td><span class="pill pill-gray">— Not detected</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Social Presence</td>
+          <td>Facebook, Instagram<br><span class="pill pill-yellow">⚠ 2 platforms</span></td>
+          <td>LinkedIn, Pinterest, Twitter referenced<br><span class="pill pill-yellow">⚠ Social sharing only</span></td>
+          <td>Facebook, Instagram, Twitter/X<br><span class="pill pill-green">✅ 3 active platforms</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Unique Differentiator</td>
+          <td>3D Virtual Showroom (Matterport)<br><span class="pill pill-green">✅ No competitor has this</span></td>
+          <td>WooCommerce e-commerce + multi-city + financing<br><span class="pill pill-green">✅ Scale advantage</span></td>
+          <td>Fast turnaround + 140 colors + price range published<br><span class="pill pill-green">✅ Conversion clarity</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- TOP KEYWORDS -->
+  <section>
+    <div class="section-title">🔑 Keyword Targeting — Observed from Live Pages</div>
+    <p class="data-note" style="margin-bottom:16px;">Keywords inferred from page titles, H1s, meta descriptions, and service page structure. Not live SERP ranking data.</p>
+    <div class="kw-grid">
+
+      <div class="kw-card">
+        <div class="kw-card-title maranatha">Maranatha Stone and Floors</div>
+        <div class="kw-item"><span class="kw-name">countertops birmingham al</span><span class="kw-status" style="color:var(--maranatha);">Homepage</span></div>
+        <div class="kw-item"><span class="kw-name">custom granite & quartz</span><span class="kw-status" style="color:var(--maranatha);">Title tag</span></div>
+        <div class="kw-item"><span class="kw-name">silestone countertops birmingham</span><span class="kw-status" style="color:var(--maranatha);">Product page</span></div>
+        <div class="kw-item"><span class="kw-name">natural stone countertops birmingham</span><span class="kw-status" style="color:var(--maranatha);">Product page</span></div>
+        <div class="kw-item"><span class="kw-name">hardwood & tile flooring birmingham</span><span class="kw-status" style="color:var(--maranatha);">Flooring page</span></div>
+        <div class="kw-item"><span class="kw-name">countertop installation cost birmingham</span><span class="kw-status" style="color:var(--maranatha);">Blog</span></div>
+        <div class="kw-item"><span class="kw-name">can quartz countertops burn</span><span class="kw-status" style="color:var(--maranatha);">Blog</span></div>
+        <div class="kw-item"><span class="kw-name" style="color:var(--red);">granite countertops birmingham al</span><span class="kw-status" style="color:var(--red);">❌ No page</span></div>
+        <div class="kw-item"><span class="kw-name" style="color:var(--red);">quartz countertops birmingham al</span><span class="kw-status" style="color:var(--red);">❌ No page</span></div>
+        <div class="kw-item"><span class="kw-name" style="color:var(--red);">countertops huntsville al</span><span class="kw-status" style="color:var(--red);">❌ No page</span></div>
+      </div>
+
+      <div class="kw-card">
+        <div class="kw-card-title gmq">GMQ Tops</div>
+        <div class="kw-item"><span class="kw-name">granite countertops birmingham</span><span class="kw-status" style="color:var(--gmq);">Location page</span></div>
+        <div class="kw-item"><span class="kw-name">granite countertops montgomery al</span><span class="kw-status" style="color:var(--gmq);">Location page</span></div>
+        <div class="kw-item"><span class="kw-name">granite countertops prattville</span><span class="kw-status" style="color:var(--gmq);">Service page</span></div>
+        <div class="kw-item"><span class="kw-name">countertops store birmingham alabama</span><span class="kw-status" style="color:var(--gmq);">City page</span></div>
+        <div class="kw-item"><span class="kw-name">kitchen countertops birmingham</span><span class="kw-status" style="color:var(--gmq);">Product cat.</span></div>
+        <div class="kw-item"><span class="kw-name">bathroom countertops alabama</span><span class="kw-status" style="color:var(--gmq);">Product cat.</span></div>
+        <div class="kw-item"><span class="kw-name">quartz countertops 2025</span><span class="kw-status" style="color:var(--gmq);">Blog</span></div>
+        <div class="kw-item"><span class="kw-name">granite color variations</span><span class="kw-status" style="color:var(--gmq);">Blog (583 posts)</span></div>
+        <div class="kw-item"><span class="kw-name">countertop installation process</span><span class="kw-status" style="color:var(--gmq);">Blog</span></div>
+        <div class="kw-item"><span class="kw-name">stone countertops financing</span><span class="kw-status" style="color:var(--gmq);">Financing page</span></div>
+      </div>
+
+      <div class="kw-card">
+        <div class="kw-card-title granite">Granite Empire of Birmingham</div>
+        <div class="kw-item"><span class="kw-name">countertops in birmingham al</span><span class="kw-status" style="color:var(--granite);">Homepage H1</span></div>
+        <div class="kw-item"><span class="kw-name">granite countertops birmingham al</span><span class="kw-status" style="color:var(--granite);">Service page</span></div>
+        <div class="kw-item"><span class="kw-name">quartz countertops birmingham al</span><span class="kw-status" style="color:var(--granite);">Service page</span></div>
+        <div class="kw-item"><span class="kw-name">marble countertops birmingham</span><span class="kw-status" style="color:var(--granite);">Service page</span></div>
+        <div class="kw-item"><span class="kw-name">quartzite countertops birmingham</span><span class="kw-status" style="color:var(--granite);">Service page</span></div>
+        <div class="kw-item"><span class="kw-name">fastest countertop installation birmingham</span><span class="kw-status" style="color:var(--granite);">Homepage CTA</span></div>
+        <div class="kw-item"><span class="kw-name">free estimate countertops birmingham</span><span class="kw-status" style="color:var(--granite);">Meta + CTA</span></div>
+        <div class="kw-item"><span class="kw-name" style="color:var(--red);">countertop blog content</span><span class="kw-status" style="color:var(--red);">❌ No blog</span></div>
+        <div class="kw-item"><span class="kw-name" style="color:var(--red);">huntsville countertops</span><span class="kw-status" style="color:var(--red);">❌ No page</span></div>
+        <div class="kw-item"><span class="kw-name" style="color:var(--red);">informational keywords</span><span class="kw-status" style="color:var(--red);">❌ No content</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEO OPPORTUNITIES FOR MARANATHA -->
+  <section>
+    <div class="section-title">🎯 SEO Opportunities for Maranatha</div>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">Areas where Maranatha can outperform or differentiate from both competitors based on the gap analysis.</p>
+    <div class="opp-grid">
+
+      <div class="opp-card high">
+        <div class="opp-tag"><span class="pill pill-red">High Priority</span></div>
+        <div class="opp-title">Create Granite &amp; Quartz Dedicated Pages</div>
+        <div class="opp-body">Both competitors have dedicated "Granite Countertops Birmingham AL" and "Quartz Countertops Birmingham AL" pages. Maranatha does not. These are the two highest-value lead-driving keywords in the market.</div>
+      </div>
+
+      <div class="opp-card high">
+        <div class="opp-tag"><span class="pill pill-red">High Priority</span></div>
+        <div class="opp-title">Add LocalBusiness Schema</div>
+        <div class="opp-body">Granite Empire has the strongest schema of the three sites (Organization, LocalBusiness, Place, Article). Maranatha has none on the homepage. Adding it immediately closes a significant local SEO gap.</div>
+      </div>
+
+      <div class="opp-card high">
+        <div class="opp-tag"><span class="pill pill-red">High Priority</span></div>
+        <div class="opp-title">Add Pricing Range to Homepage</div>
+        <div class="opp-body">Granite Empire shows "$35–$150 per SF" prominently. GMQ shows product prices via WooCommerce. Maranatha shows nothing. Even a general price range reduces friction and increases qualified lead quality.</div>
+      </div>
+
+      <div class="opp-card medium">
+        <div class="opp-tag"><span class="pill pill-yellow">Medium Priority</span></div>
+        <div class="opp-title">Dominate Huntsville — Neither Competitor Has It</div>
+        <div class="opp-body">Neither gmqtops.com nor graniteempirebirmingham.com has a Huntsville-focused page. Maranatha has stated Huntsville as a growth market. This is a wide-open opportunity to rank first with zero direct competitor pages.</div>
+      </div>
+
+      <div class="opp-card medium">
+        <div class="opp-tag"><span class="pill pill-yellow">Medium Priority</span></div>
+        <div class="opp-title">Leverage the 3D Virtual Showroom</div>
+        <div class="opp-body">Neither GMQ Tops nor Granite Empire has a virtual showroom. Maranatha's Matterport 3D tours are a unique asset that is currently buried. Promote it in the homepage hero and navigation — it is a strong conversion differentiator.</div>
+      </div>
+
+      <div class="opp-card medium">
+        <div class="opp-tag"><span class="pill pill-yellow">Medium Priority</span></div>
+        <div class="opp-title">Blog Content Gap vs. GMQ</div>
+        <div class="opp-body">GMQ Tops has 583 blog posts. Maranatha has 27. Granite Empire has 0. Maranatha can own the informational/blog space in Birmingham with consistent publishing — Granite Empire won't compete and GMQ's posts may lack local relevance to Birmingham specifically.</div>
+      </div>
+
+      <div class="opp-card info">
+        <div class="opp-tag"><span class="pill pill-blue">Growth</span></div>
+        <div class="opp-title">Turnaround Time as a CTA</div>
+        <div class="opp-body">Granite Empire leads with "5–7 business days" everywhere. Maranatha's actual turnaround time is not mentioned anywhere on the site. If competitive, this should be added to the homepage, service pages, and contact page.</div>
+      </div>
+
+      <div class="opp-card info">
+        <div class="opp-tag"><span class="pill pill-blue">Growth</span></div>
+        <div class="opp-title">Fix Brand Name — "Maranatha Granite" vs "Stone and Floors"</div>
+        <div class="opp-body">The site refers to the business as "Maranatha Granite" throughout, limiting it to granite associations. Granite Empire and GMQ both use broader positioning. Updating to the full brand name reinforces the flooring and multi-material offering.</div>
+      </div>
+
+      <div class="opp-card info">
+        <div class="opp-tag"><span class="pill pill-blue">Growth</span></div>
+        <div class="opp-title">Add Financing Option</div>
+        <div class="opp-body">GMQ Tops offers financing per city — a significant conversion lever for higher-ticket countertop projects. Maranatha does not currently offer or promote financing. Adding or partnering for financing could meaningfully increase conversions.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SWOT -->
+  <section>
+    <div class="section-title">⚖️ Maranatha — SWOT vs. Competitors</div>
+    <div class="swot-grid">
+
+      <div class="swot-card">
+        <div class="swot-label s">Strengths</div>
+        <ul class="swot-list">
+          <li><span class="swot-icon">✅</span>Only site with 3D virtual showroom — unique competitive asset</li>
+          <li><span class="swot-icon">✅</span>Strongest homepage H1 of the three sites</li>
+          <li><span class="swot-icon">✅</span>Active blog (27 posts) — ahead of Granite Empire</li>
+          <li><span class="swot-icon">✅</span>In-house fabrication and installation</li>
+          <li><span class="swot-icon">✅</span>Wide material selection (granite, quartz, marble, quartzite, porcelain, flooring)</li>
+          <li><span class="swot-icon">✅</span>GA4 and Facebook Pixel tracking in place</li>
+        </ul>
+      </div>
+
+      <div class="swot-card">
+        <div class="swot-label w">Weaknesses</div>
+        <ul class="swot-list">
+          <li><span class="swot-icon">❌</span>No dedicated pages for primary revenue keywords (granite, quartz Birmingham)</li>
+          <li><span class="swot-icon">❌</span>No LocalBusiness schema — weakest local SEO signals of all three</li>
+          <li><span class="swot-icon">❌</span>34 pages missing meta descriptions</li>
+          <li><span class="swot-icon">❌</span>Homepage CTA sends to Google Form — loses leads</li>
+          <li><span class="swot-icon">❌</span>No pricing transparency</li>
+          <li><span class="swot-icon">❌</span>Brand name inconsistency throughout site</li>
+        </ul>
+      </div>
+
+      <div class="swot-card">
+        <div class="swot-label o">Opportunities</div>
+        <ul class="swot-list">
+          <li><span class="swot-icon">🔵</span>Huntsville market — zero competitor pages targeting this city</li>
+          <li><span class="swot-icon">🔵</span>Content gap — Granite Empire has no blog; GMQ's posts may not be locally relevant</li>
+          <li><span class="swot-icon">🔵</span>Schema + local signals — quick wins that leapfrog current setup</li>
+          <li><span class="swot-icon">🔵</span>3D showroom promotion — can be a leading CTA no competitor can match</li>
+          <li><span class="swot-icon">🔵</span>Add turnaround time guarantee to match Granite Empire's speed messaging</li>
+        </ul>
+      </div>
+
+      <div class="swot-card">
+        <div class="swot-label t">Threats</div>
+        <ul class="swot-list">
+          <li><span class="swot-icon">⚠️</span>GMQ Tops has 583 blog posts — massive organic traffic moat if they optimize</li>
+          <li><span class="swot-icon">⚠️</span>Granite Empire has better schema and cleaner service pages targeting the same keywords</li>
+          <li><span class="swot-icon">⚠️</span>GMQ Tops covers Birmingham, Montgomery, and Mobile — multi-city scale advantage</li>
+          <li><span class="swot-icon">⚠️</span>Granite Empire's pricing transparency may convert price-sensitive leads away from Maranatha</li>
+          <li><span class="swot-icon">⚠️</span>Both competitors are actively updating their sites (March 2026)</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  Prepared by <strong>Agencia Melbee</strong> for Maranatha Stone and Floors &nbsp;·&nbsp; maranatha.pro &nbsp;·&nbsp; March 2026<br>
+  <span style="font-size:11px;">Data sourced from live site crawls. Traffic and DA figures are estimates — verify with Ahrefs, SEMrush, or Moz.</span>
+</div>
+
+</body>
+</html>
