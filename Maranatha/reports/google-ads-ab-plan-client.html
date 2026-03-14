@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Ads A/B Test Plan — Maranatha Stone and Floors</title>
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #c8923a;
+      --accent-light: #fdf3e7;
+      --google-blue: #1a73e8;
+      --google-green: #34a853;
+      --google-red: #ea4335;
+      --google-yellow: #fbbc04;
+      --ad-a: #1565c0;
+      --ad-a-light: #e3f2fd;
+      --ad-b: #6a1b9a;
+      --ad-b-light: #f3e5f5;
+      --phase1: #1565c0;
+      --phase1-light: #e3f2fd;
+      --phase2: #6a1b9a;
+      --phase2-light: #f3e5f5;
+      --phase3: #2e7d32;
+      --phase3-light: #e8f5e9;
+      --warn: #e65100;
+      --warn-light: #fff3e0;
+      --border: #e0e0e0;
+      --gray: #f5f5f5;
+      --text: #1a1a1a;
+      --muted: #666;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #efefef;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--primary);
+      color: white;
+      padding: 40px 48px 32px;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .brand-agency { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 600; }
+    .brand-client { font-size: 24px; font-weight: 700; }
+    .report-meta { text-align: right; }
+    .report-meta .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #aaa; }
+    .report-meta .value { font-size: 14px; color: white; font-weight: 500; }
+    .header-title { margin-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; }
+    .header-title h1 { font-size: 30px; font-weight: 700; }
+    .header-title p { margin-top: 6px; color: #bbb; font-size: 14px; max-width: 680px; }
+
+    .g-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      font-weight: 800;
+      font-size: 18px;
+      margin-top: 12px;
+    }
+    .g-logo span:nth-child(1) { color: var(--google-blue); }
+    .g-logo span:nth-child(2) { color: var(--google-red); }
+    .g-logo span:nth-child(3) { color: var(--google-yellow); }
+    .g-logo span:nth-child(4) { color: var(--google-blue); }
+    .g-logo span:nth-child(5) { color: var(--google-green); }
+    .g-logo span:nth-child(6) { color: var(--google-red); }
+    .g-logo-suffix { font-size: 14px; color: #bbb; font-weight: 400; margin-left: 6px; }
+
+    /* LAYOUT */
+    .container { max-width: 1140px; margin: 0 auto; padding: 32px 24px 64px; }
+    section { margin-bottom: 48px; }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 18px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-number {
+      background: var(--accent);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* CARDS */
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    /* OVERVIEW STATS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 10px;
+      padding: 18px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-top: 4px solid var(--border);
+      text-align: center;
+    }
+    .stat-card.blue  { border-top-color: var(--google-blue); }
+    .stat-card.green { border-top-color: var(--google-green); }
+    .stat-card.gold  { border-top-color: var(--accent); }
+    .stat-card.red   { border-top-color: var(--google-red); }
+    .stat-value { font-size: 26px; font-weight: 800; color: var(--primary); line-height: 1.1; }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.8px; }
+
+    /* TABLES */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th {
+      background: var(--primary);
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 600;
+    }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child  { border-radius: 0 8px 0 0; }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #fafafa; }
+    tr:hover td { background: var(--accent-light); }
+    .table-wrap { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+    /* BADGES */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-blue   { background: var(--ad-a-light);   color: var(--ad-a); }
+    .badge-purple { background: var(--ad-b-light);   color: var(--ad-b); }
+    .badge-green  { background: #e8f5e9; color: #2e7d32; }
+    .badge-gold   { background: var(--accent-light); color: #8a5a0a; }
+    .badge-red    { background: #ffebee; color: #c62828; }
+    .badge-gray   { background: #f5f5f5; color: #555; }
+
+    /* AD PREVIEW */
+    .ad-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .ad-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+    }
+    .ad-card-header {
+      padding: 14px 20px;
+      color: white;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ad-card-header.ad-a { background: var(--ad-a); }
+    .ad-card-header.ad-b { background: var(--ad-b); }
+    .ad-angle {
+      font-size: 11px;
+      opacity: 0.85;
+      font-weight: 400;
+      font-style: italic;
+    }
+    .ad-card-body { padding: 20px; }
+
+    /* GOOGLE AD MOCKUP */
+    .ad-mockup {
+      background: white;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    .ad-mockup-tag {
+      display: inline-block;
+      font-size: 11px;
+      color: #3c4043;
+      border: 1px solid #3c4043;
+      border-radius: 2px;
+      padding: 0 4px;
+      margin-bottom: 4px;
+      font-weight: 400;
+    }
+    .ad-mockup-url { color: #202124; font-size: 12px; margin-bottom: 4px; }
+    .ad-mockup-headline { color: var(--google-blue); font-size: 18px; font-weight: 400; line-height: 1.3; margin-bottom: 4px; }
+    .ad-mockup-headline span::after { content: ' | '; color: #dadce0; }
+    .ad-mockup-headline span:last-child::after { content: ''; }
+    .ad-mockup-desc { color: #3c4043; font-size: 13px; line-height: 1.5; }
+
+    /* FIELD ROWS */
+    .field-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: flex-start; }
+    .field-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+      min-width: 120px;
+      padding-top: 2px;
+    }
+    .field-value { font-size: 13px; color: var(--text); flex: 1; }
+    .field-value .char-count {
+      font-size: 10px;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+    .char-ok   { color: var(--google-green); }
+    .char-warn { color: var(--google-red); }
+
+    /* HEADLINE / DESC BOXES */
+    .hl-box {
+      display: inline-block;
+      background: var(--ad-a-light);
+      border: 1px solid #90caf9;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 13px;
+      margin: 3px 0;
+      font-weight: 500;
+    }
+    .hl-box.b { background: var(--ad-b-light); border-color: #ce93d8; }
+    .desc-box {
+      background: #f9fbe7;
+      border: 1px solid #c5e1a5;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 13px;
+      margin: 3px 0;
+    }
+    .desc-box.b { background: var(--ad-b-light); border-color: #ce93d8; }
+
+    /* KEYWORDS */
+    .kw-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .kw {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+      font-weight: 600;
+    }
+    .kw-exact { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+    .kw-phrase { background: #fff3e0; color: #bf360c; border: 1px solid #ffcc80; }
+
+    /* EXTENSIONS */
+    .ext-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .ext-box {
+      background: var(--gray);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .ext-box-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 8px; }
+    .ext-item {
+      font-size: 12px;
+      color: var(--google-blue);
+      padding: 4px 0;
+      border-bottom: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ext-item:last-child { border-bottom: none; }
+    .ext-item::before { content: '→'; color: var(--accent); font-size: 11px; }
+    .callout-item {
+      font-size: 12px;
+      color: var(--text);
+      padding: 4px 0;
+      border-bottom: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .callout-item:last-child { border-bottom: none; }
+    .callout-item::before { content: '✓'; color: var(--google-green); font-size: 11px; font-weight: 700; }
+
+    /* SCHEDULE TABLE */
+    .schedule-week {
+      display: grid;
+      grid-template-columns: 90px 1fr 90px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      align-items: start;
+    }
+    .schedule-week:last-child { border-bottom: none; }
+    .schedule-week:hover { background: var(--accent-light); }
+    .week-label { font-weight: 700; color: var(--primary); font-size: 13px; }
+    .week-action { font-size: 13px; padding-right: 16px; }
+    .week-budget { font-weight: 700; color: var(--google-green); font-size: 13px; }
+    .week-goal { font-size: 13px; color: var(--muted); }
+    .schedule-header {
+      display: grid;
+      grid-template-columns: 90px 1fr 90px 1fr;
+      gap: 0;
+      background: var(--primary);
+      color: white;
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-radius: 8px 8px 0 0;
+    }
+    .schedule-wrap { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .phase-divider {
+      background: var(--gray);
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .phase-divider.p1 { border-left: 4px solid var(--phase1); color: var(--phase1); }
+    .phase-divider.p2 { border-left: 4px solid var(--phase2); color: var(--phase2); }
+    .phase-divider.p3 { border-left: 4px solid var(--phase3); color: var(--phase3); }
+
+    /* METRICS */
+    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .metric-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-left: 5px solid var(--border);
+    }
+    .metric-card.blue   { border-left-color: var(--google-blue); }
+    .metric-card.green  { border-left-color: var(--google-green); }
+    .metric-card.gold   { border-left-color: var(--accent); }
+    .metric-name { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 6px; }
+    .metric-target { font-size: 28px; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 4px; }
+    .metric-desc { font-size: 12px; color: var(--muted); }
+    .metric-range { font-size: 11px; color: var(--google-green); margin-top: 4px; font-weight: 600; }
+
+    /* WEEK 1 CHECKLIST */
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      font-size: 13px;
+    }
+    .checklist li:hover { background: var(--accent-light); }
+    .step-number {
+      background: var(--primary);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-title { font-weight: 700; color: var(--primary); margin-bottom: 3px; }
+    .step-note { font-size: 12px; color: var(--muted); }
+
+    /* PHASE EXPANSION */
+    .phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .phase-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .phase-card-header {
+      padding: 14px 20px;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .phase-card-header.p2 { background: var(--phase2); }
+    .phase-card-header.p3 { background: var(--phase3); }
+    .phase-card-body { padding: 18px 20px; }
+    .phase-item { padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 13px; }
+    .phase-item:last-child { border-bottom: none; }
+    .phase-item strong { color: var(--primary); }
+
+    /* LOCATION PILLS */
+    .location-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .location-pill {
+      background: var(--phase3-light);
+      color: #1b5e20;
+      border: 1px solid #a5d6a7;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .location-pill.primary { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* NOTE BOX */
+    .note-box {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: #5d4037;
+      margin-top: 12px;
+    }
+    .note-box strong { color: var(--accent); }
+
+    /* GAP TABLE COLORING */
+    .own-it { background: #e8f5e9 !important; color: #1b5e20; font-weight: 700; }
+    .competitor-angle { color: var(--muted); }
+    .gap-open { background: #fff8e1 !important; }
+
+    /* FOOTER */
+    .footer {
+      background: var(--primary);
+      color: #aaa;
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+    }
+    .footer strong { color: var(--accent); }
+
+    /* PRINT */
+    @media print {
+      body { background: white; font-size: 12px; }
+      .header { padding: 24px 32px; }
+      .container { padding: 16px 24px 32px; }
+      section { margin-bottom: 32px; page-break-inside: avoid; }
+      .ad-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+      .phase-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .header { padding: 24px 20px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .ad-grid { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: 1fr; }
+      .phase-grid { grid-template-columns: 1fr; }
+      .ext-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="brand-agency">Agencia Melbee — Growth Strategy</div>
+      <div class="brand-client">Maranatha Stone and Floors</div>
+      <div style="font-size:12px; color:#aaa; margin-top:4px;">205.663.0400 &nbsp;|&nbsp; Pelham, AL &nbsp;|&nbsp; maranatha.pro</div>
+    </div>
+    <div class="report-meta">
+      <div class="label">Report Date</div>
+      <div class="value">March 2026</div>
+      <div class="label" style="margin-top:8px;">Document</div>
+      <div class="value">Google Ads A/B Plan</div>
+    </div>
+  </div>
+  <div class="header-title">
+    <div class="g-logo">
+      <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+      <span class="g-logo-suffix">Ads — A/B Test Plan &amp; 90-Day Schedule</span>
+    </div>
+    <h1>Competitive A/B Strategy for Countertop Leads in Birmingham, AL</h1>
+    <p>A complete launch playbook: competitive gap analysis, Phase 1 ad copy, 90-day schedule, expansion roadmap, and a step-by-step Week 1 checklist for first-time Google Ads users.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- OVERVIEW STATS -->
+  <div class="stats-grid">
+    <div class="stat-card blue">
+      <div class="stat-value">$1,500</div>
+      <div class="stat-label">Total Monthly Budget</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-value">$37/day</div>
+      <div class="stat-label">Google Ads — Month 1</div>
+    </div>
+    <div class="stat-card gold">
+      <div class="stat-value">$13/day</div>
+      <div class="stat-label">Meta Ads — Month 1</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-value">90</div>
+      <div class="stat-label">Day Roadmap</div>
+    </div>
+  </div>
+
+  <!-- BUDGET SPLIT -->
+  <section>
+    <div class="section-title">💰 Budget Split — $1,500/month</div>
+    <table class="compare-table" style="background:white;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);width:100%;border-collapse:collapse;font-size:13px;">
+      <thead>
+        <tr>
+          <th style="background:var(--primary);color:white;padding:12px 16px;text-align:left;">Canal</th>
+          <th style="background:var(--primary);color:white;padding:12px 16px;text-align:left;">Mês 1</th>
+          <th style="background:var(--primary);color:white;padding:12px 16px;text-align:left;">Mês 2</th>
+          <th style="background:var(--primary);color:white;padding:12px 16px;text-align:left;">Mês 3</th>
+          <th style="background:var(--primary);color:white;padding:12px 16px;text-align:left;">Objetivo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:12px 16px;border-bottom:1px solid #e0e0e0;font-weight:700;">Google Ads</td>
+          <td style="padding:12px 16px;border-bottom:1px solid #e0e0e0;">$1,100 ($37/day)<br><small>2 campanhas: Branded+Geral + Material</small></td>
+          <td style="padding:12px 16px;border-bottom:1px solid #e0e0e0;">$1,100 ($50/day)<br><small>+ Quartz expansion</small></td>
+          <td style="padding:12px 16px;border-bottom:1px solid #e0e0e0;">$1,100–$1,500<br><small>Scale winner + Competitor campaign</small></td>
+          <td style="padding:12px 16px;border-bottom:1px solid #e0e0e0;">Capturar intenção ativa</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 16px;font-weight:700;">Meta Ads</td>
+          <td style="padding:12px 16px;">$400 ($13/day)<br><small>Vídeo — Instant Form</small></td>
+          <td style="padding:12px 16px;">$400 ($13/day)<br><small>Testar variações de copy</small></td>
+          <td style="padding:12px 16px;">$400–$600<br><small>Escalar criativo vencedor</small></td>
+          <td style="padding:12px 16px;">Criar desejo + leads frios</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 1: COMPETITIVE GAP ANALYSIS -->
+  <section id="gap-analysis">
+    <div class="section-title">
+      <span class="section-number">1</span>
+      Competitive Gap Analysis
+    </div>
+    <p style="margin-bottom:16px; color:var(--muted); font-size:13px;">
+      What each competitor is saying in their ads — and the angles Maranatha should own. Green cells = Maranatha's opportunity to dominate.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Angle / Message</th>
+            <th>GMQ Tops</th>
+            <th>Surface One</th>
+            <th>Granite Empire</th>
+            <th>Maranatha — Recommended Position</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Price / Discount</strong></td>
+            <td class="competitor-angle">Financing offered</td>
+            <td class="competitor-angle">Not confirmed</td>
+            <td class="competitor-angle">$35–$150/SF shown</td>
+            <td class="gap-open"><span class="badge badge-gold">Do NOT fight on price</span> — Maranatha owns quality + value. Worth every penny.</td>
+          </tr>
+          <tr>
+            <td><strong>Turnaround Speed</strong></td>
+            <td class="competitor-angle">Fastest turnaround in the area</td>
+            <td class="competitor-angle">Not confirmed</td>
+            <td class="competitor-angle">5–7 business days</td>
+            <td class="own-it">COUNTER with in-house fabrication = faster AND better quality. "Made In-House, Ready Fast."</td>
+          </tr>
+          <tr>
+            <td><strong>Selection / Inventory</strong></td>
+            <td class="competitor-angle">250+ colors</td>
+            <td class="competitor-angle">Not confirmed</td>
+            <td class="competitor-angle">140+ colors in stock</td>
+            <td class="gap-open"><span class="badge badge-gold">Phase 2+</span> — Mention multiple materials (granite, quartz, marble, quartzite, porcelain) but don't anchor on volume.</td>
+          </tr>
+          <tr>
+            <td><strong>Free Estimate / Quote</strong></td>
+            <td class="competitor-angle">Not prominently confirmed</td>
+            <td class="competitor-angle">Not confirmed</td>
+            <td class="competitor-angle">Free estimate shown</td>
+            <td class="own-it">OWN "Free Estimate" but pair with LOCAL showroom visit. More personal than an online form.</td>
+          </tr>
+          <tr>
+            <td><strong>Local / Showroom</strong></td>
+            <td class="competitor-angle">Multi-city targeting, less local feel</td>
+            <td class="competitor-angle">Pelham based, local feel</td>
+            <td class="competitor-angle">Birmingham address listed</td>
+            <td class="own-it">OWN local identity. "Pelham Showroom," "Birmingham's Local Stone Experts." Beats online-only competitors for trust.</td>
+          </tr>
+          <tr>
+            <td><strong>Premium / Quality</strong></td>
+            <td class="competitor-angle">Not differentiated on quality</td>
+            <td class="competitor-angle">Quality implied, not explicit</td>
+            <td class="competitor-angle">Not differentiated</td>
+            <td class="own-it">OWN premium positioning. Quality messaging wins homeowners investing $5K–$15K. Beats price-war trap.</td>
+          </tr>
+          <tr>
+            <td><strong>In-House Fabrication</strong></td>
+            <td class="competitor-angle">Not explicitly claimed</td>
+            <td class="competitor-angle">Not confirmed</td>
+            <td class="competitor-angle">Not confirmed</td>
+            <td class="own-it">UNIQUE differentiator. "We cut it ourselves" = accountability, precision, speed. No competitor owns this clearly.</td>
+          </tr>
+          <tr>
+            <td><strong>B2B / Contractor</strong></td>
+            <td class="competitor-angle">Consumer focus</td>
+            <td class="competitor-angle">Strong B2B/builder focus</td>
+            <td class="competitor-angle">Consumer focus</td>
+            <td class="gap-open"><span class="badge badge-gold">Future</span> — Contractor targeting as a Phase 3+ campaign if desired. Not primary focus now.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box">
+      <strong>Strategic conclusion:</strong> Maranatha should own three angles no single competitor holds simultaneously — <strong>Local Showroom + In-House Fabrication + Premium Quality</strong>. This positions the brand above price fighters (Alabama Granite) without chasing speed-claims alone (GMQ) or losing local identity to larger operators (Surface One).
+    </div>
+  </section>
+
+  <!-- SECTION 2: A/B TEST STRUCTURE — PHASE 1 -->
+  <section id="ab-test">
+    <div class="section-title">
+      <span class="section-number">2</span>
+      A/B Test Structure — Phase 1 (Months 1–2)
+    </div>
+
+    <div class="card" style="background: var(--gray); border: 1px solid var(--border);">
+      <div class="card-title">Campaign &amp; Ad Group Setup</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
+        <div>
+          <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.8px;">Campaign Name</div>
+          <div style="font-size:14px; font-weight:700; color:var(--primary); margin-top:4px;">MSF | Granite | Search | Birmingham</div>
+        </div>
+        <div>
+          <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.8px;">Ad Group Name</div>
+          <div style="font-size:14px; font-weight:700; color:var(--primary); margin-top:4px;">Granite Countertops — Birmingham</div>
+        </div>
+        <div>
+          <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.8px;">Campaign Type</div>
+          <div style="font-size:14px; font-weight:700; color:var(--primary); margin-top:4px;">Search &nbsp;<span class="badge badge-gray">Manual CPC → Target CPA later</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AD PREVIEWS SIDE BY SIDE -->
+    <div class="ad-grid">
+
+      <!-- AD A -->
+      <div class="ad-card">
+        <div class="ad-card-header ad-a">
+          <span>Ad A — Local + Premium + Free Estimate</span>
+          <span class="ad-angle">Counters Alabama Granite's discount angle</span>
+        </div>
+        <div class="ad-card-body">
+
+          <!-- Mockup -->
+          <div class="ad-mockup">
+            <div><span class="ad-mockup-tag">Ad</span></div>
+            <div class="ad-mockup-url">maranatha.pro</div>
+            <div class="ad-mockup-headline">
+              <span>Granite Countertops Pelham</span>
+              <span>Local Showroom — Visit Us</span>
+              <span>Free Estimate Today</span>
+            </div>
+            <div class="ad-mockup-desc">Premium granite, quartz &amp; marble — fabricated in-house at our Birmingham-area showroom. No middleman, honest pricing.</div>
+            <div class="ad-mockup-desc" style="margin-top:4px;">Trusted local fabricators serving Birmingham, Hoover &amp; Vestavia. Call or visit for a free estimate.</div>
+          </div>
+
+          <!-- Field Rows -->
+          <div class="field-row">
+            <span class="field-label">Headline 1</span>
+            <span class="field-value"><span class="hl-box">Granite Countertops Pelham</span> <span class="char-count char-ok">26 chars</span></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Headline 2</span>
+            <span class="field-value"><span class="hl-box">Local Showroom — Visit Us</span> <span class="char-count char-ok">24 chars</span></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Headline 3</span>
+            <span class="field-value"><span class="hl-box">Free Estimate Today</span> <span class="char-count char-ok">19 chars</span></span>
+          </div>
+          <div class="field-row" style="margin-top:10px;">
+            <span class="field-label">Description 1</span>
+            <span class="field-value"><span class="desc-box">Premium granite, quartz &amp; marble — fabricated in-house at our Birmingham-area showroom. No middleman, honest pricing.</span> <span class="char-count char-ok">119 chars (trimmed below)</span></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Description 1</span>
+            <span class="field-value" style="font-size:12px; color:var(--muted);">(Final, 90 chars max)</span>
+          </div>
+          <div style="background:#f0f7ff; border:1px solid #90caf9; border-radius:6px; padding:8px 12px; font-size:13px; margin-bottom:8px;">
+            Premium granite, quartz &amp; marble fabricated in-house. No middleman — better quality.
+            <span class="char-count char-ok" style="display:block; margin-top:2px;">88 chars ✓</span>
+          </div>
+          <div style="background:#f0f7ff; border:1px solid #90caf9; border-radius:6px; padding:8px 12px; font-size:13px; margin-bottom:16px;">
+            Local Pelham showroom. Serving Birmingham, Hoover &amp; Vestavia. Free estimate — call us!
+            <span class="char-count char-ok" style="display:block; margin-top:2px;">90 chars ✓</span>
+          </div>
+
+          <!-- Extensions -->
+          <div class="ext-grid">
+            <div class="ext-box">
+              <div class="ext-box-title">Sitelink Extensions</div>
+              <div class="ext-item">View Granite Colors</div>
+              <div class="ext-item">Get a Free Estimate</div>
+              <div class="ext-item">Visit Our Showroom</div>
+              <div class="ext-item">See Our Project Gallery</div>
+            </div>
+            <div class="ext-box">
+              <div class="ext-box-title">Callout Extensions</div>
+              <div class="callout-item">In-House Fabrication</div>
+              <div class="callout-item">Free Estimate</div>
+              <div class="callout-item">Local Birmingham Showroom</div>
+              <div class="callout-item">Granite, Quartz &amp; Marble</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;">
+            <div class="field-row"><span class="field-label">Final URL</span><span class="field-value" style="color:var(--google-blue);">https://maranatha.pro</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AD B -->
+      <div class="ad-card">
+        <div class="ad-card-header ad-b">
+          <span>Ad B — In-House Fabrication + No Middleman + Speed</span>
+          <span class="ad-angle">Counters GMQ's turnaround claim</span>
+        </div>
+        <div class="ad-card-body">
+
+          <!-- Mockup -->
+          <div class="ad-mockup">
+            <div><span class="ad-mockup-tag">Ad</span></div>
+            <div class="ad-mockup-url">maranatha.pro</div>
+            <div class="ad-mockup-headline">
+              <span>Countertops Cut In-House</span>
+              <span>No Middleman — We Fabricate</span>
+              <span>Get Your Free Quote Now</span>
+            </div>
+            <div class="ad-mockup-desc">We fabricate &amp; install in-house — no outsourcing, no middleman. Most projects completed in 7–10 days. Birmingham's local countertop fabricator.</div>
+            <div class="ad-mockup-desc" style="margin-top:4px;">Granite, quartz, marble &amp; more. Pelham showroom open. Skip the middleman — call Maranatha today.</div>
+          </div>
+
+          <!-- Field Rows -->
+          <div class="field-row">
+            <span class="field-label">Headline 1</span>
+            <span class="field-value"><span class="hl-box b">In-House Fabrication, Birmingham</span> <span class="char-count char-ok">32 chars</span></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Headline 2</span>
+            <span class="field-value"><span class="hl-box b">No Middleman — We Fabricate</span> <span class="char-count char-ok">27 chars</span></span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Headline 3</span>
+            <span class="field-value"><span class="hl-box b">Installed in 7–10 Days</span> <span class="char-count char-ok">22 chars</span></span>
+          </div>
+          <div style="margin-top:10px;"></div>
+          <div style="background:var(--ad-b-light); border:1px solid #ce93d8; border-radius:6px; padding:8px 12px; font-size:13px; margin-bottom:8px;">
+            We fabricate &amp; install your countertops in-house — no middleman, no outsourcing. Most projects ready in 7–10 days. Free estimate.
+            <span class="char-count char-ok" style="display:block; margin-top:2px;">87 chars ✓</span>
+          </div>
+          <div style="background:var(--ad-b-light); border:1px solid #ce93d8; border-radius:6px; padding:8px 12px; font-size:13px; margin-bottom:16px;">
+            Granite, quartz &amp; marble. Pelham showroom. Skip the middleman — call Maranatha today!
+            <span class="char-count char-ok" style="display:block; margin-top:2px;">89 chars ✓</span>
+          </div>
+
+          <!-- Extensions -->
+          <div class="ext-grid">
+            <div class="ext-box">
+              <div class="ext-box-title">Sitelink Extensions</div>
+              <div class="ext-item">How We Fabricate In-House</div>
+              <div class="ext-item">Request a Free Quote</div>
+              <div class="ext-item">Quartz Countertops</div>
+              <div class="ext-item">Kitchen Remodel Countertops</div>
+            </div>
+            <div class="ext-box">
+              <div class="ext-box-title">Callout Extensions</div>
+              <div class="callout-item">Direct Fabrication</div>
+              <div class="callout-item">No Outsourcing</div>
+              <div class="callout-item">Quick Turnaround</div>
+              <div class="callout-item">5 Materials Available</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;">
+            <div class="field-row"><span class="field-label">Final URL</span><span class="field-value" style="color:var(--google-blue);">https://maranatha.pro</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /ad-grid -->
+
+    <!-- KEYWORDS -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Keywords — Phase 1 Ad Group (Granite Countertops — Birmingham)</div>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">Both Ad A and Ad B compete in the same ad group. Google rotates them and you compare performance after 4–6 weeks.</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <div>
+          <div style="font-size:12px; font-weight:700; color:var(--google-green); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">Exact Match <span class="badge badge-green">[keyword]</span></div>
+          <div class="kw-wrap">
+            <span class="kw kw-exact">[granite countertops birmingham al]</span>
+            <span class="kw kw-exact">[granite countertops pelham al]</span>
+            <span class="kw kw-exact">[countertop installation birmingham]</span>
+            <span class="kw kw-exact">[granite fabrication birmingham]</span>
+            <span class="kw kw-exact">[stone countertops birmingham]</span>
+            <span class="kw kw-exact">[countertop company birmingham al]</span>
+            <span class="kw kw-exact">[granite countertop near me]</span>
+            <span class="kw kw-exact">[countertop fabricator near me]</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px; font-weight:700; color: var(--warn); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">Phrase Match <span class="badge badge-red">"keyword"</span></div>
+          <div class="kw-wrap">
+            <span class="kw kw-phrase">"granite countertops birmingham"</span>
+            <span class="kw kw-phrase">"granite countertops near me"</span>
+            <span class="kw kw-phrase">"countertop installation near me"</span>
+            <span class="kw kw-phrase">"stone countertops pelham"</span>
+            <span class="kw kw-phrase">"kitchen countertop replacement"</span>
+            <span class="kw kw-phrase">"granite fabricator alabama"</span>
+            <span class="kw kw-phrase">"countertop company near me"</span>
+            <span class="kw kw-phrase">"quartz countertops birmingham"</span>
+          </div>
+        </div>
+      </div>
+      <div class="note-box" style="margin-top:16px;">
+        <strong>Negative keywords to add on day 1:</strong>
+        <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">free</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">DIY</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">how to</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">repair</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">fix</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">crack</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">used</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">wholesale</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">cheap</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">discount</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">lowes</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">home depot</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">ikea</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">samples</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">rent</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">lease</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">jobs</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">hiring</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">career</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">salary</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">review</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">complaint</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">laminate</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">formica</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">tile</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">epoxy</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600">paint</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SECTION 3: 90-DAY SCHEDULE -->
+  <section id="schedule">
+    <div class="section-title">
+      <span class="section-number">3</span>
+      Campaign Schedule — 90 Days
+    </div>
+
+    <div class="schedule-wrap">
+      <div class="schedule-header">
+        <span>Week</span>
+        <span>Action</span>
+        <span>Budget / Day</span>
+        <span>Goal</span>
+      </div>
+
+      <!-- PHASE 1 -->
+      <div class="phase-divider p1">Phase 1 — Launch A/B Test (Month 1)</div>
+
+      <div class="schedule-week" style="background:#f0f7ff;">
+        <div class="week-label">Wk 1–2</div>
+        <div class="week-action">
+          <strong>Account setup + Launch A/B test</strong><br>
+          Create Google Ads account, set up conversion tracking (phone calls + form fills), launch Granite campaign with Ad A &amp; Ad B. Set ad rotation to "Rotate indefinitely."
+        </div>
+        <div class="week-budget">$37 / day</div>
+        <div class="week-goal">Collect initial impressions and click data. No optimization yet — let ads run freely.</div>
+      </div>
+
+      <div class="schedule-week">
+        <div class="week-label">Wk 3</div>
+        <div class="week-action">
+          <strong>Add call extension + review search terms</strong><br>
+          Enable call extension with 205.663.0400. Download search terms report and add irrelevant queries as negative keywords.
+        </div>
+        <div class="week-budget">$37 / day</div>
+        <div class="week-goal">Tighten keyword targeting. Eliminate wasted spend from irrelevant searches.</div>
+      </div>
+
+      <div class="schedule-week" style="background:#f0f7ff;">
+        <div class="week-label">Wk 4</div>
+        <div class="week-action">
+          <strong>First A/B performance review</strong><br>
+          Compare Ad A vs Ad B: CTR, conversion rate, cost per click. If one ad has statistically more clicks or leads, note the winning angle. Do not pause the loser yet — wait for Month 2.
+        </div>
+        <div class="week-budget">$37 / day</div>
+        <div class="week-goal">Identify early signal on which message (Local+Premium vs In-House+Speed) resonates more.</div>
+      </div>
+
+      <!-- PHASE 1 CONT -->
+      <div class="phase-divider p1">Phase 1 — Optimize (Month 2, Early)</div>
+
+      <div class="schedule-week">
+        <div class="week-label">Wk 5–6</div>
+        <div class="week-action">
+          <strong>Declare A/B winner — pause loser, create iteration</strong><br>
+          Pause the lower-performing ad. Create "Ad C" — a new variation that borrows the best element from the loser and combines it with the winner's angle (e.g., winner was Ad B? Test a new ad: In-House + Local Showroom).
+        </div>
+        <div class="week-budget">$37 / day</div>
+        <div class="week-goal">Run second-round A/B: winner vs iteration. Keep improving CTR and conversion rate.</div>
+      </div>
+
+      <div class="schedule-week" style="background:#f0f7ff;">
+        <div class="week-label">Wk 7</div>
+        <div class="week-action">
+          <strong>Enable location bid adjustments</strong><br>
+          Review geographic report: which cities (Birmingham, Hoover, Vestavia, Pelham, Alabaster) are driving clicks and calls. Increase bid by +15% for best-performing cities.
+        </div>
+        <div class="week-budget">$37 / day</div>
+        <div class="week-goal">Maximize budget efficiency by investing more in high-converting locations.</div>
+      </div>
+
+      <div class="schedule-week">
+        <div class="week-label">Wk 8</div>
+        <div class="week-action">
+          <strong>Launch Quartz campaign (Phase 2 begins)</strong><br>
+          Duplicate granite campaign, rename to "MSF | Quartz | Search | Birmingham." Update headlines and description to quartz-specific copy. New ad group: Quartz Countertops — Birmingham. Apply winning angle from Phase 1 A/B test.
+        </div>
+        <div class="week-budget">$25 / day<br><span style="font-size:11px; color:var(--muted);">($15 granite + $10 quartz)</span></div>
+        <div class="week-goal">Expand reach to quartz-intending shoppers. Test if quartz ads generate lower cost-per-lead.</div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="phase-divider p2">Phase 2 — Quartz Expansion (Month 2, Late)</div>
+
+      <div class="schedule-week" style="background:#fdf3f8;">
+        <div class="week-label">Wk 9–10</div>
+        <div class="week-action">
+          <strong>Quartz A/B test running + granite optimization continues</strong><br>
+          Add price extensions to granite campaign (e.g., "Granite from $XX per sq ft — visit showroom"). Review quality scores for all keywords; pause keywords below Quality Score 5.
+        </div>
+        <div class="week-budget">$50 / day</div>
+        <div class="week-goal">Improve Quality Score to lower CPC. Price extensions increase CTR by showing value context.</div>
+      </div>
+
+      <div class="schedule-week">
+        <div class="week-label">Wk 11</div>
+        <div class="week-action">
+          <strong>Add marble + quartzite ad group</strong><br>
+          Create third ad group inside granite campaign (or new campaign): targeting marble and quartzite keywords for higher-intent, premium shoppers. Use premium messaging only.
+        </div>
+        <div class="week-budget">$60 / day</div>
+        <div class="week-goal">Capture premium shoppers overlooked by discount competitors. Higher-value jobs.</div>
+      </div>
+
+      <div class="schedule-week" style="background:#fdf3f8;">
+        <div class="week-label">Wk 12</div>
+        <div class="week-action">
+          <strong>Month 2 full review — prepare Phase 3 plan</strong><br>
+          Pull all campaign data: cost per lead, best-performing keywords, best-performing ad copy, best locations. Document findings and set Phase 3 targets.
+        </div>
+        <div class="week-budget">$60 / day</div>
+        <div class="week-goal">Validate full-funnel performance. Ready to scale budget and locations in Month 3.</div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="phase-divider p3">Phase 3 — Scale + Location Expansion (Month 3)</div>
+
+      <div class="schedule-week" style="background:#f0fff4;">
+        <div class="week-label">Wk 13</div>
+        <div class="week-action">
+          <strong>Activate location targeting expansion</strong><br>
+          Add Hoover, Vestavia Hills, Alabaster as separate location bid adjustments (+20% for closest cities). Review which zip codes are producing conversions and increase bids there.
+        </div>
+        <div class="week-budget">$75 / day</div>
+        <div class="week-goal">Reach higher-income suburbs (Vestavia, Hoover) where countertop upgrade jobs tend to be larger.</div>
+      </div>
+
+      <div class="schedule-week">
+        <div class="week-label">Wk 14</div>
+        <div class="week-action">
+          <strong>Enable remarketing (RLSA)</strong><br>
+          Tag website visitors and create remarketing list. Increase bids by +30% for users who visited the site but did not call or fill out a form. Create a dedicated remarketing ad: "Still looking for countertops? Visit our Pelham showroom."
+        </div>
+        <div class="week-budget">$75 / day</div>
+        <div class="week-goal">Re-engage warm prospects who showed interest. Remarketing CPL is typically 50% lower than cold traffic.</div>
+      </div>
+
+      <div class="schedule-week" style="background:#f0fff4;">
+        <div class="week-label">Wk 15</div>
+        <div class="week-action">
+          <strong>Switch granite campaign to Target CPA bidding</strong><br>
+          If at least 30 conversions have been recorded, switch from Manual CPC to Target CPA. Set initial CPA target at 20% above current average CPL to give Google room to optimize.
+        </div>
+        <div class="week-budget">$75 / day</div>
+        <div class="week-goal">Let Google's Smart Bidding optimize for conversions once enough data exists. Lower CPL over time.</div>
+      </div>
+
+      <div class="schedule-week">
+        <div class="week-label">Wk 16</div>
+        <div class="week-action">
+          <strong>90-day full performance review &amp; Q2 plan</strong><br>
+          Compile 90-day report: total spend, total leads, cost per lead, best keywords, best ads, best locations. Plan Q2 budget increase if CPL is within target. Consider adding a Display remarketing campaign.
+        </div>
+        <div class="week-budget">$75 / day</div>
+        <div class="week-goal">Document ROI. Present results and plan next 90 days with data-backed confidence.</div>
+      </div>
+
+    </div><!-- /schedule-wrap -->
+  </section>
+
+  <!-- SECTION 4: PHASE 2 EXPANSION -->
+  <section id="phase2">
+    <div class="section-title">
+      <span class="section-number">4</span>
+      Phase 2 — Quartz Campaign Expansion (Month 2)
+    </div>
+
+    <p style="color:var(--muted); font-size:13px; margin-bottom:18px;">Once Phase 1 has a winning A/B angle, apply that angle to new material-specific campaigns. Each material gets its own campaign and ad group for clean data.</p>
+
+    <div class="phase-grid">
+      <div class="phase-card">
+        <div class="phase-card-header p2">New Campaign: MSF | Quartz | Search | Birmingham</div>
+        <div class="phase-card-body">
+          <div class="phase-item"><strong>Ad Group:</strong> Quartz Countertops — Birmingham</div>
+          <div class="phase-item"><strong>Angle (apply Phase 1 winner):</strong> Combine winning Phase 1 message + "quartz" specificity. E.g., if Ad B (In-House) won: "Quartz Countertops — Fabricated In-House"</div>
+          <div class="phase-item"><strong>New Keywords (exact):</strong> [quartz countertops birmingham al], [quartz countertop installer near me], [quartz countertops pelham al], [white quartz countertops birmingham]</div>
+          <div class="phase-item"><strong>New Keywords (phrase):</strong> "quartz countertops near me", "quartz kitchen countertops", "quartz bathroom countertops"</div>
+          <div class="phase-item"><strong>Sitelinks:</strong> View Quartz Colors, Quartz vs Granite Guide, Get a Free Estimate, Visit Our Showroom</div>
+          <div class="phase-item"><strong>Budget start:</strong> $20/day alongside granite campaign</div>
+        </div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-card-header p2">New Ad Group (in Granite Campaign): Marble + Quartzite</div>
+        <div class="phase-card-body">
+          <div class="phase-item"><strong>Positioning:</strong> Premium-only messaging — marble and quartzite buyers are higher-intent, higher-budget shoppers. No discount language whatsoever.</div>
+          <div class="phase-item"><strong>Headline examples:</strong> "Marble Countertops Birmingham", "Quartzite Slabs — Premium Quality", "Showroom — Marble &amp; Quartzite"</div>
+          <div class="phase-item"><strong>New Keywords:</strong> [marble countertops birmingham], [quartzite countertops near me], [marble kitchen countertops alabama]</div>
+          <div class="phase-item"><strong>Why this works:</strong> Competitors (Alabama Granite, GMQ) compete hard on granite/quartz but rarely run targeted marble/quartzite ads — less auction competition = lower CPC.</div>
+          <div class="phase-item"><strong>Budget:</strong> Included within granite campaign budget initially</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SECTION 5: PHASE 3 LOCATION SCALE -->
+  <section id="phase3">
+    <div class="section-title">
+      <span class="section-number">5</span>
+      Phase 3 — Location Targeting Expansion (Month 3)
+    </div>
+
+    <p style="color:var(--muted); font-size:13px; margin-bottom:18px;">Maranatha's Pelham location is central to multiple high-value Birmingham suburbs. Phase 3 aggressively targets these with refined bid adjustments.</p>
+
+    <div class="card">
+      <div class="card-title">Target Locations — Bid Adjustment Map</div>
+      <div class="location-wrap">
+        <span class="location-pill primary">Pelham, AL (Home Base)</span>
+        <span class="location-pill">Birmingham, AL</span>
+        <span class="location-pill">Hoover, AL</span>
+        <span class="location-pill">Vestavia Hills, AL</span>
+        <span class="location-pill">Alabaster, AL</span>
+        <span class="location-pill">Helena, AL</span>
+        <span class="location-pill">Calera, AL</span>
+        <span class="location-pill">Homewood, AL</span>
+        <span class="location-pill">Mountain Brook, AL</span>
+      </div>
+    </div>
+
+    <div class="phase-grid" style="margin-top:16px;">
+      <div class="phase-card">
+        <div class="phase-card-header p3">Bid Adjustment Strategy by City</div>
+        <div class="phase-card-body">
+          <div class="phase-item"><strong>Pelham + Alabaster:</strong> +20% bid — closest to showroom, highest close rate expected</div>
+          <div class="phase-item"><strong>Hoover + Vestavia Hills:</strong> +15% bid — higher household income, larger kitchen remodel budgets</div>
+          <div class="phase-item"><strong>Birmingham (metro):</strong> Baseline bid — broad reach, monitor for CPA</div>
+          <div class="phase-item"><strong>Mountain Brook:</strong> +25% bid — highest-income suburb, premium stone purchasers</div>
+          <div class="phase-item"><strong>Helena + Calera:</strong> Baseline — grow carefully, further from showroom</div>
+          <div class="phase-item"><strong>Device bid adjustment:</strong> +10% mobile (many searches happen on phones while in kitchen or showroom shopping)</div>
+        </div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-card-header p3">Ad Copy Localization (Phase 3 Additions)</div>
+        <div class="phase-card-body">
+          <div class="phase-item"><strong>Hoover / Vestavia headline variant:</strong> "Countertops for Hoover Homes" — use location insertion in headline for higher relevance score</div>
+          <div class="phase-item"><strong>Dynamic keyword insertion:</strong> Test headline: {KeyWord:Granite Countertops Birmingham} — auto-matches searcher's query</div>
+          <div class="phase-item"><strong>New callout:</strong> "Serving All Birmingham Suburbs" — adds geographic credibility</div>
+          <div class="phase-item"><strong>Structured snippets:</strong> Materials: Granite, Quartz, Marble, Quartzite, Porcelain</div>
+          <div class="phase-item"><strong>Remarketing ad headline:</strong> "Still Looking? Our Pelham Showroom Is Open" — targets site visitors who didn't convert</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SECTION 6: METRICS TO TRACK -->
+  <section id="metrics">
+    <div class="section-title">
+      <span class="section-number">6</span>
+      Metrics to Track
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card blue">
+        <div class="metric-name">Click-Through Rate (CTR)</div>
+        <div class="metric-target">3–6%</div>
+        <div class="metric-desc">Percentage of people who see the ad and click it. A low CTR means your headline is not compelling enough or keywords are too broad.</div>
+        <div class="metric-range">Industry benchmark: 2–4% for home services. Target 4%+ by Month 2.</div>
+      </div>
+
+      <div class="metric-card green">
+        <div class="metric-name">Conversion Rate</div>
+        <div class="metric-target">8–15%</div>
+        <div class="metric-desc">Of visitors who click the ad, the percentage who call, fill out a form, or visit the showroom. Improve by making the landing page load fast and the phone number prominent.</div>
+        <div class="metric-range">Home services average: 10–12%. Track phone calls as conversions via Google Call Tracking.</div>
+      </div>
+
+      <div class="metric-card gold">
+        <div class="metric-name">Cost Per Lead (CPL)</div>
+        <div class="metric-target">$25–$60</div>
+        <div class="metric-desc">Total spend divided by number of leads (calls + forms). A countertop job worth $5,000–$15,000 makes a CPL under $100 very profitable.</div>
+        <div class="metric-range">Month 1 target: under $75. Month 3 target: under $45 with Smart Bidding.</div>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Check Frequency</th>
+            <th>Month 1 Target</th>
+            <th>Month 3 Target</th>
+            <th>Action if Off-Track</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>CTR</strong></td>
+            <td>Weekly</td>
+            <td><span class="badge badge-blue">≥ 3%</span></td>
+            <td><span class="badge badge-green">≥ 5%</span></td>
+            <td>Rewrite headlines. Add more negative keywords. Check if keywords are too broad.</td>
+          </tr>
+          <tr>
+            <td><strong>Conversion Rate</strong></td>
+            <td>Weekly</td>
+            <td><span class="badge badge-blue">≥ 8%</span></td>
+            <td><span class="badge badge-green">≥ 12%</span></td>
+            <td>Improve landing page speed, add trust signals, move phone number above the fold.</td>
+          </tr>
+          <tr>
+            <td><strong>Cost Per Lead</strong></td>
+            <td>Weekly</td>
+            <td><span class="badge badge-blue">≤ $75</span></td>
+            <td><span class="badge badge-green">≤ $45</span></td>
+            <td>Pause low-quality keywords. Increase bids on exact match. Improve Quality Score.</td>
+          </tr>
+          <tr>
+            <td><strong>Quality Score</strong></td>
+            <td>Monthly</td>
+            <td><span class="badge badge-blue">≥ 6/10</span></td>
+            <td><span class="badge badge-green">≥ 8/10</span></td>
+            <td>Align ad copy more closely with keyword. Improve landing page relevance.</td>
+          </tr>
+          <tr>
+            <td><strong>Impression Share</strong></td>
+            <td>Monthly</td>
+            <td><span class="badge badge-blue">≥ 40%</span></td>
+            <td><span class="badge badge-green">≥ 60%</span></td>
+            <td>Increase daily budget or improve bid. Low impression share = losing to competitors.</td>
+          </tr>
+          <tr>
+            <td><strong>Search Lost IS (Budget)</strong></td>
+            <td>Monthly</td>
+            <td><span class="badge badge-blue">≤ 30%</span></td>
+            <td><span class="badge badge-green">≤ 15%</span></td>
+            <td>Increase daily budget or tighten targeting to prioritize best keywords.</td>
+          </tr>
+          <tr>
+            <td><strong>Phone Calls (tracked)</strong></td>
+            <td>Weekly</td>
+            <td><span class="badge badge-blue">≥ 5/month</span></td>
+            <td><span class="badge badge-green">≥ 20/month</span></td>
+            <td>Confirm call tracking is properly configured. Review call recordings if available.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <!-- SECTION 7: REMOVED FOR CLIENT VERSION -->
+  <section id="week1" style="display:none;">
+    <div class="section-title">
+      <span class="section-number">7</span>
+      What To Do in Week 1 — Step-by-Step for Someone New to Google Ads
+    </div>
+
+    <p style="color:var(--muted); font-size:13px; margin-bottom:18px;">Follow these steps in order. Each step builds on the previous one. Plan for 3–4 hours of setup time total, spread across 2–3 sessions.</p>
+
+    <ul class="checklist">
+      <li>
+        <div class="step-number">1</div>
+        <div>
+          <div class="step-title">Create your Google Ads account</div>
+          <div class="step-note">Go to ads.google.com. Sign in with the business Google account (same one used for Google Business Profile if possible). Choose "Switch to Expert Mode" when prompted — this gives full control and avoids automatic Smart Campaign setups that waste budget. Set billing to credit card and set a monthly spending cap.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-number">2</div>
+        <div>
+          <div class="step-title">Install the Google Ads tag on your website</div>
+          <div class="step-note">In Google Ads: go to Tools → Measurement → Google Tag. Copy the global site tag (gtag.js) and paste it in the &lt;head&gt; of every page on maranatha.pro. If the site is on WordPress, use the "Insert Headers and Footers" plugin or Google Tag Manager. This tag is required before any conversions can be tracked.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-number">3</div>
+        <div>
+          <div class="step-title">Set up conversion tracking — phone calls + contact form</div>
+          <div class="step-note">In Google Ads: Tools → Conversions → + New Conversion. Create two: (1) "Phone call from ad" — set minimum call duration to 30 seconds so only real conversations count. (2) "Contact form submitted" — track the Thank You page after form submission. Without conversions, Google has no signal to optimize your bids later.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-number">4</div>
+        <div>
+          <div class="step-title">Create the first campaign: MSF | Granite | Search | Birmingham</div>
+          <div class="step-note">In Google Ads: Campaigns → + New Campaign → Sales → Search. Name: "MSF | Granite | Search | Birmingham". Bidding: Manual CPC (uncheck "Enhanced CPC" for now). Daily budget: $15. Location: Birmingham, AL metro area (use radius targeting: 30 miles from Pelham, AL 35124). Language: English. Network: Search only — uncheck Display Network and Search Partners initially.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-number">5</div>
+        <div>
+          <div class="step-title">Create the Ad Group: Granite Countertops — Birmingham</div>
+          <div class="step-note">Inside your new campaign: + New Ad Group. Name: "Granite Countertops — Birmingham". Default bid: $2.50 CPC to start (adjust after seeing average CPC data in first week). Add all keywords from Section 2 of this report — both exact match and phrase match. Do NOT add broad match keywords yet.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-number">6</div>
+        <div>
+          <div class="step-title">Add negative keywords (critical step — do this BEFORE launching)</div>
+          <div class="step-note">In the campaign, go to Keywords → Negative Keywords → + Add. Add all 27 words from the Negative Keywords section above (free, DIY, how to, repair, fix, crack, used, wholesale, cheap, discount, lowes, home depot, ikea, samples, rent, lease, jobs, hiring, career, salary, review, complaint, laminate, formica, tile, epoxy, paint). This prevents paying for clicks from people with zero intent to hire you. Adding negatives before launch saves 15–25% of budget from day one.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-number">7</div>
+        <div>
+          <div class="step-title">Create Ad A (Local + Premium + Free Estimate)</div>
+          <div class="step-note">In the ad group: + New Ad → Responsive Search Ad. Enter headlines and descriptions exactly as shown in Section 2 of this report. Set the Final URL to https://maranatha.pro. Pin Headline 1 to position 1 (so your main keyword always appears). Save and label it "Ad A — Local Premium."</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-number">8</div>
+        <div>
+          <div class="step-title">Create Ad B (In-House Fabrication + No Middleman)</div>
+          <div class="step-note">Repeat the same process in the same ad group. Enter Ad B headlines and descriptions from Section 2. Label it "Ad B — In-House Fabrication." Having two ads in one ad group automatically sets up the A/B test — Google will rotate them and report performance separately for each.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-number">9</div>
+        <div>
+          <div class="step-title">Set ad rotation to "Rotate indefinitely"</div>
+          <div class="step-note">In Campaign Settings → Additional Settings → Ad Rotation → select "Rotate indefinitely." This tells Google to show both ads equally, instead of automatically favoring one before you have enough data. You want to measure them fairly for at least 4 weeks before making decisions.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-number">10</div>
+        <div>
+          <div class="step-title">Add all extensions (sitelinks, callouts, call extension)</div>
+          <div class="step-note">In the campaign: go to Ads &amp; Extensions → Extensions → + New Extension. Add: (1) Call extension: 205.663.0400, schedule Mon–Sat 8am–6pm. (2) Sitelink extensions: 4 links as listed in Section 2 for each ad. (3) Callout extensions: 4 callouts as listed. Extensions are free — they increase your ad size and CTR at no extra cost.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-number">11</div>
+        <div>
+          <div class="step-title">Review and publish — then check back in 24–48 hours</div>
+          <div class="step-note">Do a final review: confirm billing is active, location targeting is set correctly, conversions are tracking, and both ads are approved (status: Eligible). After 48 hours, check: Are ads showing? Are you getting impressions? Review the Search Terms report to see what actual queries triggered your ads. Add anything irrelevant to negative keywords immediately.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-number">12</div>
+        <div>
+          <div class="step-title">Set a weekly calendar reminder to review performance</div>
+          <div class="step-note">Every Monday morning, spend 20 minutes reviewing: CTR, clicks, conversions, and search terms. Do not make major changes (pausing ads, changing bids) until you have at least 2 weeks of data. Google's algorithm needs time to learn. Resist the urge to optimize daily — give data time to accumulate.</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="note-box" style="margin-top:8px;">
+      <strong>Pro tip for Week 1:</strong> The single most important thing you can do in the first week is verify that conversions are tracking correctly. Call your own ad (from a different phone), submit the contact form, and confirm the conversion appears in Google Ads within 24 hours. If conversions don't track, all future optimization decisions will be based on incomplete data.
+    </div>
+
+  </section>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>Maranatha Stone and Floors</strong> — Google Ads A/B Test Plan &amp; 90-Day Schedule<br>
+  Prepared by Agencia Melbee &nbsp;|&nbsp; March 2026 &nbsp;|&nbsp; Confidential<br>
+  <span style="margin-top:4px; display:block;">205.663.0400 &nbsp;|&nbsp; maranatha.pro &nbsp;|&nbsp; Pelham, AL Showroom</span>
+</div>
+
+</body>
+</html>
