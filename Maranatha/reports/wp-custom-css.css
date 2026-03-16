@@ -1,0 +1,191 @@
+/* ============================================================
+   MARANATHA — CSS DAS NOVAS SEÇÕES
+   Colar em: WordPress Admin → Appearance → Customize → Additional CSS
+   ============================================================ */
+
+/* ── Trust Bar ── */
+.trust-bar {
+  background-color: #1a1a1a;
+  color: white;
+  padding: .625rem 0;
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+.trust-bar .trust-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.trust-bar .trust-item { display: flex; align-items: center; gap: .4rem; }
+.trust-bar .trust-dot { color: red; font-size: 1.2em; line-height: 1; }
+
+/* ── Hero CTA Overlay ── */
+.product-header-image { position: relative; }
+.hero-cta-overlay {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background: rgba(0,0,0,.6);
+  padding: 1.5rem 2.5rem;
+  min-width: 480px;
+}
+.hero-cta-overlay .hero-headline {
+  font-family: "EB Garamond", serif;
+  font-size: 2rem;
+  color: white;
+  margin: 0 0 .25rem;
+  line-height: 1.15;
+}
+.hero-cta-overlay .hero-sub {
+  font-size: .875rem;
+  color: #ddd;
+  margin: 0 0 1rem;
+}
+.hero-cta-overlay .hero-pricing {
+  font-size: .8125rem;
+  color: #bbb;
+  margin-top: .5rem;
+  margin-bottom: 0;
+}
+.button.btn-1-red {
+  display: inline-block;
+  background-color: red;
+  border: 1px solid red;
+  color: white;
+  padding: .875rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: "Poppins", sans-serif;
+}
+.button.btn-1-red:hover { background-color: #cc0000; border-color: #cc0000; }
+
+/* ── Social Proof Strip ── */
+.social-proof-strip {
+  background-color: #f8f8f8;
+  border-top: 1px solid #F1F1F1;
+  border-bottom: 1px solid #F1F1F1;
+  padding: 2.5rem 0;
+  margin: 3rem 0;
+}
+.social-proof-strip .sp-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+.review-card {
+  background: white;
+  border: 1px solid #eee;
+  padding: 1.5rem;
+  flex: 1;
+}
+.review-stars { color: #f4b400; font-size: 1.125rem; margin-bottom: .5rem; }
+.review-text { font-size: .875rem; color: #444; line-height: 1.6; margin-bottom: .75rem; font-style: italic; }
+.review-author { font-size: .8125rem; font-weight: 700; color: #000; margin: 0; }
+.google-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2rem;
+  background: white;
+  border: 1px solid #eee;
+  flex: 0 0 160px;
+  text-align: center;
+  gap: .5rem;
+}
+.google-badge .gb-score { font-size: 3rem; font-family: "EB Garamond", serif; line-height: 1; }
+.google-badge .gb-stars { color: #f4b400; font-size: 1.25rem; }
+.google-badge .gb-label { font-size: .75rem; color: #666; }
+
+/* ── How It Works ── */
+.how-it-works-section {
+  padding: 4rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.how-it-works-section h2 { text-align: center; margin-bottom: 2.5rem; }
+.steps-grid {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+}
+.step-item {
+  flex: 1;
+  padding: 0 2rem;
+  text-align: center;
+  position: relative;
+}
+.step-item:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -.5rem;
+  top: 1.25rem;
+  font-size: 1.5rem;
+  color: #ccc;
+}
+.step-number {
+  width: 56px;
+  height: 56px;
+  border: 2px solid red;
+  color: red;
+  font-family: "EB Garamond", serif;
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+.step-item h4 {
+  font-family: "Poppins", sans-serif;
+  font-size: .9375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin: 0 0 .5rem;
+  padding: 0;
+}
+.step-item p { font-size: .875rem; color: #555; }
+.steps-cta { text-align: center; margin-top: 2.5rem; }
+
+/* ── FAQ ── */
+.faq-section-new {
+  padding: 4rem 1.5rem;
+  border-top: 1px solid #F1F1F1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.faq-section-new h2 { margin-bottom: 2.5rem; }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 3rem;
+}
+.faq-item { border-bottom: 1px solid #eee; padding-bottom: 1.25rem; }
+.faq-q { font-family: "Poppins",sans-serif; font-weight: 700; font-size: .9375rem; margin-bottom: .5rem; }
+.faq-a { font-size: .875rem; color: #444; line-height: 1.7; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero-cta-overlay { min-width: auto; width: 85%; bottom: 1rem; padding: 1rem 1.5rem; }
+  .hero-cta-overlay .hero-headline { font-size: 1.5rem; }
+  .trust-bar .trust-bar-inner { gap: 1rem; font-size: .75rem; }
+  .social-proof-strip .sp-inner { flex-direction: column; }
+  .steps-grid { flex-direction: column; gap: 1.5rem; }
+  .step-item:not(:last-child)::after { display: none; }
+  .faq-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEO Report — Maranatha Stone and Floors</title>
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #c8923a;
+      --accent-light: #f5e6d0;
+      --green: #2e7d32;
+      --green-light: #e8f5e9;
+      --red: #c62828;
+      --red-light: #ffebee;
+      --yellow: #f57f17;
+      --yellow-light: #fff8e1;
+      --blue: #1565c0;
+      --blue-light: #e3f2fd;
+      --gray: #f5f5f5;
+      --border: #e0e0e0;
+      --text: #1a1a1a;
+      --text-muted: #666;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f0f0f0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--primary);
+      color: white;
+      padding: 40px 48px 32px;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .brand { display: flex; flex-direction: column; gap: 4px; }
+    .brand-agency {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .brand-client {
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+    }
+    .brand-url {
+      font-size: 13px;
+      color: #aaa;
+    }
+    .report-meta {
+      text-align: right;
+    }
+    .report-meta .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #aaa;
+    }
+    .report-meta .value {
+      font-size: 14px;
+      color: white;
+      font-weight: 500;
+    }
+    .header-title {
+      margin-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+    }
+    .header-title h1 {
+      font-size: 30px;
+      font-weight: 700;
+      color: white;
+    }
+    .header-title p {
+      margin-top: 6px;
+      color: #bbb;
+      font-size: 14px;
+      max-width: 600px;
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+
+    section { margin-bottom: 40px; }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title .icon { font-size: 20px; }
+
+    /* SCORE CARDS */
+    .scorecard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .scorecard {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-top: 4px solid var(--border);
+    }
+    .scorecard.critical { border-top-color: var(--red); }
+    .scorecard.warning  { border-top-color: var(--yellow); }
+    .scorecard.info     { border-top-color: var(--blue); }
+    .scorecard.good     { border-top-color: var(--green); }
+
+    .scorecard-number {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .scorecard.critical .scorecard-number { color: var(--red); }
+    .scorecard.warning  .scorecard-number { color: var(--yellow); }
+    .scorecard.info     .scorecard-number { color: var(--blue); }
+    .scorecard.good     .scorecard-number { color: var(--green); }
+
+    .scorecard-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* CARDS */
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    /* BADGES */
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-critical { background: var(--red-light); color: var(--red); }
+    .badge-warning  { background: var(--yellow-light); color: var(--yellow); }
+    .badge-info     { background: var(--blue-light); color: var(--blue); }
+    .badge-good     { background: var(--green-light); color: var(--green); }
+
+    /* TABLES */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th {
+      background: var(--gray);
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafafa; }
+    .url {
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--blue);
+    }
+    .code {
+      font-family: monospace;
+      font-size: 12px;
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .strike { text-decoration: line-through; color: var(--red); }
+    .arrow { color: var(--accent); margin: 0 4px; }
+
+    /* ISSUE LIST */
+    .issue-list { list-style: none; }
+    .issue-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .issue-list li:last-child { border-bottom: none; }
+    .issue-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ACTION PLAN */
+    .phase {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      margin-bottom: 16px;
+    }
+    .phase-header {
+      padding: 14px 20px;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .phase-header.week1  { background: #ffebee; color: var(--red); }
+    .phase-header.week24 { background: #fff8e1; color: var(--yellow); }
+    .phase-header.month2 { background: var(--blue-light); color: var(--blue); }
+    .phase-header.month3 { background: var(--green-light); color: var(--green); }
+    .phase-header .phase-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800;
+      flex-shrink: 0;
+    }
+    .phase-header.week1  .phase-num { background: var(--red); color: white; }
+    .phase-header.week24 .phase-num { background: var(--yellow); color: white; }
+    .phase-header.month2 .phase-num { background: var(--blue); color: white; }
+    .phase-header.month3 .phase-num { background: var(--green); color: white; }
+
+    .phase-items { padding: 0 20px; }
+    .phase-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .phase-item:last-child { border-bottom: none; }
+    .phase-item-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      min-width: 20px;
+      padding-top: 2px;
+    }
+    .phase-item-text { font-size: 13px; }
+    .phase-item-text strong { color: var(--primary); }
+
+    /* MISSING PAGES */
+    .page-gap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .page-gap-item {
+      background: white;
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      border-left: 4px solid var(--red);
+      font-size: 13px;
+    }
+    .page-gap-item .keyword {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .page-gap-item .action {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* PROGRESS BAR */
+    .progress-bar-wrap {
+      background: var(--border);
+      border-radius: 100px;
+      height: 8px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 100px;
+    }
+    .progress-bar.red    { background: var(--red); }
+    .progress-bar.yellow { background: var(--yellow); }
+    .progress-bar.green  { background: var(--green); }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+    .footer strong { color: var(--accent); }
+
+    /* TWO-COL */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 700px) {
+      .two-col { grid-template-columns: 1fr; }
+      .header { padding: 24px; }
+      .header-title h1 { font-size: 22px; }
+    }
+
+    .tag-red    { background: var(--red-light);    color: var(--red);    padding: 2px 7px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+    .tag-yellow { background: var(--yellow-light); color: var(--yellow); padding: 2px 7px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+    .tag-green  { background: var(--green-light);  color: var(--green);  padding: 2px 7px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+    .tag-blue   { background: var(--blue-light);   color: var(--blue);   padding: 2px 7px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="brand">
+      <span class="brand-agency">Agencia Melbee</span>
+      <span class="brand-client">Maranatha Stone and Floors</span>
+      <span class="brand-url">maranatha.pro</span>
+    </div>
+    <div class="report-meta">
+      <div class="label">Report Date</div>
+      <div class="value">March 2026</div>
+      <div class="label" style="margin-top:8px;">Pages Crawled</div>
+      <div class="value">59 pages</div>
+    </div>
+  </div>
+  <div class="header-title">
+    <h1>SEO Weekly Report</h1>
+    <p>Full site audit based on live page crawl, Screaming Frog exports, and keyword gap analysis for Birmingham and Huntsville markets.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SCORE OVERVIEW -->
+  <section>
+    <div class="section-title"><span class="icon">📊</span> Issues Overview</div>
+    <div class="scorecard-grid">
+      <div class="scorecard critical">
+        <div class="scorecard-number">2</div>
+        <div class="scorecard-label">Critical Bugs</div>
+      </div>
+      <div class="scorecard critical">
+        <div class="scorecard-number">34</div>
+        <div class="scorecard-label">Missing Meta Desc.</div>
+      </div>
+      <div class="scorecard warning">
+        <div class="scorecard-number">15</div>
+        <div class="scorecard-label">Weak H1 Tags</div>
+      </div>
+      <div class="scorecard warning">
+        <div class="scorecard-number">13</div>
+        <div class="scorecard-label">Titles Too Long</div>
+      </div>
+      <div class="scorecard warning">
+        <div class="scorecard-number">4</div>
+        <div class="scorecard-label">Archive Titles</div>
+      </div>
+      <div class="scorecard info">
+        <div class="scorecard-number">9</div>
+        <div class="scorecard-label">Missing Pages</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRITICAL BUGS -->
+  <section>
+    <div class="section-title"><span class="icon">🚨</span> Critical Bugs — Fix Immediately</div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Issue</th>
+            <th>Current State</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="url">/products/sapienstone/</span></td>
+            <td>Duplicated word in title tag</td>
+            <td><span class="code"><span class="strike">Porcelain</span>Porcelain Countertops in Birmingham, AL</span></td>
+            <td><span class="badge badge-critical">Critical</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/products/neolith/</span></td>
+            <td>Title is one word only (8 chars)</td>
+            <td><span class="code">Dialtile</span></td>
+            <td><span class="badge badge-critical">Critical</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/products/neolith/</span></td>
+            <td>Meta description describes a different product (Neolith) than the page content (Dialtile)</td>
+            <td>Content mismatch</td>
+            <td><span class="badge badge-critical">Critical</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/the-ultimate-guide-to-choosing.../</span></td>
+            <td>Title tag truncated — ends with bare dash</td>
+            <td><span class="code">...for Your Kitchen -</span></td>
+            <td><span class="badge badge-warning">High</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/can-quartz-countertops-burn/</span></td>
+            <td>Title tag cut off mid-word</td>
+            <td><span class="code">...What Birmingham Homeowners S</span></td>
+            <td><span class="badge badge-warning">High</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/ (Homepage)</span></td>
+            <td>Primary CTA sends users to external Google Form</td>
+            <td>Loses analytics, unprofessional</td>
+            <td><span class="badge badge-warning">High</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- META DESCRIPTIONS -->
+  <section>
+    <div class="section-title"><span class="icon">📝</span> Missing Meta Descriptions</div>
+
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+        <div class="card-title" style="margin-bottom:0;">34 pages are missing meta descriptions</div>
+        <span class="badge badge-critical">58% of blog posts affected</span>
+      </div>
+      <div style="margin-bottom: 16px;">
+        <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+          <span>Blog posts with meta descriptions</span>
+          <strong>4 of 27</strong>
+        </div>
+        <div class="progress-bar-wrap"><div class="progress-bar red" style="width:15%"></div></div>
+      </div>
+      <div style="margin-bottom: 16px;">
+        <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+          <span>Service/core pages with meta descriptions</span>
+          <strong>10 of 14</strong>
+        </div>
+        <div class="progress-bar-wrap"><div class="progress-bar yellow" style="width:71%"></div></div>
+      </div>
+
+      <div class="two-col" style="margin-top:20px;">
+        <div>
+          <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Service Pages Missing Meta</div>
+          <ul class="issue-list">
+            <li><span class="issue-icon">❌</span><div><span class="url">/products/</span></div></li>
+            <li><span class="issue-icon">❌</span><div><span class="url">/projects/</span></div></li>
+            <li><span class="issue-icon">❌</span><div><span class="url">/project-category/commercial/</span></div></li>
+            <li><span class="issue-icon">❌</span><div><span class="url">/project-category/residential/</span></div></li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">High-Value Blog Posts Missing Meta</div>
+          <ul class="issue-list">
+            <li><span class="issue-icon">❌</span><div>Can You Put Hot Pans on Granite?</div></li>
+            <li><span class="issue-icon">❌</span><div>Differences Between Granite, Quartz, and Marble</div></li>
+            <li><span class="issue-icon">❌</span><div>Quartzite Care &amp; Maintenance</div></li>
+            <li><span class="issue-icon">❌</span><div>The Ultimate Guide to Choosing a Countertop</div></li>
+            <li><span class="issue-icon">❌</span><div>+ 19 more blog posts</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- H1 ISSUES -->
+  <section>
+    <div class="section-title"><span class="icon">🏷️</span> H1 Tag Issues</div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">✅ Well-Optimized H1s (Reference)</div>
+        <ul class="issue-list">
+          <li><span class="issue-icon">✅</span><div><strong>Homepage:</strong><br><span class="code">Custom Countertops &amp; Flooring in Birmingham, AL.</span></div></li>
+          <li><span class="issue-icon">✅</span><div><strong>Silestone page:</strong><br><span class="code">Silestone Quartz Countertops in Birmingham, AL.</span></div></li>
+          <li><span class="issue-icon">✅</span><div><strong>Cost blog post:</strong><br><span class="code">How Much Does Countertop Installation Cost in Birmingham, AL?</span></div></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">❌ Single-Word H1s (No Keyword Value)</div>
+        <table>
+          <thead>
+            <tr><th>Page</th><th>Current H1</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="url">/products/</span></td><td><span class="code">Products.</span></td></tr>
+            <tr><td><span class="url">/about-us/</span></td><td><span class="code">About.</span></td></tr>
+            <tr><td><span class="url">/contact/</span></td><td><span class="code">Contact.</span></td></tr>
+            <tr><td><span class="url">/showroom/</span></td><td><span class="code">Showroom.</span></td></tr>
+            <tr><td><span class="url">/projects/</span></td><td><span class="code">Projects.</span></td></tr>
+            <tr><td><span class="url">/products/dekton/</span></td><td><span class="code">Dekton.</span></td></tr>
+            <tr><td><span class="url">/products/cambria/</span></td><td><span class="code">Cambria.</span></td></tr>
+            <tr><td><span class="url">/products/hanstone/</span></td><td><span class="code">HanStone.</span></td></tr>
+            <tr><td><span class="url">/products/sapienstone/</span></td><td><span class="code">Porcelain.</span></td></tr>
+            <tr><td><span class="url">/products/neolith/</span></td><td><span class="code">Dialtile.</span></td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">+ 5 more pages. All product/service pages share this same pattern.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Recommended H1 Rewrites — Service Pages</div>
+      <table>
+        <thead>
+          <tr><th>Page</th><th>Current H1</th><th>Recommended H1</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="url">/products/</span></td>
+            <td><span class="code">Products.</span></td>
+            <td><span class="tag-green">Stone Countertops &amp; Flooring — Birmingham, AL</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/products/granite-marble-quartzite/</span></td>
+            <td><span class="code">Natural Stones.</span></td>
+            <td><span class="tag-green">Natural Stone Countertops in Birmingham, AL</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/products/flooring/</span></td>
+            <td><span class="code">Hardwood &amp; Tile Flooring.</span></td>
+            <td><span class="tag-green">Hardwood, Tile &amp; Vinyl Flooring in Birmingham, AL</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/showroom/</span></td>
+            <td><span class="code">Showroom.</span></td>
+            <td><span class="tag-green">Countertop Showroom in Birmingham, AL</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/projects/</span></td>
+            <td><span class="code">Projects.</span></td>
+            <td><span class="tag-green">Countertop &amp; Flooring Projects — Birmingham, AL</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/about-us/</span></td>
+            <td><span class="code">About.</span></td>
+            <td><span class="tag-green">About Maranatha Stone and Floors — Birmingham, AL</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/contact/</span></td>
+            <td><span class="code">Contact.</span></td>
+            <td><span class="tag-green">Contact Maranatha Stone and Floors — Birmingham, AL</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- TITLE TAG ISSUES -->
+  <section>
+    <div class="section-title"><span class="icon">📄</span> Title Tag Issues</div>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title">WordPress Default "Archive" Titles — No Keyword Value</div>
+      <table>
+        <thead>
+          <tr><th>Page</th><th>Current Title</th><th>Recommended Title</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="url">/products/</span></td>
+            <td><span class="code strike">Products Archive - Maranatha Granite</span></td>
+            <td><span class="tag-green">Stone Countertops &amp; Flooring in Birmingham, AL | Maranatha</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/projects/</span></td>
+            <td><span class="code strike">Projects Archive - Maranatha Granite</span></td>
+            <td><span class="tag-green">Countertop &amp; Flooring Projects | Birmingham, AL | Maranatha</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/project-category/commercial/</span></td>
+            <td><span class="code strike">Commercial Archives - Maranatha Granite</span></td>
+            <td><span class="tag-green">Commercial Stone Projects | Birmingham, AL | Maranatha</span></td>
+          </tr>
+          <tr>
+            <td><span class="url">/project-category/residential/</span></td>
+            <td><span class="code strike">Residential Archives - Maranatha Granite</span></td>
+            <td><span class="tag-green">Residential Countertop Projects | Birmingham, AL | Maranatha</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">13 Blog Post Titles Exceed 600px — Will Be Truncated in Google</div>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;"><strong>Root cause:</strong> Appending "- Maranatha Granite" to already-long titles pushes them over the Google display limit. Recommended fix: remove the brand suffix from blog titles or shorten titles to stay under 55 characters.</p>
+      <table>
+        <thead>
+          <tr><th>Post</th><th>Pixel Width</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>How to Take Care of Your Countertops During the Holidays...</td>
+            <td>978px</td>
+            <td><span class="badge badge-critical">Over limit</span></td>
+          </tr>
+          <tr>
+            <td>Elevate Your Kitchen in 2024: Top Trends and Tips...</td>
+            <td>947px</td>
+            <td><span class="badge badge-critical">Over limit</span></td>
+          </tr>
+          <tr>
+            <td>The Importance of Professionalism Installation for Stone...</td>
+            <td>883px</td>
+            <td><span class="badge badge-critical">Over limit</span></td>
+          </tr>
+          <tr>
+            <td>The Benefits of Choosing Local Stone Fabricators...</td>
+            <td>831px</td>
+            <td><span class="badge badge-critical">Over limit</span></td>
+          </tr>
+          <tr>
+            <td>Recap of 2024 Stone Design Trends...</td>
+            <td>870px</td>
+            <td><span class="badge badge-critical">Over limit</span></td>
+          </tr>
+          <tr>
+            <td>The Importance of Professional Stone Installation...</td>
+            <td>771px</td>
+            <td><span class="badge badge-critical">Over limit</span></td>
+          </tr>
+          <tr>
+            <td>Differences Between Granite, Quartz, and Marble...</td>
+            <td>734px</td>
+            <td><span class="badge badge-warning">Over limit</span></td>
+          </tr>
+          <tr>
+            <td>+ 6 more posts</td>
+            <td>654–717px</td>
+            <td><span class="badge badge-warning">Over limit</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- MISSING PAGES -->
+  <section>
+    <div class="section-title"><span class="icon">🗺️</span> Missing Pages — Keyword Gaps</div>
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">These are the highest-value keywords from <strong>keywords.md</strong> and <strong>keyword-gap.md</strong> that currently have no dedicated page on maranatha.pro. Each missing page represents direct lost traffic to competitors.</p>
+
+    <div class="page-gap-grid">
+      <div class="page-gap-item">
+        <div class="keyword">Granite Countertops Birmingham AL</div>
+        <div class="action">🔴 Create dedicated page — #1 priority keyword</div>
+      </div>
+      <div class="page-gap-item">
+        <div class="keyword">Quartz Countertops Birmingham AL</div>
+        <div class="action">🔴 Create parent quartz hub page</div>
+      </div>
+      <div class="page-gap-item">
+        <div class="keyword">Marble Countertops Birmingham AL</div>
+        <div class="action">🔴 Split from natural stone page</div>
+      </div>
+      <div class="page-gap-item">
+        <div class="keyword">Quartzite Countertops Birmingham AL</div>
+        <div class="action">🔴 Split from natural stone page</div>
+      </div>
+      <div class="page-gap-item">
+        <div class="keyword">Kitchen Countertops Birmingham AL</div>
+        <div class="action">🟡 Create high-intent service page</div>
+      </div>
+      <div class="page-gap-item">
+        <div class="keyword">Countertop Installation Birmingham AL</div>
+        <div class="action">🟡 Create service/process page</div>
+      </div>
+      <div class="page-gap-item">
+        <div class="keyword">Custom Countertops Birmingham AL</div>
+        <div class="action">🟡 Create or consolidate into service page</div>
+      </div>
+      <div class="page-gap-item">
+        <div class="keyword">Countertops Huntsville AL</div>
+        <div class="action">🔵 Create Huntsville location page</div>
+      </div>
+      <div class="page-gap-item">
+        <div class="keyword">Granite Countertops Huntsville AL</div>
+        <div class="action">🔵 Create Huntsville material page</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND CONSISTENCY -->
+  <section>
+    <div class="section-title"><span class="icon">⚠️</span> Brand Name Inconsistency</div>
+    <div class="card">
+      <p style="font-size:13px; margin-bottom:14px;">The website uses <strong>"Maranatha Granite"</strong> throughout page titles, email addresses, and navigation — but the legal business name is <strong>"Maranatha Stone and Floors."</strong> This inconsistency affects Google's entity understanding and may reduce trust with customers searching for the full brand name.</p>
+      <table>
+        <thead>
+          <tr><th>Location</th><th>Current</th><th>Should Be</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Blog post title suffixes</td>
+            <td><span class="code strike">- Maranatha Granite</span></td>
+            <td><span class="tag-green">- Maranatha Stone and Floors</span></td>
+          </tr>
+          <tr>
+            <td>Email domain</td>
+            <td><span class="code">info@maranathagranite.com</span></td>
+            <td>Update to match brand or note as known alias</td>
+          </tr>
+          <tr>
+            <td>Schema / structured data</td>
+            <td>Not present on homepage</td>
+            <td>Add LocalBusiness schema with correct brand name</td>
+          </tr>
+          <tr>
+            <td>About page</td>
+            <td><span class="code strike">Maranatha Granite</span></td>
+            <td><span class="tag-green">Maranatha Stone and Floors</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- LOCAL SEO -->
+  <section>
+    <div class="section-title"><span class="icon">📍</span> Local SEO Signals</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Missing Local Signals</div>
+        <ul class="issue-list">
+          <li><span class="issue-icon">❌</span><div><strong>No LocalBusiness schema</strong> on homepage — Google has no structured data for NAP (Name, Address, Phone, Hours)</div></li>
+          <li><span class="issue-icon">❌</span><div><strong>No Google Map embed</strong> on contact page — reduces local trust signal</div></li>
+          <li><span class="issue-icon">❌</span><div><strong>No Huntsville pages</strong> despite being a stated growth market</div></li>
+          <li><span class="issue-icon">❌</span><div><strong>No suburb mentions</strong> — Hoover, Vestavia Hills, Alabaster, Pelham not mentioned in service area content</div></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">What's Working</div>
+        <ul class="issue-list">
+          <li><span class="issue-icon">✅</span><div>GA4 and Facebook Pixel are active — tracking is in place</div></li>
+          <li><span class="issue-icon">✅</span><div>Address, phone, and hours on contact page are complete</div></li>
+          <li><span class="issue-icon">✅</span><div>Showroom 3D virtual tour is a strong differentiator</div></li>
+          <li><span class="issue-icon">✅</span><div>BreadcrumbList schema exists on multiple pages</div></li>
+          <li><span class="issue-icon">✅</span><div>Blog covers local topics (Birmingham pricing, Alabama homeowners)</div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTION PLAN -->
+  <section>
+    <div class="section-title"><span class="icon">🗓️</span> Priority Action Plan</div>
+
+    <div class="phase">
+      <div class="phase-header week1">
+        <div class="phase-num">1</div>
+        Week 1 — Fix Critical Issues
+      </div>
+      <div class="phase-items">
+        <div class="phase-item">
+          <div class="phase-item-num">01</div>
+          <div class="phase-item-text">Fix <strong>"PorcelainPorcelain"</strong> duplicated title tag on <span class="url">/products/sapienstone/</span></div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">02</div>
+          <div class="phase-item-text">Fix <strong>Dialtile page</strong> — rewrite one-word title, fix Neolith/Dialtile meta description mismatch</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">03</div>
+          <div class="phase-item-text">Fix <strong>2 truncated blog titles</strong> — Ultimate Guide (ends with "-") and Can Quartz Burn (cut mid-word)</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">04</div>
+          <div class="phase-item-text">Rewrite <strong>4 WordPress "Archive" title tags</strong> on /products/, /projects/, /project-category/commercial/, /project-category/residential/</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">05</div>
+          <div class="phase-item-text">Add <strong>LocalBusiness JSON-LD schema</strong> to homepage with full NAP + hours</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">06</div>
+          <div class="phase-item-text">Add <strong>Google Map embed</strong> to contact page</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header week24">
+        <div class="phase-num">2</div>
+        Weeks 2–4 — Build Core Pages
+      </div>
+      <div class="phase-items">
+        <div class="phase-item">
+          <div class="phase-item-num">07</div>
+          <div class="phase-item-text">Create <strong>Granite Countertops Birmingham AL</strong> dedicated page — highest-value keyword on the site</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">08</div>
+          <div class="phase-item-text">Create <strong>Quartz Countertops Birmingham AL</strong> parent page — covers Silestone, HanStone, Cambria as sub-options</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">09</div>
+          <div class="phase-item-text">Create <strong>Marble Countertops Birmingham AL</strong> and <strong>Quartzite Countertops Birmingham AL</strong> pages (split from natural stone page)</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">10</div>
+          <div class="phase-item-text">Replace <strong>Google Form homepage CTA</strong> with native contact/quote form</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">11</div>
+          <div class="phase-item-text">Rewrite <strong>H1s on all 15 single-word product/service pages</strong> to include keyword + location</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">12</div>
+          <div class="phase-item-text">Add <strong>meta descriptions to all 4 service/category pages</strong> currently missing them</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header month2">
+        <div class="phase-num">3</div>
+        Month 2 — Optimize Existing Content
+      </div>
+      <div class="phase-items">
+        <div class="phase-item">
+          <div class="phase-item-num">13</div>
+          <div class="phase-item-text">Add <strong>meta descriptions to all 23 blog posts</strong> currently missing them — prioritize high-traffic topics first</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">14</div>
+          <div class="phase-item-text"><strong>Noindex blog pagination pages 2–6</strong> — eliminates 5 duplicate titles and 5 duplicate H1s in one fix</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">15</div>
+          <div class="phase-item-text">Remove or shorten <strong>"- Maranatha Granite"</strong> suffix on blog titles — 13 posts currently exceed 600px limit</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">16</div>
+          <div class="phase-item-text">Expand <strong>thin blog posts</strong> to 900+ words (especially "Can You Put Hot Pans on Granite?" at ~475 words)</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">17</div>
+          <div class="phase-item-text">Convert <strong>"Request an Appointment." H2</strong> to a non-heading element sitewide — appears on 38 of 58 pages</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header month3">
+        <div class="phase-num">4</div>
+        Month 3 — Expand Reach
+      </div>
+      <div class="phase-items">
+        <div class="phase-item">
+          <div class="phase-item-num">18</div>
+          <div class="phase-item-text">Create <strong>Countertops Huntsville AL</strong> location page — Huntsville is a stated growth market with zero current coverage</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">19</div>
+          <div class="phase-item-text">Create <strong>Kitchen Countertops Birmingham AL</strong> and <strong>Countertop Installation Birmingham AL</strong> pages</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">20</div>
+          <div class="phase-item-text">Build <strong>internal links</strong> from blog posts to new service pages using target anchor text from internal-linking.md</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-item-num">21</div>
+          <div class="phase-item-text">Update brand name from <strong>"Maranatha Granite" → "Maranatha Stone and Floors"</strong> across all title tags and schema</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  Prepared by <strong>Agencia Melbee</strong> for Maranatha Stone and Floors &nbsp;·&nbsp; maranatha.pro &nbsp;·&nbsp; March 2026
+</div>
+
+</body>
+</html>

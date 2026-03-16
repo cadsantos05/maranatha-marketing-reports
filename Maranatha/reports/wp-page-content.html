@@ -1,0 +1,375 @@
+<!-- wp:html -->
+<style>
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+img { max-width: 100%; height: auto; }
+a { text-decoration: none; }
+p { margin: 0 0 1em; }
+
+/* ── Trust Bar ── */
+.trust-bar {
+  background-color: #1a1a1a;
+  color: white;
+  padding: .625rem 0;
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  margin-bottom: 0;
+}
+.trust-bar .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.trust-bar span { display: flex; align-items: center; gap: .4rem; }
+.trust-bar .dot { color: red; font-size: 1.2em; line-height: 1; }
+
+/* ── Hero Image ── */
+.lp-hero-image {
+  height: 18.75em;
+  background-position: center 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 3.25em 1.875em 3.9375em;
+  position: relative;
+}
+.hero-cta-overlay {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background: rgba(0,0,0,.6);
+  padding: 1.5rem 2.5rem;
+  min-width: 480px;
+}
+.hero-cta-overlay .hero-headline {
+  font-family: "EB Garamond", serif;
+  font-size: 2rem;
+  color: white;
+  margin: 0 0 .25rem;
+  padding: 0;
+  line-height: 1.15;
+}
+.hero-cta-overlay .hero-sub {
+  font-size: .875rem;
+  color: #ddd;
+  margin: 0 0 1rem;
+}
+.hero-cta-overlay .hero-pricing {
+  font-size: .8125rem;
+  color: #bbb;
+  margin-top: .5rem;
+  margin-bottom: 0;
+}
+.button.btn-1-red {
+  display: inline-block;
+  background-color: red;
+  border: 1px solid red;
+  color: white !important;
+  padding: .875rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  transition: all .2s;
+  font-family: "Poppins", sans-serif;
+}
+.button.btn-1-red:hover { background-color: #cc0000; border-color: #cc0000; }
+
+/* ── Product Content ── */
+.lp-product-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+.lp-product-content .product-tagline { margin-bottom: 1.5rem; }
+.lp-product-content .main-product-section {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+.lp-product-content .description-content { flex: 1; }
+.lp-product-content .description-content p { font-size: .9375rem; line-height: 1.75; color: #333; }
+.lp-product-content .product-highlight-images {
+  flex: 0 0 340px;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+.lp-product-content .product-highlight-images img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+/* ── Social Proof ── */
+.social-proof-strip {
+  background-color: #f8f8f8;
+  border-top: 1px solid #F1F1F1;
+  border-bottom: 1px solid #F1F1F1;
+  padding: 2.5rem 0;
+  margin: 0 0 3rem;
+}
+.social-proof-strip .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+  justify-content: space-between;
+}
+.review-card {
+  background: white;
+  border: 1px solid #eee;
+  padding: 1.5rem;
+  flex: 1;
+}
+.review-stars { color: #f4b400; font-size: 1.125rem; margin-bottom: .5rem; }
+.review-text { font-size: .875rem; color: #444; line-height: 1.6; margin-bottom: .75rem; font-style: italic; }
+.review-author { font-size: .8125rem; font-weight: 700; color: #000; margin: 0; }
+.google-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2rem;
+  background: white;
+  border: 1px solid #eee;
+  flex: 0 0 160px;
+  text-align: center;
+  gap: .5rem;
+}
+.google-badge .gb-score { font-size: 3rem; font-family: "EB Garamond", serif; line-height: 1; color: #000; }
+.google-badge .gb-stars { color: #f4b400; font-size: 1.25rem; }
+.google-badge .gb-label { font-size: .75rem; color: #666; }
+
+/* ── How It Works ── */
+.how-it-works {
+  padding: 4rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.how-it-works h2 { text-align: center; margin-bottom: 2.5rem; }
+.steps-grid { display: flex; gap: 0; align-items: flex-start; }
+.step {
+  flex: 1;
+  padding: 0 2rem;
+  text-align: center;
+  position: relative;
+}
+.step:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -.5rem;
+  top: 1.25rem;
+  font-size: 1.5rem;
+  color: #ccc;
+}
+.step-number {
+  width: 56px;
+  height: 56px;
+  border: 2px solid red;
+  color: red;
+  font-family: "EB Garamond", serif;
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+.step h4 {
+  font-family: "Poppins", sans-serif;
+  font-size: .9375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin: 0 0 .5rem;
+  padding: 0;
+}
+.step p { font-size: .875rem; color: #555; }
+.steps-cta { text-align: center; margin-top: 2.5rem; }
+
+/* ── Gallery ── */
+.lp-gallery { padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+.lp-gallery h2 { margin-bottom: 2rem; }
+.lp-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .75rem;
+}
+.lp-gallery-grid img { width: 100%; height: 220px; object-fit: cover; display: block; }
+
+/* ── FAQ ── */
+.lp-faq { padding: 4rem 1.5rem; border-top: 1px solid #F1F1F1; max-width: 1200px; margin: 0 auto; }
+.lp-faq h2 { margin-bottom: 2.5rem; }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 3rem; }
+.faq-item { border-bottom: 1px solid #eee; padding-bottom: 1.25rem; }
+.faq-q { font-family: "Poppins", sans-serif; font-weight: 700; font-size: .9375rem; margin-bottom: .5rem; }
+.faq-a { font-size: .875rem; color: #444; line-height: 1.7; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .trust-bar .inner { gap: 1rem; font-size: .75rem; }
+  .lp-hero-image { margin: 2rem .5rem 2rem; height: 14em; }
+  .hero-cta-overlay { min-width: auto; width: 85%; bottom: 1rem; padding: 1rem 1.5rem; }
+  .hero-cta-overlay .hero-headline { font-size: 1.5rem; }
+  .lp-hero-cta .hero-headline { font-size: 1.75rem; }
+  .lp-product-content .main-product-section { flex-direction: column; }
+  .lp-product-content .product-highlight-images { flex: auto; flex-direction: row; }
+  .social-proof-strip .inner { flex-direction: column; }
+  .steps-grid { flex-direction: column; gap: 1.5rem; }
+  .step:not(:last-child)::after { display: none; }
+  .lp-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .faq-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="inner">
+    <span><span class="dot">&#9679;</span> Family-Owned &amp; Operated</span>
+    <span><span class="dot">&#9679;</span> 500+ Projects Completed</span>
+    <span><span class="dot">&#9679;</span> Free In-Home Measure</span>
+    <span><span class="dot">&#9679;</span> Fabricated Locally in Pelham, AL</span>
+    <span><span class="dot">&#9679;</span> Lifetime Install Warranty</span>
+  </div>
+</div>
+
+<!-- HERO IMAGE + OVERLAY -->
+<div class="lp-hero-image" style="background-image: url('https://maranatha.pro/wp-content/uploads/F5A5720-1.jpg')">
+  <div class="hero-cta-overlay">
+    <p class="hero-headline">Granite, Marble &amp; Quartzite<br>for Birmingham Homes</p>
+    <p class="hero-sub">Fabricated &amp; installed locally — results in 2–3 weeks</p>
+    <a class="button btn-1-red" href="https://maranatha.pro/contact/?utm_source=lp&utm_medium=hero&utm_campaign=natural-stone">Get a Free Estimate</a>
+    <p class="hero-pricing">Starting from $45/sq ft installed &nbsp;·&nbsp; No obligation</p>
+  </div>
+</div>
+
+<!-- TEXTO PRINCIPAL -->
+<div class="lp-product-content">
+  <h2 class="product-tagline">A countertop like no other<span class="accent">.</span></h2>
+  <div class="main-product-section">
+    <div class="description-content">
+      <p>Natural stone is a popular option for kitchen countertops, and there are many reasons why going with a natural stone is a great choice. There are several options for natural stone countertops, such as marble, granite and quartzite, and each type of material is unique in how it can serve its purpose. Natural stone is also unique because each slab is one of a kind, giving each project its own aesthetic with distinctive mineral patterns — so you'll have a countertop like no other.</p>
+      <p>The downside to natural stone materials is that they're sensitive to stains because of their porous composition. But with proper preventative measures like consistent cleaning and annual resealing, your countertops will maintain their beauty for years to come.</p>
+      <p><strong>Granite:</strong> Hard, scratch-resistant, available in hundreds of colors. The most popular choice for kitchen countertops in Birmingham.</p>
+      <p><strong>Quartzite:</strong> Naturally harder than granite. Scratch-resistant and ideal for high-traffic kitchens. Often confused with marble but far more durable.</p>
+      <p><strong>Marble:</strong> Timeless elegance. Perfect for bathrooms, baking areas, and fireplace surrounds. Requires annual sealing.</p>
+      <a class="button btn-1" href="https://maranatha.pro/contact/?utm_source=lp&utm_medium=content&utm_campaign=natural-stone">Request an Appointment</a>
+    </div>
+    <div class="product-highlight-images">
+      <img src="https://maranatha.pro/wp-content/uploads/Quartzite-Traditional-Kitchen--720x300.jpg" alt="Quartzite traditional kitchen countertops" />
+      <img src="https://maranatha.pro/wp-content/uploads/Quartzite-Kitchen-with-Full-Backsplash-720x300.jpg" alt="Quartzite kitchen with full backsplash Birmingham" />
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF — substituir [colchetes] com dados reais -->
+<div class="social-proof-strip">
+  <div class="inner">
+    <div class="google-badge">
+      <div class="gb-score">[4.9]</div>
+      <div class="gb-stars">★★★★★</div>
+      <div class="gb-label">Google Reviews<br><strong>[XX] reviews</strong></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"[Colar review real do Google]"</p>
+      <p class="review-author">— [Nome], [Cidade], AL</p>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"[Colar review real do Google]"</p>
+      <p class="review-author">— [Nome], [Cidade], AL</p>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"[Colar review real do Google]"</p>
+      <p class="review-author">— [Nome], [Cidade], AL</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-it-works">
+  <h2>How It Works<span class="accent">.</span></h2>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h4>Visit the Showroom</h4>
+      <p>Browse 200+ slabs in our Birmingham-area showroom. Touch, compare, and choose your stone in person.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h4>Free Measure</h4>
+      <p>Our team visits your home to take precise measurements — no charge, no obligation.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h4>Local Fabrication</h4>
+      <p>Your slab is cut, edged, and finished in our Pelham, AL facility. No third-party shops.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <h4>Professional Install</h4>
+      <p>Our crew installs your countertops with precision. Most kitchens are complete in a single day.</p>
+    </div>
+  </div>
+  <div class="steps-cta">
+    <a class="button btn-1" href="https://maranatha.pro/contact/?utm_source=lp&utm_medium=process&utm_campaign=natural-stone">Start the Process →</a>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="lp-gallery">
+  <h2>Gallery<span class="accent">.</span></h2>
+  <div class="lp-gallery-grid">
+    <img src="https://maranatha.pro/wp-content/uploads/Quartzite-Kitchen-1-350x500.jpg" alt="Quartzite kitchen countertop Birmingham"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Quartzite-Bathroom-350x500.jpg" alt="Quartzite bathroom countertop"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Marble-Kitchen-Perimeter-350x500.jpg" alt="Marble kitchen perimeter countertop"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Marble-Full-Backsplash-Kitchen-1-350x500.jpg" alt="Marble full backsplash kitchen"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Marble-Bathroom-350x500.jpg" alt="Marble bathroom countertop"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Marble-Bathroom-with-Marble-made-Sink-350x500.jpg" alt="Marble bathroom with integrated sink"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Marble-Bathroom-with-Design-Backsplash-350x500.jpg" alt="Marble bathroom design backsplash"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Granite-Kitchen-350x500.jpg" alt="Granite kitchen countertop Birmingham"/>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="lp-faq">
+  <h2>Frequently Asked Questions<span class="accent">.</span></h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q">How much do granite countertops cost in Birmingham?</div>
+      <div class="faq-a">Natural stone countertops typically start around $45 per square foot installed, depending on the stone selected and edge profile. We provide transparent, itemized quotes — no surprises.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How long does the process take?</div>
+      <div class="faq-a">From your first visit to installation day, most projects are complete in 2–3 weeks. The actual install typically takes 4–6 hours for a standard kitchen.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is granite better than quartz?</div>
+      <div class="faq-a">They're different materials with different strengths. Granite is a natural stone — completely unique, heat-resistant, and long-lasting with simple care. Quartz is engineered. We carry both and can help you choose the right fit.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do you offer financing?</div>
+      <div class="faq-a">Yes. We work with financing partners so you can get your dream countertops today and pay over time. Ask us about current options during your consultation.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do I need to seal my granite countertops?</div>
+      <div class="faq-a">We apply a professional-grade sealer at installation. We recommend resealing once a year — a simple 15-minute process you can do yourself with a store-bought product.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do you serve the entire Birmingham area?</div>
+      <div class="faq-a">Yes. We serve Birmingham, Hoover, Vestavia Hills, Mountain Brook, Homewood, Pelham, Chelsea, Alabaster, and surrounding communities throughout Jefferson and Shelby counties.</div>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->

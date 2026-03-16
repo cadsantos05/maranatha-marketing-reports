@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Natural Stone Countertops in Birmingham, AL | Maranatha</title>
+<meta name="description" content="Granite, marble and quartzite countertops — fabricated and installed in Birmingham, AL. Family-owned. 500+ projects. Get a free estimate today." />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================
+  DEV NOTES — NOVAS SEÇÕES ADICIONADAS
+  Tudo marcado com [NEW] é conteúdo novo
+  a ser inserido na página WordPress.
+  As seções existentes foram preservadas
+  com o mesmo CSS/HTML do tema Kronos.
+  =========================================== -->
+
+<style>
+/* ── Reset & Base (igual ao Kronos) ── */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; border-style: none; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: "EB Garamond", serif;
+  font-weight: 400;
+  line-height: 1;
+  margin: 0 0 1rem;
+  padding: .75rem 0 0;
+}
+h1 { font-size: 3.875rem; }
+h2 { font-size: 3.25rem; }
+h3 { font-size: 2.5rem; }
+p { margin: 0 0 1em; }
+
+/* ── Accent dot (red) — same as .accent{color:red} in Kronos ── */
+.accent { color: red; }
+
+/* ── Container ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* ── Site Header ── */
+.site-header {
+  background-color: white;
+  padding: 15px 0 9px;
+  border-bottom: 1px solid #F1F1F1;
+  margin-bottom: 0;
+}
+.site-header .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#site-title img { height: 48px; width: auto; }
+
+nav.desktop-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+  align-items: center;
+}
+nav.desktop-nav ul li a {
+  font-family: "Poppins", sans-serif;
+  font-size: .875rem;
+  color: #000;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+nav.desktop-nav ul li a:hover { color: red; }
+.nav-phone a { color: #000; font-weight: 700; }
+.nav-cta a {
+  background-color: transparent;
+  border: 1px solid #707070;
+  padding: .5rem 1.25rem;
+  font-size: .8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  transition: all .2s;
+}
+.nav-cta a:hover { background-color: red; color: white; border-color: red; }
+
+/* ── Buttons — same as .btn-1 in Kronos ── */
+.button.btn-1 {
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid #707070;
+  color: #000;
+  padding: .75rem 2rem;
+  font-size: .9375rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: "Poppins", sans-serif;
+}
+.button.btn-1:hover { background-color: red; color: white; border-color: red; }
+
+/* btn-1-red: filled red version for primary CTA */
+.button.btn-1-red {
+  display: inline-block;
+  background-color: red;
+  border: 1px solid red;
+  color: white;
+  padding: .875rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: "Poppins", sans-serif;
+}
+.button.btn-1-red:hover { background-color: #cc0000; border-color: #cc0000; }
+
+/* ── [NEW] Trust Bar ── */
+.trust-bar {
+  background-color: #1a1a1a;
+  color: white;
+  padding: .625rem 0;
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+.trust-bar .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.trust-bar span { display: flex; align-items: center; gap: .4rem; }
+.trust-bar .dot { color: red; font-size: 1.2em; line-height: 1; }
+
+/* ── Product Header ── */
+.product-header { text-align: center; }
+.product-title { text-align: center; margin-bottom: 0; }
+.product-header-image {
+  height: 18.75em;
+  background-position: center 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 3.25em 1.875em 3.9375em;
+  position: relative;
+}
+
+/* ── [NEW] Hero CTA overlay ── */
+.hero-cta-overlay {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background: rgba(0,0,0,.6);
+  padding: 1.5rem 2.5rem;
+  min-width: 480px;
+}
+.hero-cta-overlay .hero-headline {
+  font-family: "EB Garamond", serif;
+  font-size: 2rem;
+  color: white;
+  margin: 0 0 .25rem;
+  padding: 0;
+  line-height: 1.15;
+}
+.hero-cta-overlay .hero-sub {
+  font-size: .875rem;
+  color: #ddd;
+  margin: 0 0 1rem;
+}
+.hero-cta-overlay .hero-pricing {
+  font-size: .8125rem;
+  color: #bbb;
+  margin-top: .5rem;
+  margin-bottom: 0;
+}
+
+/* ── Product Content ── */
+.product-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+.product-tagline { margin-bottom: 1.5rem; }
+.main-product-section {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+.description-content { flex: 1; }
+.description-content p { font-size: .9375rem; line-height: 1.75; color: #333; }
+.product-highlight-images {
+  flex: 0 0 340px;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+.product-highlight-images img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+/* ── [NEW] Social Proof Strip ── */
+.social-proof-strip {
+  background-color: #f8f8f8;
+  border-top: 1px solid #F1F1F1;
+  border-bottom: 1px solid #F1F1F1;
+  padding: 2.5rem 0;
+  margin: 3rem 0;
+}
+.social-proof-strip .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+  justify-content: space-between;
+}
+.review-card {
+  background: white;
+  border: 1px solid #eee;
+  padding: 1.5rem;
+  flex: 1;
+}
+.review-stars { color: #f4b400; font-size: 1.125rem; margin-bottom: .5rem; }
+.review-text { font-size: .875rem; color: #444; line-height: 1.6; margin-bottom: .75rem; font-style: italic; }
+.review-author { font-size: .8125rem; font-weight: 700; color: #000; margin: 0; }
+.google-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2rem;
+  background: white;
+  border: 1px solid #eee;
+  flex: 0 0 160px;
+  text-align: center;
+  gap: .5rem;
+}
+.google-badge .score {
+  font-size: 3rem;
+  font-family: "EB Garamond", serif;
+  line-height: 1;
+  color: #000;
+}
+.google-badge .stars { color: #f4b400; font-size: 1.25rem; }
+.google-badge .label { font-size: .75rem; color: #666; }
+
+/* ── [NEW] How It Works ── */
+.how-it-works {
+  padding: 4rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.how-it-works h2 { text-align: center; margin-bottom: 2.5rem; }
+.steps-grid {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+}
+.step {
+  flex: 1;
+  padding: 0 2rem;
+  text-align: center;
+  position: relative;
+}
+.step:not(:last-child)::after {
+  content: "\2192";
+  position: absolute;
+  right: -.5rem;
+  top: 1.25rem;
+  font-size: 1.5rem;
+  color: #ccc;
+}
+.step-number {
+  width: 56px;
+  height: 56px;
+  border: 2px solid red;
+  color: red;
+  font-family: "EB Garamond", serif;
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+.step h4 {
+  font-family: "Poppins", sans-serif;
+  font-size: .9375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin: 0 0 .5rem;
+  padding: 0;
+}
+.step p { font-size: .875rem; color: #555; }
+.steps-cta { text-align: center; margin-top: 2.5rem; }
+
+/* ── Photo Gallery ── */
+.product-photo-gallery {
+  padding: 4rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.product-photo-gallery h2 { margin-bottom: 2rem; }
+.product-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .75rem;
+}
+.product-gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── [NEW] FAQ ── */
+.faq-section {
+  padding: 4rem 0;
+  border-top: 1px solid #F1F1F1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.faq-section h2 { margin-bottom: 2.5rem; }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 3rem;
+}
+.faq-item { border-bottom: 1px solid #eee; padding-bottom: 1.25rem; }
+.faq-q {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: .9375rem;
+  margin-bottom: .5rem;
+}
+.faq-a { font-size: .875rem; color: #444; line-height: 1.7; }
+
+/* ── Footer CTA ── */
+.footer-cta {
+  background-color: #f8f8f8;
+  border-top: 1px solid #F1F1F1;
+  padding: 4rem 0;
+}
+.footer-cta .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2.25rem;
+}
+.footer-cta h2 { margin: 0 0 .5rem; padding: 0; }
+.footer-cta p { color: #555; font-size: .9375rem; margin: 0; max-width: 600px; }
+
+/* ── Site Footer ── */
+.site-footer {
+  background-color: #1a1a1a;
+  color: white;
+  padding: 3rem 0 0;
+}
+.site-footer .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+}
+.footer-logo { height: 40px; filter: brightness(10); }
+.footer-info { font-size: .875rem; color: #aaa; }
+.footer-info address { font-style: normal; line-height: 1.8; }
+.footer-copy {
+  text-align: center;
+  font-size: .75rem;
+  color: #666;
+  padding: 1.25rem 0;
+  border-top: 1px solid #333;
+}
+
+/* ── Dev Notes Panel ── */
+.dev-notes {
+  background: #fff8e1;
+  border: 2px dashed #f59e0b;
+  padding: 1.5rem 2rem;
+  margin: 0 auto;
+  max-width: 1200px;
+  font-family: monospace;
+  font-size: .875rem;
+}
+.dev-notes h3 {
+  font-family: monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 .75rem;
+  color: #92400e;
+  padding: 0;
+}
+.dev-notes ul { margin: 0; padding-left: 1.5rem; color: #78350f; }
+.dev-notes li { margin-bottom: .4rem; }
+.new-tag {
+  display: inline-block;
+  background: #ef4444;
+  color: white;
+  font-size: .6875rem;
+  padding: .1em .4em;
+  border-radius: 2px;
+  margin-right: .3rem;
+  font-family: sans-serif;
+  font-weight: 700;
+}
+.keep-tag {
+  display: inline-block;
+  background: #10b981;
+  color: white;
+  font-size: .6875rem;
+  padding: .1em .4em;
+  border-radius: 2px;
+  margin-right: .3rem;
+  font-family: sans-serif;
+  font-weight: 700;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  .main-product-section { flex-direction: column; }
+  .product-highlight-images { flex: auto; flex-direction: row; }
+  .product-gallery { grid-template-columns: repeat(2, 1fr); }
+  .social-proof-strip .inner { flex-direction: column; }
+  .steps-grid { flex-direction: column; gap: 1.5rem; }
+  .step:not(:last-child)::after { display: none; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .footer-cta .inner { flex-direction: column; }
+  .hero-cta-overlay { min-width: auto; width: 85%; bottom: 1rem; }
+  .trust-bar .inner { gap: 1rem; font-size: .75rem; }
+  nav.desktop-nav { display: none; }
+}
+</style>
+</head>
+
+<body class="products-template-default single single-products">
+
+<!-- ════════════════════════════════════════════════
+     DEV NOTES (remove before going live)
+════════════════════════════════════════════════ -->
+<div class="dev-notes">
+  <h3>🛠 INSTRUÇÕES PARA O DESENVOLVEDOR — Página: /products/granite-marble-quartzite/</h3>
+  <ul>
+    <li><span class="new-tag">NEW</span> <strong>Trust Bar</strong> — adicionar logo abaixo do header, antes do product-header. Widget ou shortcode custom.</li>
+    <li><span class="keep-tag">KEEP</span> <strong>Product Header (h1 + hero image)</strong> — manter exatamente como está. Apenas adicionar o overlay abaixo.</li>
+    <li><span class="new-tag">NEW</span> <strong>Hero CTA Overlay</strong> — div com position:absolute dentro do .product-header-image. Inclui headline, subtext, CTA botão e preço âncora.</li>
+    <li><span class="keep-tag">KEEP</span> <strong>Seção principal de texto (product-tagline + main-product-section)</strong> — manter conteúdo existente. Pode atualizar copy dos materiais.</li>
+    <li><span class="new-tag">NEW</span> <strong>Social Proof Strip</strong> — 3 reviews do Google + badge de nota. Substituir [Customer Name] e [XX] com dados reais. Inserir após .main-product-section.</li>
+    <li><span class="new-tag">NEW</span> <strong>How It Works</strong> — 4 passos do processo. Inserir antes da galeria.</li>
+    <li><span class="keep-tag">KEEP</span> <strong>Photo Gallery</strong> — manter como está. Pode adicionar mais fotos.</li>
+    <li><span class="new-tag">NEW</span> <strong>FAQ</strong> — 6 perguntas frequentes. Inserir após a galeria. Atualizar pricing se necessário.</li>
+    <li><span class="keep-tag">KEEP</span> <strong>Footer CTA + Site Footer</strong> — manter como estão.</li>
+    <li>⚠️ Todos os CTAs têm UTM tags — manter os parâmetros <code>?utm_source=lp&amp;utm_medium=...&amp;utm_campaign=natural-stone</code></li>
+    <li>⚠️ Substituir textos entre [colchetes] com dados reais antes de publicar.</li>
+    <li>⚠️ Verificar score de velocidade após implementação (objetivo: &gt;70 mobile).</li>
+  </ul>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SITE HEADER (existing — estrutura idêntica ao site)
+════════════════════════════════════════════════ -->
+<div class="site-header gray-underline">
+  <div class="inner">
+    <div id="site-title">
+      <a href="https://maranatha.pro/" rel="home">
+        <img src="https://maranatha.pro/wp-content/uploads/Marantha-Logo-2025.png" alt="Maranatha Granite Logo" loading="eager">
+      </a>
+    </div>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="https://fusiondrivecloud.com/inventory/?license=5a1a1eab099d334940f490b69cf2f6df">Inventory</a></li>
+        <li><a href="https://maranatha.pro/products/">Stone</a></li>
+        <li><a href="https://maranatha.pro/projects/">Projects</a></li>
+        <li><a href="https://maranatha.pro/showroom/">Showroom</a></li>
+        <li><a href="https://maranatha.pro/blog/">Blog</a></li>
+        <li><a href="https://maranatha.pro/about-us/">About</a></li>
+        <li class="nav-phone"><a href="tel:205-663-0400">205.663.0400</a></li>
+        <li class="nav-cta"><a href="https://maranatha.pro/contact/?utm_source=lp&utm_medium=nav&utm_campaign=natural-stone">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     [NEW] TRUST BAR
+════════════════════════════════════════════════ -->
+<div class="trust-bar">
+  <div class="inner">
+    <span><span class="dot">&#9679;</span> Family-Owned &amp; Operated</span>
+    <span><span class="dot">&#9679;</span> 500+ Projects Completed</span>
+    <span><span class="dot">&#9679;</span> Free In-Home Measure</span>
+    <span><span class="dot">&#9679;</span> Fabricated Locally in Pelham, AL</span>
+    <span><span class="dot">&#9679;</span> Lifetime Install Warranty</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     PRODUCT HEADER (existing — estrutura idêntica)
+     [NEW] Hero CTA overlay adicionado dentro da imagem
+════════════════════════════════════════════════ -->
+<header class="product-header">
+  <h1 class="product-title">Natural Stones<span class="accent">.</span></h1>
+  <div class="product-header-image" style="background-image: url('https://maranatha.pro/wp-content/uploads/F5A5720-1.jpg')">
+
+    <!-- [NEW] CTA overlay — position:absolute inside .product-header-image -->
+    <div class="hero-cta-overlay">
+      <p class="hero-headline">Granite, Marble &amp; Quartzite<br>for Birmingham Homes</p>
+      <p class="hero-sub">Fabricated &amp; installed locally — results in 2–3 weeks</p>
+      <a class="button btn-1-red" href="https://maranatha.pro/contact/?utm_source=lp&utm_medium=hero&utm_campaign=natural-stone">
+        Get a Free Estimate
+      </a>
+      <p class="hero-pricing">Starting from $45/sq ft installed &nbsp;·&nbsp; No obligation</p>
+    </div>
+
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════
+     PRODUCT CONTENT (existing — estrutura idêntica)
+════════════════════════════════════════════════ -->
+<div class="product-content">
+
+  <h2 class="product-tagline">A countertop like no other<span class="accent">.</span></h2>
+
+  <div class="main-product-section">
+    <div class="description-content">
+      <p>Natural stone is a popular option for kitchen countertops, and there are many reasons why going with a natural stone is a great choice. There are several options for natural stone countertops, such as marble, granite and quartzite, and each type of material is unique in how it can serve its purpose. Natural stone is also unique because each slab is one of a kind, giving each project its own aesthetic with distinctive mineral patterns — so you'll have a countertop like no other.</p>
+      <p>The downside to natural stone materials is that they're sensitive to stains because of their porous composition. But with proper preventative measures like consistent cleaning and annual resealing, your countertops will maintain their beauty for years to come.</p>
+      <p><strong>Granite:</strong> Hard, scratch-resistant, available in hundreds of colors. The most popular choice for kitchen countertops in Birmingham.</p>
+      <p><strong>Quartzite:</strong> Naturally harder than granite. Scratch-resistant and ideal for high-traffic kitchens. Often confused with marble but far more durable.</p>
+      <p><strong>Marble:</strong> Timeless elegance. Perfect for bathrooms, baking areas, and fireplace surrounds. Requires annual sealing.</p>
+      <a class="button btn-1" href="https://maranatha.pro/contact/?utm_source=lp&utm_medium=content&utm_campaign=natural-stone" target="_self">Request an Appointment</a>
+    </div>
+
+    <div class="product-highlight-images">
+      <img src="https://maranatha.pro/wp-content/uploads/Quartzite-Traditional-Kitchen--720x300.jpg" alt="Quartzite traditional kitchen countertops" />
+      <img src="https://maranatha.pro/wp-content/uploads/Quartzite-Kitchen-with-Full-Backsplash-720x300.jpg" alt="Quartzite kitchen with full backsplash Birmingham" />
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════════════════
+     [NEW] SOCIAL PROOF STRIP
+     Substituir com reviews reais do Google
+════════════════════════════════════════════════ -->
+<div class="social-proof-strip">
+  <div class="inner">
+
+    <div class="google-badge">
+      <div class="score">4.9</div>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="label">Google Reviews<br><strong>[XX] reviews</strong></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">"The team was professional from start to finish. Our granite countertops look absolutely stunning. They matched the veining perfectly and installation was flawless."</p>
+      <p class="review-author">— [Customer Name], Hoover, AL</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">"We visited the showroom and were blown away by the selection. The quartzite we chose transformed our kitchen. Best investment we've made in the house."</p>
+      <p class="review-author">— [Customer Name], Mountain Brook, AL</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">"Quick turnaround, fair pricing and quality is unmatched. From measurement to install in under 3 weeks. Highly recommend Maranatha to anyone in Birmingham."</p>
+      <p class="review-author">— [Customer Name], Vestavia Hills, AL</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     [NEW] HOW IT WORKS
+════════════════════════════════════════════════ -->
+<div class="how-it-works">
+  <h2>How It Works<span class="accent">.</span></h2>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h4>Visit the Showroom</h4>
+      <p>Browse 200+ slabs in our Birmingham-area showroom. Touch, compare, and choose your stone in person.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h4>Free Measure</h4>
+      <p>Our team visits your home to take precise measurements — no charge, no obligation.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h4>Local Fabrication</h4>
+      <p>Your slab is cut, edged, and finished in our Pelham, AL facility. No third-party shops.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <h4>Professional Install</h4>
+      <p>Our crew installs your countertops with precision. Most kitchens are complete in a single day.</p>
+    </div>
+  </div>
+  <div class="steps-cta">
+    <a class="button btn-1" href="https://maranatha.pro/contact/?utm_source=lp&utm_medium=process&utm_campaign=natural-stone">Start the Process &#8594;</a>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     PHOTO GALLERY (existing — estrutura idêntica)
+════════════════════════════════════════════════ -->
+<section class="product-photo-gallery">
+  <h2>Gallery<span class="accent">.</span></h2>
+  <div class="product-gallery">
+    <img src="https://maranatha.pro/wp-content/uploads/Quartzite-Kitchen-1-350x500.jpg" alt="Quartzite kitchen countertop Birmingham"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Quartzite-Bathroom-350x500.jpg" alt="Quartzite bathroom countertop"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Marble-Kitchen-Perimeter-350x500.jpg" alt="Marble kitchen perimeter countertop"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Marble-Full-Backsplash-Kitchen-1-350x500.jpg" alt="Marble full backsplash kitchen"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Marble-Bathroom-350x500.jpg" alt="Marble bathroom countertop"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Marble-Bathroom-with-Marble-made-Sink-350x500.jpg" alt="Marble bathroom with integrated sink"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Marble-Bathroom-with-Design-Backsplash-350x500.jpg" alt="Marble bathroom design backsplash"/>
+    <img src="https://maranatha.pro/wp-content/uploads/Granite-Kitchen-350x500.jpg" alt="Granite kitchen countertop Birmingham"/>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     [NEW] FAQ SECTION
+════════════════════════════════════════════════ -->
+<div class="faq-section">
+  <h2>Frequently Asked Questions<span class="accent">.</span></h2>
+  <div class="faq-grid">
+
+    <div class="faq-item">
+      <div class="faq-q">How much do granite countertops cost in Birmingham?</div>
+      <div class="faq-a">Natural stone countertops typically start around $45 per square foot installed, depending on the stone selected and edge profile. We provide transparent, itemized quotes — no surprises.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How long does the process take?</div>
+      <div class="faq-a">From your first visit to installation day, most projects are complete in 2–3 weeks. The actual install typically takes 4–6 hours for a standard kitchen.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is granite better than quartz?</div>
+      <div class="faq-a">They're different materials with different strengths. Granite is a natural stone — completely unique, heat-resistant, and long-lasting with simple care. Quartz is engineered. We carry both and can help you choose the right fit.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Do you offer financing?</div>
+      <div class="faq-a">Yes. We work with financing partners so you can get your dream countertops today and pay over time. Ask us about current options during your consultation.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Do I need to seal my granite countertops?</div>
+      <div class="faq-a">We apply a professional-grade sealer at installation. We recommend resealing once a year — a simple 15-minute process you can do yourself with a store-bought product.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Do you serve the entire Birmingham area?</div>
+      <div class="faq-a">Yes. We serve Birmingham, Hoover, Vestavia Hills, Mountain Brook, Homewood, Pelham, Chelsea, Alabaster, and surrounding communities throughout Jefferson and Shelby counties.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     FOOTER CTA (existing — estrutura idêntica)
+════════════════════════════════════════════════ -->
+<div class="footer-cta">
+  <div class="inner">
+    <div>
+      <h2>Request an Appointment<span class="accent">.</span></h2>
+      <p>Our team is here to bring your creative vision to reality. Tell us about your project and we'll establish a budget, schedule and process that works for both you and our team. Let's get started!</p>
+    </div>
+    <div>
+      <a class="button btn-1" href="https://maranatha.pro/contact/?utm_source=lp&utm_medium=footer-cta&utm_campaign=natural-stone" target="_self">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SITE FOOTER (existing — estrutura idêntica)
+════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <a href="https://maranatha.pro/" rel="home">
+        <img class="footer-logo" src="https://maranatha.pro/wp-content/themes/kronos/assets/img/logo-footer.png" alt="Maranatha Granite Logo" loading="eager">
+      </a>
+    </div>
+    <div class="footer-info">
+      <address>
+        <strong>Maranatha Granite</strong><br>
+        2090 Hwy 31 S · Pelham, AL 35124<br>
+        <a href="tel:205-663-0400" style="color:#aaa;">205.663.0400</a><br>
+        Mon–Fri 9am–5pm &nbsp;·&nbsp; Sat 10am–3pm
+      </address>
+    </div>
+    <div class="footer-info">
+      <strong style="color:white;">Products</strong><br>
+      Granite &nbsp;·&nbsp; Marble &nbsp;·&nbsp; Quartzite<br>
+      Silestone &nbsp;·&nbsp; Cambria &nbsp;·&nbsp; Dekton<br>
+      Porcelain &nbsp;·&nbsp; Flooring
+    </div>
+  </div>
+  <div class="footer-copy">
+    &copy; 2025 Maranatha Granite. All rights reserved.
+    &nbsp;&nbsp;·&nbsp;&nbsp;
+    <a href="https://maranatha.pro/privacy-policy/" style="color:#666;">Privacy Policy</a>
+  </div>
+</footer>
+
+</body>
+</html>

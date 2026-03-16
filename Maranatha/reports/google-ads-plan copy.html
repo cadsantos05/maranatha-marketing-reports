@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Ads Plan — Maranatha Stone and Floors</title>
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #c8923a;
+      --accent-light: #fdf3e7;
+      --google-blue: #1a73e8;
+      --google-green: #34a853;
+      --google-red: #ea4335;
+      --google-yellow: #fbbc04;
+      --campaign1: #1565c0;
+      --campaign1-light: #e3f2fd;
+      --campaign2: #6a1b9a;
+      --campaign2-light: #f3e5f5;
+      --campaign3: #2e7d32;
+      --campaign3-light: #e8f5e9;
+      --campaign4: #e65100;
+      --campaign4-light: #fff3e0;
+      --border: #e0e0e0;
+      --gray: #f5f5f5;
+      --text: #1a1a1a;
+      --muted: #666;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #efefef;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--primary);
+      color: white;
+      padding: 40px 48px 32px;
+    }
+    .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+    .brand-agency { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 600; }
+    .brand-client { font-size: 24px; font-weight: 700; }
+    .report-meta .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #aaa; }
+    .report-meta .value { font-size: 14px; color: white; font-weight: 500; text-align: right; }
+    .header-title { margin-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; }
+    .header-title h1 { font-size: 30px; font-weight: 700; }
+    .header-title p { margin-top: 6px; color: #bbb; font-size: 14px; max-width: 640px; }
+
+    /* GOOGLE LOGO PILLS */
+    .g-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      font-weight: 800;
+      font-size: 18px;
+      margin-top: 12px;
+    }
+    .g-logo span:nth-child(1) { color: var(--google-blue); }
+    .g-logo span:nth-child(2) { color: var(--google-red); }
+    .g-logo span:nth-child(3) { color: var(--google-yellow); }
+    .g-logo span:nth-child(4) { color: var(--google-blue); }
+    .g-logo span:nth-child(5) { color: var(--google-green); }
+    .g-logo span:nth-child(6) { color: var(--google-red); }
+    .g-logo-suffix { font-size: 14px; color: #bbb; font-weight: 400; margin-left: 6px; }
+
+    /* LAYOUT */
+    .container { max-width: 1140px; margin: 0 auto; padding: 32px 24px 64px; }
+    section { margin-bottom: 44px; }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 18px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* STRATEGY OVERVIEW */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .strategy-card {
+      background: white;
+      border-radius: 10px;
+      padding: 18px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-top: 4px solid var(--border);
+      text-align: center;
+    }
+    .strategy-card.c1 { border-top-color: var(--campaign1); }
+    .strategy-card.c2 { border-top-color: var(--campaign2); }
+    .strategy-card.c3 { border-top-color: var(--campaign3); }
+    .strategy-card.c4 { border-top-color: var(--campaign4); }
+    .strategy-num { font-size: 32px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+    .strategy-card.c1 .strategy-num { color: var(--campaign1); }
+    .strategy-card.c2 .strategy-num { color: var(--campaign2); }
+    .strategy-card.c3 .strategy-num { color: var(--campaign3); }
+    .strategy-card.c4 .strategy-num { color: var(--campaign4); }
+    .strategy-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .strategy-sub { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+    /* CAMPAIGN BLOCK */
+    .campaign-block {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 28px;
+    }
+    .campaign-header {
+      padding: 18px 24px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .campaign-header.c1 { background: var(--campaign1); }
+    .campaign-header.c2 { background: var(--campaign2); }
+    .campaign-header.c3 { background: var(--campaign3); }
+    .campaign-header.c4 { background: var(--campaign4); }
+    .campaign-name { font-size: 17px; font-weight: 700; }
+    .campaign-meta { font-size: 12px; opacity: 0.85; margin-top: 3px; }
+    .campaign-badge {
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .campaign-body { padding: 0 24px 24px; }
+
+    /* AD GROUPS */
+    .adgroup-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .adgroup {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .adgroup-header {
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .adgroup-header.c1 { background: var(--campaign1-light); color: var(--campaign1); }
+    .adgroup-header.c2 { background: var(--campaign2-light); color: var(--campaign2); }
+    .adgroup-header.c3 { background: var(--campaign3-light); color: var(--campaign3); }
+    .adgroup-header.c4 { background: var(--campaign4-light); color: var(--campaign4); }
+    .adgroup-icon { font-size: 14px; }
+    .adgroup-body { padding: 12px 14px; background: white; }
+
+    /* KEYWORD PILLS */
+    .kw-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .kw-pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--gray);
+      color: var(--text);
+    }
+    .kw-pill.exact  { background: #e8f5e9; border-color: #a5d6a7; color: #2e7d32; }
+    .kw-pill.phrase { background: #e3f2fd; border-color: #90caf9; color: #1565c0; }
+    .kw-pill.broad  { background: #fff8e1; border-color: #ffe082; color: #f57f17; }
+    .kw-pill.neg    { background: #ffebee; border-color: #ef9a9a; color: #c62828; }
+
+    .kw-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .kw-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+    .kw-legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+    .dot-exact  { background: #a5d6a7; }
+    .dot-phrase { background: #90caf9; }
+    .dot-broad  { background: #ffe082; }
+    .dot-neg    { background: #ef9a9a; }
+
+    /* AD COPY PREVIEW */
+    .ad-preview {
+      background: white;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    .ad-preview + .ad-preview { margin-top: 8px; }
+    .ad-url-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .ad-favicon {
+      width: 16px; height: 16px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .ad-domain { font-size: 12px; color: #202124; font-weight: 500; }
+    .ad-sponsored { font-size: 11px; color: #70757a; margin-left: 4px; }
+    .ad-headline {
+      font-size: 18px;
+      color: #1a0dab;
+      font-weight: 400;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      cursor: pointer;
+    }
+    .ad-headline:hover { text-decoration: underline; }
+    .ad-description { font-size: 13px; color: #4d5156; line-height: 1.5; }
+    .ad-sitelinks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .ad-sitelink {
+      font-size: 12px;
+      color: #1a0dab;
+      border: 1px solid #dadce0;
+      border-radius: 16px;
+      padding: 3px 10px;
+    }
+    .ad-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+    .ad-tag.rsa  { background: #e3f2fd; color: #1565c0; }
+    .ad-tag.var  { background: var(--accent-light); color: var(--accent); }
+
+    /* SETTINGS TABLE */
+    .settings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .settings-table th {
+      background: var(--gray);
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+    .settings-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .settings-table tr:last-child td { border-bottom: none; }
+    .settings-table td:first-child { font-weight: 600; color: var(--primary); width: 28%; }
+
+    /* BUDGET TABLE */
+    .budget-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .budget-card {
+      background: white;
+      border-radius: 10px;
+      padding: 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .budget-amount { font-size: 28px; font-weight: 800; color: var(--primary); }
+    .budget-period { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .budget-label { font-size: 12px; font-weight: 600; color: var(--primary); margin-top: 8px; }
+    .budget-sub { font-size: 11px; color: var(--muted); }
+
+    /* EXTENSIONS */
+    .ext-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .ext-card {
+      background: white;
+      border-radius: 10px;
+      padding: 16px 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .ext-title { font-weight: 700; font-size: 13px; margin-bottom: 8px; color: var(--primary); display: flex; align-items: center; gap: 6px; }
+    .ext-items { font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .ext-items span { display: block; }
+
+    /* NEGATIVE KEYWORDS */
+    .neg-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* PILL */
+    .pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; }
+    .pill-blue   { background: #e3f2fd; color: #1565c0; }
+    .pill-green  { background: #e8f5e9; color: #2e7d32; }
+    .pill-yellow { background: #fff8e1; color: #f57f17; }
+    .pill-red    { background: #ffebee; color: #c62828; }
+
+    /* FOOTER */
+    .footer { text-align: center; padding: 24px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 48px; }
+
+    @media (max-width: 800px) {
+      .strategy-grid, .budget-grid { grid-template-columns: 1fr 1fr; }
+      .header { padding: 24px; }
+      .adgroup-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="brand-agency">Agencia Melbee</div>
+      <div class="brand-client">Google Ads Campaign Plan</div>
+      <div class="g-logo">
+        <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+        <span class="g-logo-suffix">Ads — Search</span>
+      </div>
+    </div>
+    <div class="report-meta">
+      <div class="label">Client</div>
+      <div class="value">Maranatha Stone and Floors</div>
+      <div class="label" style="margin-top:8px;">Market</div>
+      <div class="value">Birmingham, AL</div>
+      <div class="label" style="margin-top:8px;">Date</div>
+      <div class="value">March 2026</div>
+    </div>
+  </div>
+  <div class="header-title">
+    <h1>Search Campaign Plan</h1>
+    <p>4-campaign structure targeting countertop and flooring searches across Birmingham, Pelham, Hoover, Vestavia Hills, and surrounding areas.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- CAMPAIGN OVERVIEW -->
+  <section>
+    <div class="section-title">🗂️ Campaign Structure Overview</div>
+    <div class="strategy-grid">
+      <div class="strategy-card c1">
+        <div class="strategy-num">01</div>
+        <div class="strategy-label">Branded + General</div>
+        <div class="strategy-sub">Countertops Birmingham</div>
+      </div>
+      <div class="strategy-card c2">
+        <div class="strategy-num">02</div>
+        <div class="strategy-label">Material-Specific</div>
+        <div class="strategy-sub">Granite · Quartz · Marble</div>
+      </div>
+      <div class="strategy-card c3">
+        <div class="strategy-num">03</div>
+        <div class="strategy-label">Service Intent</div>
+        <div class="strategy-sub">Installation · Fabrication</div>
+      </div>
+      <div class="strategy-card c4">
+        <div class="strategy-num">04</div>
+        <div class="strategy-label">Competitor + RLSA</div>
+        <div class="strategy-sub">Conquest + Retargeting</div>
+      </div>
+    </div>
+
+    <table class="settings-table">
+      <thead>
+        <tr><th>Setting</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Campaign Type</td><td>Google Search (all campaigns)</td></tr>
+        <tr><td>Bidding Strategy</td><td>Maximize Conversions (once 30+ conversions/month); Target CPA once data matures</td></tr>
+        <tr><td>Location Targeting</td><td>Birmingham AL, Pelham, Hoover, Vestavia Hills, Alabaster, Trussville, Helena — 30-mile radius from showroom</td></tr>
+        <tr><td>Location Exclusions</td><td>Exclude areas outside Alabama unless Huntsville campaign is active</td></tr>
+        <tr><td>Ad Schedule</td><td>Mon–Fri 7am–7pm, Sat 8am–3pm (align with showroom hours)</td></tr>
+        <tr><td>Devices</td><td>All devices; increase mobile bid adjustment +15% (most home improvement searches are mobile)</td></tr>
+        <tr><td>Networks</td><td>Search only — disable Search Partners and Display initially</td></tr>
+        <tr><td>Conversion Actions</td><td>Form submission, phone call (30+ seconds), quote request button click</td></tr>
+        <tr><td>Ad Rotation</td><td>Optimize — show best-performing ads</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- KEYWORD LEGEND -->
+  <div style="background:white; border-radius:10px; padding:16px 20px; box-shadow:0 1px 4px rgba(0,0,0,0.06); margin-bottom: 28px;">
+    <div style="font-size:12px; font-weight:700; color:var(--primary); margin-bottom:10px;">Keyword Match Type Legend</div>
+    <div class="kw-legend">
+      <div class="kw-legend-item"><div class="kw-legend-dot dot-exact"></div> [Exact Match]</div>
+      <div class="kw-legend-item"><div class="kw-legend-dot dot-phrase"></div> "Phrase Match"</div>
+      <div class="kw-legend-item"><div class="kw-legend-dot dot-broad"></div> Broad Match Modified</div>
+      <div class="kw-legend-item"><div class="kw-legend-dot dot-neg"></div> −Negative Keyword</div>
+    </div>
+  </div>
+
+  <!-- CAMPAIGN 1 -->
+  <section>
+    <div class="campaign-block">
+      <div class="campaign-header c1">
+        <div>
+          <div class="campaign-name">Campaign 1 — Brand &amp; General Countertops</div>
+          <div class="campaign-meta">Captures high-intent searchers looking for countertops in Birmingham without specifying material</div>
+        </div>
+        <div class="campaign-badge">Goal: Lead Volume</div>
+      </div>
+      <div class="campaign-body">
+
+        <div class="adgroup-grid">
+
+          <!-- AG 1.1 -->
+          <div class="adgroup">
+            <div class="adgroup-header c1"><span class="adgroup-icon">🎯</span> Ad Group 1.1 — General Countertops Birmingham</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill exact">[countertops birmingham al]</span>
+                <span class="kw-pill exact">[countertops birmingham]</span>
+                <span class="kw-pill phrase">"countertops in birmingham"</span>
+                <span class="kw-pill phrase">"countertop store birmingham"</span>
+                <span class="kw-pill broad">countertops near me birmingham</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">RSA — Responsive Search Ad</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Custom Countertops in Birmingham, AL | Free Estimate</div>
+                <div class="ad-description">Granite, quartz, marble, and quartzite countertops fabricated and installed in Birmingham. Visit our showroom in Pelham or request a free quote today.</div>
+                <div class="ad-sitelinks">
+                  <span class="ad-sitelink">Granite Countertops</span>
+                  <span class="ad-sitelink">Quartz Countertops</span>
+                  <span class="ad-sitelink">Get a Free Quote</span>
+                  <span class="ad-sitelink">Virtual Showroom</span>
+                </div>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag var">Variation B</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Birmingham's Countertop Specialists | In-House Fabrication</div>
+                <div class="ad-description">From granite to quartz — Maranatha Stone and Floors fabricates and installs premium countertops in Birmingham, AL. Explore 140+ stone options.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AG 1.2 -->
+          <div class="adgroup">
+            <div class="adgroup-header c1"><span class="adgroup-icon">🏷️</span> Ad Group 1.2 — Brand Keywords</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill exact">[maranatha stone and floors]</span>
+                <span class="kw-pill exact">[maranatha granite birmingham]</span>
+                <span class="kw-pill exact">[maranatha.pro]</span>
+                <span class="kw-pill phrase">"maranatha countertops"</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">Brand Defense Ad</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Maranatha Stone and Floors | Birmingham, AL</div>
+                <div class="ad-description">Custom countertop fabrication and installation in Birmingham. Granite, quartz, marble, quartzite and flooring. Visit our showroom in Pelham — 205.663.0400.</div>
+                <div class="ad-sitelinks">
+                  <span class="ad-sitelink">Schedule Consultation</span>
+                  <span class="ad-sitelink">Our Showroom</span>
+                  <span class="ad-sitelink">Recent Projects</span>
+                  <span class="ad-sitelink">About Us</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AG 1.3 -->
+          <div class="adgroup">
+            <div class="adgroup-header c1"><span class="adgroup-icon">📍</span> Ad Group 1.3 — Suburb Targeting</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill exact">[countertops hoover al]</span>
+                <span class="kw-pill exact">[countertops vestavia hills]</span>
+                <span class="kw-pill exact">[countertops pelham al]</span>
+                <span class="kw-pill phrase">"countertops alabaster al"</span>
+                <span class="kw-pill phrase">"countertops helena al"</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">Dynamic Location Insert</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Countertops Near {KeyWord:Birmingham} | Maranatha</div>
+                <div class="ad-description">Serving Hoover, Vestavia Hills, Pelham, Alabaster, and all Birmingham suburbs. Custom granite and quartz countertops fabricated locally. Free estimate.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAMPAIGN 2 -->
+  <section>
+    <div class="campaign-block">
+      <div class="campaign-header c2">
+        <div>
+          <div class="campaign-name">Campaign 2 — Material-Specific</div>
+          <div class="campaign-meta">Captures buyers who know what material they want — highest purchase intent</div>
+        </div>
+        <div class="campaign-badge">Goal: Qualified Leads</div>
+      </div>
+      <div class="campaign-body">
+
+        <div class="adgroup-grid">
+
+          <!-- AG 2.1 -->
+          <div class="adgroup">
+            <div class="adgroup-header c2"><span class="adgroup-icon">🪨</span> Ad Group 2.1 — Granite Countertops</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill exact">[granite countertops birmingham al]</span>
+                <span class="kw-pill exact">[granite countertops birmingham]</span>
+                <span class="kw-pill phrase">"granite kitchen countertops birmingham"</span>
+                <span class="kw-pill phrase">"granite countertop installation birmingham"</span>
+                <span class="kw-pill broad">granite countertop fabricators birmingham</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">RSA — Granite</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro/granite-countertops</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Granite Countertops Birmingham, AL | Maranatha</div>
+                <div class="ad-description">Custom granite countertops fabricated and installed in Birmingham. Dozens of granite colors in stock. Precision cut, expert installation. Get your free estimate.</div>
+                <div class="ad-sitelinks">
+                  <span class="ad-sitelink">View Granite Slabs</span>
+                  <span class="ad-sitelink">Granite vs Quartz</span>
+                  <span class="ad-sitelink">Free Estimate</span>
+                </div>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag var">Variation B</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro/granite-countertops</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Granite Countertops in Birmingham | Local Fabricator</div>
+                <div class="ad-description">Maranatha fabricates granite countertops in-house — no middleman. Serving Birmingham and surrounding areas. Schedule a consultation at our Pelham showroom.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AG 2.2 -->
+          <div class="adgroup">
+            <div class="adgroup-header c2"><span class="adgroup-icon">⬜</span> Ad Group 2.2 — Quartz Countertops</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill exact">[quartz countertops birmingham al]</span>
+                <span class="kw-pill exact">[quartz countertops birmingham]</span>
+                <span class="kw-pill phrase">"quartz kitchen countertops birmingham"</span>
+                <span class="kw-pill phrase">"silestone countertops birmingham"</span>
+                <span class="kw-pill phrase">"cambria quartz birmingham"</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">RSA — Quartz</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro/quartz-countertops</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Quartz Countertops Birmingham, AL | Silestone &amp; Cambria</div>
+                <div class="ad-description">Premium quartz countertops from Silestone, Cambria, and HanStone — installed by Maranatha in Birmingham. No sealing required. Free estimate available.</div>
+                <div class="ad-sitelinks">
+                  <span class="ad-sitelink">Silestone Quartz</span>
+                  <span class="ad-sitelink">Cambria Collection</span>
+                  <span class="ad-sitelink">Get a Quote</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AG 2.3 -->
+          <div class="adgroup">
+            <div class="adgroup-header c2"><span class="adgroup-icon">🤍</span> Ad Group 2.3 — Marble &amp; Natural Stone</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill exact">[marble countertops birmingham al]</span>
+                <span class="kw-pill exact">[quartzite countertops birmingham]</span>
+                <span class="kw-pill phrase">"natural stone countertops birmingham"</span>
+                <span class="kw-pill phrase">"stone countertops birmingham al"</span>
+                <span class="kw-pill broad">marble countertop installation birmingham</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">RSA — Natural Stone</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro/natural-stone</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Marble &amp; Quartzite Countertops | Birmingham, AL</div>
+                <div class="ad-description">Marble, quartzite, and natural stone countertops custom fabricated for Birmingham homes. Unique slabs, precision installation. Visit our Pelham showroom.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AG 2.4 -->
+          <div class="adgroup">
+            <div class="adgroup-header c2"><span class="adgroup-icon">🟫</span> Ad Group 2.4 — Porcelain &amp; Specialty</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill exact">[porcelain countertops birmingham]</span>
+                <span class="kw-pill exact">[dekton countertops birmingham]</span>
+                <span class="kw-pill phrase">"porcelain countertop installation"</span>
+                <span class="kw-pill broad">ultra compact surfaces birmingham</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">RSA — Specialty</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro/products</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Porcelain &amp; Dekton Countertops | Birmingham, AL</div>
+                <div class="ad-description">Specialty countertop surfaces including porcelain and Dekton — ultra-durable, heat-resistant, and low-maintenance. Custom fabrication in Birmingham.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAMPAIGN 3 -->
+  <section>
+    <div class="campaign-block">
+      <div class="campaign-header c3">
+        <div>
+          <div class="campaign-name">Campaign 3 — Service &amp; Installation Intent</div>
+          <div class="campaign-meta">Targets buyers searching for installation, replacement, and fabrication services — high conversion intent</div>
+        </div>
+        <div class="campaign-badge">Goal: Project Leads</div>
+      </div>
+      <div class="campaign-body">
+
+        <div class="adgroup-grid">
+
+          <!-- AG 3.1 -->
+          <div class="adgroup">
+            <div class="adgroup-header c3"><span class="adgroup-icon">🔧</span> Ad Group 3.1 — Installation &amp; Fabrication</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill exact">[countertop installation birmingham al]</span>
+                <span class="kw-pill exact">[countertop fabrication birmingham]</span>
+                <span class="kw-pill exact">[countertop installers birmingham]</span>
+                <span class="kw-pill phrase">"stone fabricators birmingham al"</span>
+                <span class="kw-pill phrase">"custom countertop fabrication birmingham"</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">RSA — Installation</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro/countertop-installation</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Countertop Installation Birmingham, AL | Local Fabricator</div>
+                <div class="ad-description">In-house fabrication and professional installation — no subcontractors. Granite, quartz, marble, and quartzite countertops in Birmingham. Free estimate.</div>
+                <div class="ad-sitelinks">
+                  <span class="ad-sitelink">Our Process</span>
+                  <span class="ad-sitelink">Request Estimate</span>
+                  <span class="ad-sitelink">View Projects</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AG 3.2 -->
+          <div class="adgroup">
+            <div class="adgroup-header c3"><span class="adgroup-icon">🏠</span> Ad Group 3.2 — Kitchen Countertops</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill exact">[kitchen countertops birmingham al]</span>
+                <span class="kw-pill exact">[kitchen countertop replacement birmingham]</span>
+                <span class="kw-pill phrase">"kitchen countertop ideas birmingham"</span>
+                <span class="kw-pill phrase">"best countertops for kitchen birmingham"</span>
+                <span class="kw-pill broad">kitchen remodel countertops birmingham</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">RSA — Kitchen</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro/kitchen-countertops</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Kitchen Countertops Birmingham | Granite, Quartz &amp; More</div>
+                <div class="ad-description">Transform your kitchen with custom countertops from Maranatha. Granite, quartz, marble, and quartzite — precision cut and installed in Birmingham.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AG 3.3 -->
+          <div class="adgroup">
+            <div class="adgroup-header c3"><span class="adgroup-icon">🔄</span> Ad Group 3.3 — Replacement &amp; Remodel</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill exact">[countertop replacement birmingham]</span>
+                <span class="kw-pill exact">[replace kitchen countertops birmingham]</span>
+                <span class="kw-pill phrase">"countertop upgrade birmingham al"</span>
+                <span class="kw-pill phrase">"new countertops birmingham"</span>
+                <span class="kw-pill broad">kitchen remodel countertop contractor birmingham</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">RSA — Replacement</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro/countertop-installation</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Replace Your Countertops in Birmingham | Fast Install</div>
+                <div class="ad-description">Ready for new countertops? Maranatha removes old surfaces and installs premium granite or quartz in Birmingham. Get your free estimate and project timeline.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AG 3.4 -->
+          <div class="adgroup">
+            <div class="adgroup-header c3"><span class="adgroup-icon">🏢</span> Ad Group 3.4 — Commercial &amp; Builders</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill exact">[commercial countertops birmingham]</span>
+                <span class="kw-pill phrase">"countertops for builders birmingham"</span>
+                <span class="kw-pill phrase">"multifamily countertops alabama"</span>
+                <span class="kw-pill broad">contractor countertop supplier birmingham al</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">RSA — Commercial</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro/contact</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Commercial Countertops Birmingham | Builders Welcome</div>
+                <div class="ad-description">Maranatha Stone and Floors supplies and installs countertops for builders, contractors, and commercial projects across Birmingham. Volume pricing available.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAMPAIGN 4 -->
+  <section>
+    <div class="campaign-block">
+      <div class="campaign-header c4">
+        <div>
+          <div class="campaign-name">Campaign 4 — Competitor Conquest + RLSA</div>
+          <div class="campaign-meta">Target competitor brand searches and re-engage site visitors who did not convert</div>
+        </div>
+        <div class="campaign-badge">Goal: Conquest + Recovery</div>
+      </div>
+      <div class="campaign-body">
+
+        <div class="adgroup-grid">
+
+          <!-- AG 4.1 -->
+          <div class="adgroup">
+            <div class="adgroup-header c4"><span class="adgroup-icon">⚔️</span> Ad Group 4.1 — Competitor Conquest</div>
+            <div class="adgroup-body">
+              <div class="kw-list">
+                <span class="kw-pill phrase">"granite empire birmingham"</span>
+                <span class="kw-pill phrase">"alabama granite birmingham"</span>
+                <span class="kw-pill phrase">"alabama stone works birmingham"</span>
+                <span class="kw-pill phrase">"gmq tops birmingham"</span>
+                <span class="kw-pill phrase">"surface one birmingham countertops"</span>
+                <span class="kw-pill phrase">"stone interiors birmingham"</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">Conquest Ad — Do Not Mention Competitors by Name</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Compare Countertop Fabricators in Birmingham, AL</div>
+                <div class="ad-description">Before you decide — visit Maranatha's showroom in Pelham. In-house fabrication, 3D virtual tour, and a wide selection of granite, quartz, and stone. Free estimate.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AG 4.2 -->
+          <div class="adgroup">
+            <div class="adgroup-header c4"><span class="adgroup-icon">🔁</span> Ad Group 4.2 — RLSA (Site Visitors)</div>
+            <div class="adgroup-body">
+              <div style="font-size:12px; color:var(--muted); margin-bottom:10px;">Audience: Users who visited maranatha.pro but did not submit a form. Bid adjustment: +30%.</div>
+              <div class="kw-list">
+                <span class="kw-pill broad">granite countertops birmingham</span>
+                <span class="kw-pill broad">quartz countertops birmingham</span>
+                <span class="kw-pill broad">countertops birmingham al</span>
+              </div>
+              <div class="ad-preview">
+                <div class="ad-tag rsa">Remarketing Ad — Previous Visitors</div>
+                <div class="ad-url-line">
+                  <div class="ad-favicon"></div>
+                  <span class="ad-domain">maranatha.pro</span>
+                  <span class="ad-sponsored">· Sponsored</span>
+                </div>
+                <div class="ad-headline">Still Looking for Countertops? | Maranatha Birmingham</div>
+                <div class="ad-description">You visited us — ready to take the next step? Request a free estimate from Maranatha Stone and Floors. Custom granite and quartz, locally fabricated in Pelham.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AD EXTENSIONS -->
+  <section>
+    <div class="section-title">🔌 Ad Extensions — Apply to All Campaigns</div>
+    <div class="ext-grid">
+
+      <div class="ext-card">
+        <div class="ext-title">📞 Call Extension</div>
+        <div class="ext-items">
+          <span>Phone: 205.663.0400</span>
+          <span>Schedule: Mon–Fri 7am–7pm, Sat 8am–3pm</span>
+          <span>Enable call reporting</span>
+          <span style="color:var(--muted);font-style:italic;">Track calls 30+ seconds as conversions</span>
+        </div>
+      </div>
+
+      <div class="ext-card">
+        <div class="ext-title">📍 Location Extension</div>
+        <div class="ext-items">
+          <span>140 Commerce Ct, Pelham, AL 35124</span>
+          <span>Link to Google Business Profile</span>
+          <span>Shows address + distance in ad</span>
+          <span style="color:var(--muted);font-style:italic;">Requires verified GBP listing</span>
+        </div>
+      </div>
+
+      <div class="ext-card">
+        <div class="ext-title">🔗 Sitelink Extensions</div>
+        <div class="ext-items">
+          <span>Get a Free Quote → /contact/</span>
+          <span>View Our Showroom → /showroom/</span>
+          <span>Granite Countertops → /granite/</span>
+          <span>Quartz Countertops → /quartz/</span>
+          <span>Recent Projects → /projects/</span>
+          <span>About Maranatha → /about-us/</span>
+        </div>
+      </div>
+
+      <div class="ext-card">
+        <div class="ext-title">✅ Callout Extensions</div>
+        <div class="ext-items">
+          <span>In-House Fabrication</span>
+          <span>Free Estimates</span>
+          <span>3D Virtual Showroom</span>
+          <span>Serving Birmingham Since [Year]</span>
+          <span>Granite · Quartz · Marble · Quartzite</span>
+          <span>Custom Stone Specialists</span>
+        </div>
+      </div>
+
+      <div class="ext-card">
+        <div class="ext-title">💬 Structured Snippets</div>
+        <div class="ext-items">
+          <span><strong>Header: Services</strong></span>
+          <span>Granite Countertops</span>
+          <span>Quartz Countertops</span>
+          <span>Marble Countertops</span>
+          <span>Flooring Installation</span>
+          <span>Custom Fabrication</span>
+        </div>
+      </div>
+
+      <div class="ext-card">
+        <div class="ext-title">🖼️ Image Extensions</div>
+        <div class="ext-items">
+          <span>Upload 3–5 project photos</span>
+          <span>Recommended: kitchen installs, close-up slabs, showroom</span>
+          <span>Min size: 1200×628px</span>
+          <span style="color:var(--muted);font-style:italic;">Shown on mobile — strong CTR boost</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NEGATIVE KEYWORDS -->
+  <section>
+    <div class="section-title">🚫 Negative Keywords — Account Level</div>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Apply these negatives across all campaigns to prevent wasted spend on irrelevant searches.</p>
+    <div class="neg-grid">
+      <span class="kw-pill neg">-DIY</span>
+      <span class="kw-pill neg">-how to install countertops yourself</span>
+      <span class="kw-pill neg">-how to cut granite</span>
+      <span class="kw-pill neg">-countertop paint</span>
+      <span class="kw-pill neg">-countertop refinishing kit</span>
+      <span class="kw-pill neg">-fake granite</span>
+      <span class="kw-pill neg">-laminate countertops</span>
+      <span class="kw-pill neg">-countertop contact paper</span>
+      <span class="kw-pill neg">-used countertops for sale</span>
+      <span class="kw-pill neg">-free countertops</span>
+      <span class="kw-pill neg">-craigslist countertops</span>
+      <span class="kw-pill neg">-countertop sticker</span>
+      <span class="kw-pill neg">-home depot countertops</span>
+      <span class="kw-pill neg">-lowes countertops</span>
+      <span class="kw-pill neg">-ikea countertops</span>
+      <span class="kw-pill neg">-countertop repair kit</span>
+      <span class="kw-pill neg">-jobs</span>
+      <span class="kw-pill neg">-careers</span>
+      <span class="kw-pill neg">-countertop sealer</span>
+      <span class="kw-pill neg">-how to clean</span>
+      <span class="kw-pill neg">-huntsville</span>
+      <span class="kw-pill neg">-montgomery</span>
+      <span class="kw-pill neg">-mobile al</span>
+      <span class="kw-pill neg">-atlanta</span>
+      <span class="kw-pill neg">-nashville</span>
+    </div>
+    <p style="font-size:12px; color:var(--muted); margin-top:10px;">Note: Remove <span class="kw-pill neg" style="font-size:11px;">-huntsville</span> if/when Huntsville campaign is activated.</p>
+  </section>
+
+  <!-- BUDGET -->
+  <section>
+    <div class="section-title">💰 Recommended Budget Allocation</div>
+    <div class="budget-grid" style="margin-bottom:16px;">
+      <div class="budget-card">
+        <div class="budget-amount">$2,500</div>
+        <div class="budget-period">/ month total</div>
+        <div class="budget-label">Starter Budget</div>
+        <div class="budget-sub">Enough to gather data across all 4 campaigns</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-amount">$5,000</div>
+        <div class="budget-period">/ month total</div>
+        <div class="budget-label">Growth Budget</div>
+        <div class="budget-sub">Competitive in Birmingham market</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-amount">$15–45</div>
+        <div class="budget-period">est. cost-per-click</div>
+        <div class="budget-label">Countertop Keywords</div>
+        <div class="budget-sub">High-intent local terms are competitive</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-amount">$80–150</div>
+        <div class="budget-period">target CPA</div>
+        <div class="budget-label">Cost Per Lead Goal</div>
+        <div class="budget-sub">Countertop projects = high LTV</div>
+      </div>
+    </div>
+
+    <table class="settings-table">
+      <thead><tr><th>Campaign</th><th>Starter Split</th><th>Growth Split</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Campaign 1 — Brand &amp; General</td>
+          <td>$800 / month</td>
+          <td>$1,500 / month</td>
+          <td><span class="pill pill-blue">High</span></td>
+        </tr>
+        <tr>
+          <td>Campaign 2 — Material-Specific</td>
+          <td>$1,000 / month</td>
+          <td>$2,000 / month</td>
+          <td><span class="pill pill-blue">Highest</span></td>
+        </tr>
+        <tr>
+          <td>Campaign 3 — Service Intent</td>
+          <td>$500 / month</td>
+          <td>$1,000 / month</td>
+          <td><span class="pill pill-green">Medium</span></td>
+        </tr>
+        <tr>
+          <td>Campaign 4 — Competitor + RLSA</td>
+          <td>$200 / month</td>
+          <td>$500 / month</td>
+          <td><span class="pill pill-yellow">Supporting</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- LAUNCH CHECKLIST -->
+  <section>
+    <div class="section-title">✅ Pre-Launch Checklist</div>
+    <table class="settings-table">
+      <thead><tr><th>Item</th><th>Status / Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Landing Pages</td><td>Create dedicated pages for granite, quartz, and countertop installation before launch — ads should not point to homepage</td></tr>
+        <tr><td>Conversion Tracking</td><td>Install Google Ads conversion tag for form submissions and phone calls. Confirm GA4 is linked to Google Ads account.</td></tr>
+        <tr><td>Google Business Profile</td><td>Verify GBP listing is active and linked for Location Extensions</td></tr>
+        <tr><td>Call Tracking</td><td>Enable call reporting in Google Ads. Set 30-second minimum for conversion count.</td></tr>
+        <tr><td>Replace Google Form CTA</td><td>Homepage and landing pages must use native forms — Google Form cannot track conversions properly</td></tr>
+        <tr><td>Site Speed</td><td>Confirm landing pages load under 3 seconds on mobile — Quality Score is affected by page experience</td></tr>
+        <tr><td>RSA Headlines</td><td>Write 15 unique headlines and 4 descriptions per ad group. Pin headline 1 to position 1 for brand/location consistency.</td></tr>
+        <tr><td>RLSA Audiences</td><td>Set up remarketing audience tags on site. Wait for audience to reach 1,000+ users before activating Campaign 4.</td></tr>
+        <tr><td>Negative Keyword List</td><td>Apply account-level negative list before first impression. Review search terms report weekly for first 30 days.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+
+<div class="footer">
+  Prepared by <strong>Agencia Melbee</strong> for Maranatha Stone and Floors &nbsp;·&nbsp; maranatha.pro &nbsp;·&nbsp; March 2026
+</div>
+
+</body>
+</html>

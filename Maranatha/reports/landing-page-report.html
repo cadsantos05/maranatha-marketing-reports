@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page Optimization Report — Maranatha Stone and Floors</title>
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #c8923a;
+      --accent-light: #fdf3e7;
+      --red: #c62828;
+      --red-light: #ffebee;
+      --orange: #e65100;
+      --orange-light: #fff3e0;
+      --green: #2e7d32;
+      --green-light: #e8f5e9;
+      --blue: #1565c0;
+      --blue-light: #e3f2fd;
+      --border: #e0e0e0;
+      --gray: #f5f5f5;
+      --text: #1a1a1a;
+      --muted: #666;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #efefef; color: var(--text); font-size: 14px; line-height: 1.6; }
+
+    /* HEADER */
+    .header { background: var(--primary); color: white; padding: 40px 48px 32px; }
+    .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+    .brand-agency { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 600; }
+    .brand-client { font-size: 24px; font-weight: 700; }
+    .report-meta .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #aaa; }
+    .report-meta .value { font-size: 14px; color: white; font-weight: 500; text-align: right; }
+    .header-title { margin-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; }
+    .header-title h1 { font-size: 30px; font-weight: 700; }
+    .header-title p { margin-top: 6px; color: #bbb; font-size: 14px; max-width: 640px; }
+    .header-url { margin-top: 12px; font-size: 13px; color: var(--accent); font-family: monospace; }
+
+    /* LAYOUT */
+    .container { max-width: 1140px; margin: 0 auto; padding: 32px 24px 64px; }
+    section { margin-bottom: 44px; }
+    .section-title {
+      font-size: 18px; font-weight: 700; color: var(--primary);
+      margin-bottom: 18px; padding-bottom: 8px;
+      border-bottom: 2px solid var(--accent);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-number {
+      background: var(--accent); color: white;
+      font-size: 11px; font-weight: 700;
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* SCORE CARDS */
+    .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px; }
+    .score-card {
+      background: white; border-radius: 10px; padding: 20px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08); text-align: center;
+      border-top: 4px solid var(--border);
+    }
+    .score-card.red   { border-top-color: var(--red); }
+    .score-card.orange { border-top-color: var(--orange); }
+    .score-card.green  { border-top-color: var(--green); }
+    .score-card.blue   { border-top-color: var(--blue); }
+    .score-num { font-size: 36px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+    .score-card.red    .score-num { color: var(--red); }
+    .score-card.orange .score-num { color: var(--orange); }
+    .score-card.green  .score-num { color: var(--green); }
+    .score-card.blue   .score-num { color: var(--blue); }
+    .score-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .score-sub { font-size: 11px; color: #aaa; margin-top: 3px; }
+
+    /* SETTINGS TABLE */
+    .settings-table { width: 100%; border-collapse: collapse; font-size: 13px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+    .settings-table th { background: var(--gray); padding: 10px 14px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); }
+    .settings-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .settings-table tr:last-child td { border-bottom: none; }
+    .settings-table td:first-child { font-weight: 600; color: var(--primary); width: 30%; }
+    .settings-table tr:hover td { background: #fafafa; }
+
+    /* PRIORITY BADGES */
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .5px; padding: 2px 8px; border-radius: 3px;
+    }
+    .badge.high   { background: var(--red-light);    color: var(--red); }
+    .badge.medium { background: var(--orange-light);  color: var(--orange); }
+    .badge.low    { background: var(--green-light);   color: var(--green); }
+    .badge.good   { background: var(--green-light);   color: var(--green); }
+    .badge.data   { background: var(--blue-light);    color: var(--blue); }
+
+    /* ISSUE BLOCKS */
+    .issue-block {
+      background: white; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 16px;
+    }
+    .issue-header {
+      padding: 14px 20px; display: flex; align-items: center;
+      justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .issue-header.high   { background: var(--red-light);    border-left: 5px solid var(--red); }
+    .issue-header.medium { background: var(--orange-light);  border-left: 5px solid var(--orange); }
+    .issue-header.low    { background: #f3e5f5;              border-left: 5px solid #6a1b9a; }
+    .issue-header.good   { background: var(--green-light);   border-left: 5px solid var(--green); }
+    .issue-title { font-size: 15px; font-weight: 700; color: var(--primary); }
+    .issue-body { padding: 16px 20px; }
+    .issue-body p { font-size: 13px; color: var(--text); margin-bottom: 10px; }
+    .issue-body p:last-child { margin-bottom: 0; }
+
+    /* COPY BOX */
+    .copy-box {
+      background: var(--gray); border-radius: 6px;
+      padding: 14px 16px; font-family: monospace; font-size: 12px;
+      color: var(--text); line-height: 1.8; margin: 10px 0;
+      border-left: 3px solid var(--accent);
+    }
+    .copy-box .label { font-family: 'Segoe UI', sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 6px; display: block; }
+    .copy-old { background: #ffebee; border-left-color: var(--red); }
+    .copy-old .label { color: var(--red); }
+    .copy-new { background: #e8f5e9; border-left-color: var(--green); }
+    .copy-new .label { color: var(--green); }
+
+    /* WIREFRAME */
+    .wireframe {
+      background: white; border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08); overflow: hidden;
+    }
+    .wire-section {
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .wire-section:last-child { border-bottom: none; }
+    .wire-num {
+      background: var(--primary); color: white;
+      font-size: 12px; font-weight: 700;
+      width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .wire-num.accent { background: var(--accent); }
+    .wire-content { flex: 1; }
+    .wire-title { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+    .wire-desc { font-size: 12px; color: var(--muted); }
+    .wire-cta { font-size: 11px; font-weight: 700; color: white; background: var(--accent); padding: 3px 10px; border-radius: 3px; display: inline-block; margin-top: 6px; }
+    .wire-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+    .wire-tag { font-size: 10px; background: var(--gray); border: 1px solid var(--border); padding: 2px 7px; border-radius: 3px; color: var(--muted); }
+    .wire-height { font-size: 10px; color: var(--accent); font-weight: 600; margin-left: auto; flex-shrink: 0; }
+
+    /* DATA CALLOUT */
+    .data-callout {
+      background: var(--blue-light); border-left: 4px solid var(--blue);
+      border-radius: 0 6px 6px 0; padding: 10px 14px;
+      font-size: 12px; color: var(--blue); margin: 10px 0;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .data-callout strong { font-weight: 700; }
+
+    /* CHECKLIST */
+    .checklist { list-style: none; padding: 0; }
+    .checklist li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .check-box {
+      width: 18px; height: 18px; border: 2px solid var(--border);
+      border-radius: 3px; flex-shrink: 0; margin-top: 1px;
+    }
+    .check-text { flex: 1; }
+    .check-who { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* FOOTER */
+    .footer { background: var(--primary); color: #666; text-align: center; padding: 24px; font-size: 12px; }
+    .footer span { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="brand-agency">Agencia Melbee</div>
+      <div class="brand-client">Maranatha Stone and Floors</div>
+    </div>
+    <div class="report-meta">
+      <div class="label">Document</div>
+      <div class="value">Landing Page Optimization</div>
+      <div class="label" style="margin-top:8px">Date</div>
+      <div class="value">March 2026</div>
+    </div>
+  </div>
+  <div class="header-title">
+    <h1>Landing Page Optimization Report</h1>
+    <p>Análise completa da página de produtos com recomendações priorizadas para aumentar conversão antes de ligar os anúncios Google Ads e Meta Ads.</p>
+    <div class="header-url">🔗 maranatha.pro/products/granite-marble-quartzite/</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 1. DIAGNÓSTICO GERAL -->
+  <section>
+    <div class="section-title">
+      <div class="section-number">1</div>
+      Diagnóstico Geral da Página
+    </div>
+
+    <div class="score-grid">
+      <div class="score-card red">
+        <div class="score-num">D</div>
+        <div class="score-label">Conversão</div>
+        <div class="score-sub">Sem CTA acima do fold</div>
+      </div>
+      <div class="score-card orange">
+        <div class="score-num">C</div>
+        <div class="score-label">Conteúdo</div>
+        <div class="score-sub">Educativo mas não persuasivo</div>
+      </div>
+      <div class="score-card orange">
+        <div class="score-num">C+</div>
+        <div class="score-label">SEO On-Page</div>
+        <div class="score-sub">Título bom, falta estrutura</div>
+      </div>
+      <div class="score-card red">
+        <div class="score-num">D</div>
+        <div class="score-label">Prova Social</div>
+        <div class="score-sub">Zero reviews ou depoimentos</div>
+      </div>
+      <div class="score-card green">
+        <div class="score-num">B</div>
+        <div class="score-label">Informação</div>
+        <div class="score-sub">Explica bem os materiais</div>
+      </div>
+      <div class="score-card red">
+        <div class="score-num">F</div>
+        <div class="score-label">Velocidade</div>
+        <div class="score-sub">PageSpeed: dado indisponível</div>
+      </div>
+    </div>
+
+    <table class="settings-table">
+      <thead><tr><th>Elemento</th><th>Status atual</th><th>Impacto</th><th>Prioridade</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>CTA acima do fold</td>
+          <td>❌ Não existe — primeiro CTA está no rodapé</td>
+          <td>Visitantes de anúncios saem sem agir</td>
+          <td><span class="badge high">🔴 Alta</span></td>
+        </tr>
+        <tr>
+          <td>Headline / Proposta de valor</td>
+          <td>❌ "Natural Stones. A countertop like no other." — genérico</td>
+          <td>Não diferencia da concorrência</td>
+          <td><span class="badge high">🔴 Alta</span></td>
+        </tr>
+        <tr>
+          <td>Galeria de projetos</td>
+          <td>⚠️ Seção "Gallery" presente mas sem fotos visíveis</td>
+          <td>Não inspira confiança visual</td>
+          <td><span class="badge high">🔴 Alta</span></td>
+        </tr>
+        <tr>
+          <td>Número de telefone clicável</td>
+          <td>✅ 205.663.0400 aparece no header</td>
+          <td>—</td>
+          <td><span class="badge good">✅ OK</span></td>
+        </tr>
+        <tr>
+          <td>Reviews / Depoimentos</td>
+          <td>❌ Nenhum</td>
+          <td>Falta prova social para decisão de $5k+</td>
+          <td><span class="badge high">🔴 Alta</span></td>
+        </tr>
+        <tr>
+          <td>Informação de preço</td>
+          <td>❌ Nenhuma faixa de preço mencionada</td>
+          <td>Visitante sai para pesquisar preço e não volta</td>
+          <td><span class="badge medium">🟠 Média</span></td>
+        </tr>
+        <tr>
+          <td>Diferencial competitivo</td>
+          <td>❌ "In-house fabrication" não é mencionado</td>
+          <td>Perde o maior diferencial da Maranatha</td>
+          <td><span class="badge high">🔴 Alta</span></td>
+        </tr>
+        <tr>
+          <td>Conteúdo sobre os materiais</td>
+          <td>✅ Explica granite, quartzite e marble com clareza</td>
+          <td>—</td>
+          <td><span class="badge good">✅ OK</span></td>
+        </tr>
+        <tr>
+          <td>FAQ</td>
+          <td>❌ Não existe</td>
+          <td>Dúvidas não respondidas = saída da página</td>
+          <td><span class="badge medium">🟠 Média</span></td>
+        </tr>
+        <tr>
+          <td>Framing negativo dos materiais</td>
+          <td>⚠️ "The downside to natural stone is that they're sensitive to stains"</td>
+          <td>Planta dúvida sem oferecer solução imediata</td>
+          <td><span class="badge medium">🟠 Média</span></td>
+        </tr>
+        <tr>
+          <td>Meta Pixel instalado</td>
+          <td>❓ Não confirmado</td>
+          <td>Sem pixel = impossível fazer remarketing Meta</td>
+          <td><span class="badge high">🔴 Alta (antes dos anúncios)</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 2. POR QUE ISSO IMPORTA — DADOS -->
+  <section>
+    <div class="section-title">
+      <div class="section-number">2</div>
+      O que os dados dizem — GSC + GA4 (Mar 2026)
+    </div>
+
+    <div class="data-callout">
+      <strong>📊</strong>
+      <span>CTR orgânico desta página: <strong>0.4% na posição 17.8</strong> — a página quase não gera cliques orgânicos. Com tráfego pago de $700/mês sendo direcionado para cá, uma taxa de conversão baixa significa dinheiro desperdiçado.</span>
+    </div>
+
+    <table class="settings-table" style="margin-top:16px">
+      <thead><tr><th>Métrica</th><th>Valor atual</th><th>Benchmark</th><th>O que significa</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>CTR orgânico da página</td>
+          <td>0.4%</td>
+          <td>1.5–3%</td>
+          <td>Título fraco — poucas pessoas clicam mesmo quando aparece no Google</td>
+        </tr>
+        <tr>
+          <td>Posição orgânica média</td>
+          <td>17.8</td>
+          <td>1–10</td>
+          <td>Página 2 do Google — quase invisível organicamente</td>
+        </tr>
+        <tr>
+          <td>Cliques orgânicos (30 dias)</td>
+          <td>7</td>
+          <td>—</td>
+          <td>Base muito baixa — os anúncios vão multiplicar esse tráfego</td>
+        </tr>
+        <tr>
+          <td>CTR geral do site</td>
+          <td>1.64%</td>
+          <td>3–6%</td>
+          <td>Abaixo da média — títulos e descriptions precisam ser melhorados</td>
+        </tr>
+        <tr>
+          <td>Taxa de engajamento GA4</td>
+          <td>43.4%</td>
+          <td>60–70%</td>
+          <td>Mais da metade dos visitantes sai sem interagir</td>
+        </tr>
+        <tr>
+          <td>Cidades que mais convertem</td>
+          <td>Birmingham, Pelham, Hoover</td>
+          <td>—</td>
+          <td>Essas cidades devem ser mencionadas explicitamente na página</td>
+        </tr>
+        <tr>
+          <td>Páginas com 100% bounce rate</td>
+          <td>/innovative-tile-designs/, /large-format-tiles/</td>
+          <td>—</td>
+          <td>Não enviar tráfego pago para essas páginas — focar em /granite-marble-quartzite/</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 3. ESTRUTURA RECOMENDADA -->
+  <section>
+    <div class="section-title">
+      <div class="section-number">3</div>
+      Estrutura Recomendada — Nova Ordem da Página
+    </div>
+    <p style="color:var(--muted);margin-bottom:20px;font-size:13px;">A sequência abaixo é baseada no modelo AIDA (Atenção → Interesse → Desejo → Ação), adaptado para landing pages de serviços locais com ticket médio alto ($5k–$15k).</p>
+
+    <div class="wireframe">
+      <div class="wire-section">
+        <div class="wire-num accent">1</div>
+        <div class="wire-content">
+          <div class="wire-title">HERO — Acima do fold</div>
+          <div class="wire-desc">Headline com diferencial + subtítulo + 2 CTAs (botão primário + telefone) + 4 trust signals em linha. Tudo visível sem rolar.</div>
+          <div class="wire-tags">
+            <span class="wire-tag">Headline forte</span>
+            <span class="wire-tag">CTA primário</span>
+            <span class="wire-tag">Telefone clicável</span>
+            <span class="wire-tag">Trust signals</span>
+          </div>
+        </div>
+        <div class="wire-height">🔴 Mais crítico</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-num">2</div>
+        <div class="wire-content">
+          <div class="wire-title">BARRA DE CONFIANÇA — Números rápidos</div>
+          <div class="wire-desc">500+ projetos · 140+ cores · 4 materiais · Showroom em Pelham. Fundo escuro ou accent — contrasta com o hero.</div>
+          <div class="wire-tags"><span class="wire-tag">Prova social numérica</span><span class="wire-tag">Credibilidade imediata</span></div>
+        </div>
+        <div class="wire-height">🔴 Alta</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-num">3</div>
+        <div class="wire-content">
+          <div class="wire-title">DIFERENCIAIS — Por que a Maranatha</div>
+          <div class="wire-desc">4 cards: In-House Fabrication · Showroom Local · Premium Quality · Área de Atendimento. Responde "por que aqui e não no concorrente?"</div>
+          <div class="wire-tags"><span class="wire-tag">Diferenciação competitiva</span><span class="wire-tag">Combate MC Granite e GMQ</span></div>
+        </div>
+        <div class="wire-height">🔴 Alta</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-num">4</div>
+        <div class="wire-content">
+          <div class="wire-title">GALERIA — Projetos recentes</div>
+          <div class="wire-desc">6+ fotos de projetos reais em Birmingham e arredores. Legendas com cidade e material. Antes/depois quando disponível.</div>
+          <div class="wire-tags"><span class="wire-tag">Inspira confiança visual</span><span class="wire-tag">Fotos reais obrigatórias</span></div>
+        </div>
+        <div class="wire-height">🔴 Alta</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-num">5</div>
+        <div class="wire-content">
+          <div class="wire-title">MATERIAIS — Qual pedra é certa para você?</div>
+          <div class="wire-desc">Cards para Granite · Quartz · Marble · Quartzite com prós, contras e tags visuais. Reescrever o parágrafo dos "downsides" — focar em como a Maranatha resolve as limitações.</div>
+          <div class="wire-tags"><span class="wire-tag">Já existe — reformatar</span><span class="wire-tag">Remover framing negativo</span></div>
+        </div>
+        <div class="wire-height">🟠 Média</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-num">6</div>
+        <div class="wire-content">
+          <div class="wire-title">FAIXA DE PREÇOS — Quanto custa?</div>
+          <div class="wire-desc">Preço estimado por material ($/sqft instalado). Remove a incerteza que faz o visitante sair para pesquisar no Google e não voltar.</div>
+          <div class="wire-tags"><span class="wire-tag">Granite: $45–$85/sqft</span><span class="wire-tag">Quartz: $55–$120/sqft</span><span class="wire-tag">Marble: $60–$150/sqft</span></div>
+        </div>
+        <div class="wire-height">🟠 Média</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-num">7</div>
+        <div class="wire-content">
+          <div class="wire-title">REVIEWS — O que clientes dizem</div>
+          <div class="wire-desc">3–5 reviews reais do Google ou Houzz. Nome + cidade + texto. Idealmente com foto do projeto. Decisão de $5k+ precisa de validação social.</div>
+          <div class="wire-tags"><span class="wire-tag">Reviews reais do Google Business</span><span class="wire-tag">Incluir cidade do cliente</span></div>
+        </div>
+        <div class="wire-height">🔴 Alta</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-num">8</div>
+        <div class="wire-content">
+          <div class="wire-title">FAQ — Perguntas frequentes</div>
+          <div class="wire-desc">6 perguntas que eliminam objeções: prazo, área de atendimento, manutenção, visita ao showroom, processo completo, diferença quartz vs quartzite.</div>
+          <div class="wire-tags"><span class="wire-tag">Aumenta tempo na página</span><span class="wire-tag">Reduz bounce rate</span></div>
+        </div>
+        <div class="wire-height">🟠 Média</div>
+      </div>
+      <div class="wire-section">
+        <div class="wire-num accent">9</div>
+        <div class="wire-content">
+          <div class="wire-title">CTA FINAL — Rodapé de conversão</div>
+          <div class="wire-desc">Fundo accent (laranja/dourado) · "Ready to see it in person?" · Botão "Request Free Estimate" + botão "Call 205.663.0400" + endereço + horário.</div>
+          <div class="wire-cta">Request Free Estimate →</div>
+        </div>
+        <div class="wire-height">🔴 Alta</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. COPY RECOMENDADO -->
+  <section>
+    <div class="section-title">
+      <div class="section-number">4</div>
+      Copy Recomendado — O que mudar e como fica
+    </div>
+
+    <!-- Headline -->
+    <div class="issue-block">
+      <div class="issue-header high">
+        <div class="issue-title">🏷️ Headline principal</div>
+        <span class="badge high">🔴 Alterar antes dos anúncios</span>
+      </div>
+      <div class="issue-body">
+        <div class="copy-box copy-old">
+          <span class="label">❌ Atual</span>
+          Natural Stones.<br>A countertop like no other.
+        </div>
+        <div class="copy-box copy-new">
+          <span class="label">✅ Recomendado</span>
+          Birmingham's In-House Stone Fabricators.<br>
+          Granite · Quartz · Marble · Quartzite.
+        </div>
+        <div class="data-callout" style="margin-top:12px">
+          <strong>📊 Por que isso funciona:</strong>
+          <span>"In-House Fabricators" é o diferencial que nenhum concorrente (MC Granite, GMQ Tops) reivindica claramente. "Birmingham" ancora geograficamente e combina com a keyword #1 dos anúncios: "countertops birmingham al".</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subtítulo -->
+    <div class="issue-block">
+      <div class="issue-header high">
+        <div class="issue-title">💬 Subtítulo / Proposta de valor</div>
+        <span class="badge high">🔴 Adicionar</span>
+      </div>
+      <div class="issue-body">
+        <div class="copy-box copy-old">
+          <span class="label">❌ Atual — não existe subtítulo</span>
+          (Nenhuma proposta de valor explicada acima do fold)
+        </div>
+        <div class="copy-box copy-new">
+          <span class="label">✅ Recomendado</span>
+          We cut every slab ourselves at our Pelham showroom — no middleman,<br>
+          better quality, faster turnaround. Free estimate, no commitment.
+        </div>
+      </div>
+    </div>
+
+    <!-- Parágrafo negativo -->
+    <div class="issue-block">
+      <div class="issue-header medium">
+        <div class="issue-title">⚠️ Parágrafo sobre "downsides" — reescrever</div>
+        <span class="badge medium">🟠 Média prioridade</span>
+      </div>
+      <div class="issue-body">
+        <div class="copy-box copy-old">
+          <span class="label">❌ Atual — planta dúvida sem resolver</span>
+          "The downside to natural stone materials is that they're sensitive to stains<br>
+          because of their porous composition..."
+        </div>
+        <div class="copy-box copy-new">
+          <span class="label">✅ Recomendado — transforma limitação em expertise</span>
+          "Natural stone requires proper care — and that's exactly where our expertise comes in.<br>
+          During installation, our team walks you through everything: how to clean, when to seal,<br>
+          and how to keep your countertop looking perfect for decades.<br>
+          Most homeowners find it much easier than they expected."
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="issue-block">
+      <div class="issue-header high">
+        <div class="issue-title">🔘 Botão CTA — adicionar acima do fold</div>
+        <span class="badge high">🔴 Alterar antes dos anúncios</span>
+      </div>
+      <div class="issue-body">
+        <div class="copy-box copy-old">
+          <span class="label">❌ Atual</span>
+          "Request an Appointment" — aparece apenas no rodapé da página
+        </div>
+        <div class="copy-box copy-new">
+          <span class="label">✅ Recomendado — dois CTAs visíveis imediatamente</span>
+          [Botão 1 — primário, fundo dourado]  →  "Get Your Free Estimate →"  →  /contact<br>
+          [Botão 2 — outline]                  →  "📞 205.663.0400"           →  tel:2056630400
+        </div>
+        <div class="data-callout" style="margin-top:12px">
+          <strong>📊 Dado:</strong>
+          <span>A homepage (/) tem CTR de 2.9% vs 0.4% desta página. A diferença principal é que a homepage tem o número de telefone mais proeminente. Dois CTAs acima do fold é o padrão de páginas de serviços locais com alta conversão.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CHECKLIST DE IMPLEMENTAÇÃO -->
+  <section>
+    <div class="section-title">
+      <div class="section-number">5</div>
+      Checklist de Implementação — Antes de Ligar os Anúncios
+    </div>
+
+    <div style="background:white;border-radius:10px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.08);">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Itens abaixo devem ser concluídos antes de ativar os anúncios do Google Ads e Meta. Enviar esta lista para o desenvolvedor responsável pelo site.</p>
+
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:10px;">🔴 Prioridade Alta — Fazer antes dos anúncios</div>
+        <ul class="checklist">
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Adicionar headline "Birmingham's In-House Stone Fabricators" acima do fold
+              <div class="check-who">Dev · Estimativa: 30 min</div>
+            </div>
+            <span class="badge high">Alta</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Adicionar botão "Get Your Free Estimate" e telefone clicável acima do fold
+              <div class="check-who">Dev · Estimativa: 30 min</div>
+            </div>
+            <span class="badge high">Alta</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Adicionar mínimo 4 fotos reais de projetos (cozinhas com granito ou quartz preferencial)
+              <div class="check-who">Maranatha fornece fotos · Dev publica · Estimativa: 1h</div>
+            </div>
+            <span class="badge high">Alta</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Adicionar 3 reviews reais do Google Business com nome e cidade do cliente
+              <div class="check-who">Maranatha copia do Google Business · Dev publica · Estimativa: 30 min</div>
+            </div>
+            <span class="badge high">Alta</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Instalar Meta Pixel na página (necessário para remarketing de $100/mês)
+              <div class="check-who">Dev · Meta Business Manager → Events Manager → Add Pixel · Estimativa: 45 min</div>
+            </div>
+            <span class="badge high">Alta</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Confirmar que o formulário /contact funciona e notifica a equipe por email ou CRM
+              <div class="check-who">Dev + Maranatha · Testar formulário ao vivo · Estimativa: 15 min</div>
+            </div>
+            <span class="badge high">Alta</span>
+          </li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--orange);margin-bottom:10px;">🟠 Prioridade Média — Primeira semana após lançamento</div>
+        <ul class="checklist">
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Reescrever parágrafo dos "downsides" — usar copy recomendado na seção 4
+              <div class="check-who">Dev · Estimativa: 15 min</div>
+            </div>
+            <span class="badge medium">Média</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Adicionar faixa de preços estimados por material (confirmar valores com a Maranatha primeiro)
+              <div class="check-who">Maranatha confirma valores · Dev publica · Estimativa: 1h</div>
+            </div>
+            <span class="badge medium">Média</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Adicionar seção FAQ com 6 perguntas (conteúdo disponível no arquivo landing-page-granite.html)
+              <div class="check-who">Dev · Estimativa: 1h</div>
+            </div>
+            <span class="badge medium">Média</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Adicionar barra de confiança com números: 500+ projetos, 140+ cores, showroom Pelham
+              <div class="check-who">Confirmar números com Maranatha · Dev · Estimativa: 30 min</div>
+            </div>
+            <span class="badge medium">Média</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Rodar PageSpeed Insights para maranatha.pro e otimizar imagens para .webp (máx 200kb)
+              <div class="check-who">Dev · pagespeed.web.dev · Estimativa: 2h</div>
+            </div>
+            <span class="badge medium">Média</span>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6a1b9a;margin-bottom:10px;">🟣 Prioridade Baixa — Otimização contínua (semanas 3–4)</div>
+        <ul class="checklist">
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Adicionar LocalBusiness schema markup com endereço, telefone, horário e avaliação
+              <div class="check-who">Dev · schema.org/LocalBusiness · Estimativa: 1h</div>
+            </div>
+            <span class="badge low">Baixa</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              Considerar chat widget (Tidio ou Tawk.to — gratuito) para capturar visitantes que não ligam
+              <div class="check-who">Maranatha decide · Dev instala · Estimativa: 30 min</div>
+            </div>
+            <span class="badge low">Baixa</span>
+          </li>
+          <li>
+            <div class="check-box"></div>
+            <div class="check-text">
+              A/B test: testar headline alternativa "No Middleman. Better Quality." vs versão atual
+              <div class="check-who">Google Ads Experiments ou Google Optimize · 30 dias de dados</div>
+            </div>
+            <span class="badge low">Baixa</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. IMPACTO ESPERADO -->
+  <section>
+    <div class="section-title">
+      <div class="section-number">6</div>
+      Impacto Esperado após as Melhorias
+    </div>
+    <table class="settings-table">
+      <thead><tr><th>Métrica</th><th>Estado atual</th><th>Meta após otimização</th><th>Ação que gera o resultado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Taxa de conversão da página</td>
+          <td>~1–2% estimado</td>
+          <td>3–5%</td>
+          <td>CTA acima do fold + reviews + fotos reais</td>
+        </tr>
+        <tr>
+          <td>Leads gerados pelo Google Ads</td>
+          <td>0 (anúncios não ativos)</td>
+          <td>3–7 leads/mês no mês 1</td>
+          <td>$700/mês → ~120 cliques → 3–5% conversão</td>
+        </tr>
+        <tr>
+          <td>CTR orgânico da página</td>
+          <td>0.4%</td>
+          <td>0.8–1.5%</td>
+          <td>Reescrita do título SEO da página</td>
+        </tr>
+        <tr>
+          <td>Taxa de engajamento</td>
+          <td>43.4% (site geral)</td>
+          <td>55–65%</td>
+          <td>FAQ + galeria + estrutura de conteúdo mais longa</td>
+        </tr>
+        <tr>
+          <td>Custo por lead (Google Ads)</td>
+          <td>—</td>
+          <td>$100–$230</td>
+          <td>CPC estimado $5–8 × taxa de conversão 3–5%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="background:var(--accent-light);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:16px 20px;margin-top:20px;font-size:13px;">
+      <strong>Nota estratégica:</strong> Com ticket médio de $5.000–$15.000 por projeto, mesmo 1 lead convertido por semana a um custo de $200 representa um ROI de 25x–75x sobre o investimento em anúncios de $1.000/mês. A otimização da landing page é o que transforma cliques em orçamentos.
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  Agencia Melbee · <span>Maranatha Stone and Floors</span> · Landing Page Optimization Report · March 2026
+</div>
+
+</body>
+</html>
